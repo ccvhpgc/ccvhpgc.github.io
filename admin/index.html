@@ -1,1 +1,103 @@
-div class
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Commerce Council Admin</title>
+<link rel="stylesheet" href="main.css" />
+</head><body><div id="wrapper">
+
+<div class="guest">
+<h1>Commerce Council Admin Area</h1>
+<p>Update your profile for the landing page.</p>
+
+<hr>
+
+<h2>Login</h2>
+<form id="loginForm">
+<label for="loginEmail">Email</label>
+<input type="email" id="loginEmail" name="loginEmail" required>
+<label for="loginPwd">Password</label>
+<input type="password" id="loginPwd" name="loginPwd" required>
+<input type="submit" class="btn" name="submit" value="Submit">
+</form>
+
+<hr>
+
+<h2>Forgot your password?</h2>
+<p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
+<form id="resetPwdForm">
+<label for="resetPwdEmail">Email</label>
+<input type="email" id="resetPwdEmail" required>
+<input type="submit" class="btn" name="submit" value="Reset Password">
+</form>
+
+<hr>
+
+<h2>Create Account</h2>
+<form id="signupForm">
+<label for="signupEmail">Email</label>
+<input type="email" id="signupEmail" name="signupEmail" required>
+<label for="signupPwd">Password</label>
+<input type="password" id="signupPwd" name="signupPwd" required>
+<input type="submit" class="btn" name="submit" value="Submit">
+</form>
+
+<hr>
+<br>
+</div> <!-- guest -->
+
+
+<div class="member">
+<h1>You are logged in.</h1>
+<p>Yay.</p>
+<button id="refreshData" onclick="getProfile()">Refresh Data</button>
+<button id="logout" class="ml-2">Logout</button>
+
+<hr>
+
+<h2>Submit Profile Details</h2>
+<form id="profileForm">
+<label for="profileName">Name</label>
+<input type="text" id="profileName" value="" required><br>
+
+<label for="profileClass">Class</label>
+<input type="text" id="profileClass" value=""><br>
+
+<label for="profileEmail">Email</label>
+<input type="email" id="profileEmail" value=""><br>
+
+<label for="profileWA">WhatsApp</label>
+<input type="text" id="profileWA" value=""><br>
+
+<label for="profilePhone">Phone No.</label>
+<input type="text" id="profilePhone" value=""><br>
+
+<div id="profileErrMsg"></div>
+<input type="submit" class="btn" value="Submit">
+</form>
+
+<hr>
+
+<div id="profileOutput"></div>
+
+<hr>
+
+<h2>Change Email</h2>
+
+
+
+
+<hr>
+
+<button id="deleteAcc">Delete Account</button>
+
+
+
+<hr><br>
+
+</div> <!-- member -->
+
+</div> <!-- wrapper -->
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+<script src="app.js"></script></body></html>
