@@ -19,29 +19,25 @@
 <input type="email" id="loginEmail" name="loginEmail" required>
 <label for="loginPwd">Password</label>
 <input type="password" id="loginPwd" name="loginPwd" required>
-<input type="submit" name="submit" value="Submit">
+<input type="submit" class="w-100" value="Submit">
 </form>
 </div>
 
 <div class="card">
 <h2>Create Account</h2>
-<form id="signupForm">
 <label for="signupEmail">Email</label>
 <input type="email" id="signupEmail" name="signupEmail" required>
 <label for="signupPwd">Password</label>
 <input type="password" id="signupPwd" name="signupPwd" required>
-<input type="submit" name="submit" value="Submit">
-</form>
+<button id="signupBtn" class="w-100">Create Account</button>
 </div>
 
 <div class="card">
 <h2>Forgot your password?</h2>
 <p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
-<form id="resetPwdForm">
 <label for="resetPwdEmail">Email</label>
 <input type="email" id="resetPwdEmail" required>
-<input type="submit" name="submit" value="Reset Password">
-</form>
+<button id="resetPwdBtn" class="w-100">Reset Password</button>
 </div>
 <br>
 </div> <!-- guestArea -->
@@ -51,8 +47,7 @@
 <div class="card">
 <h2 id="displayEmail"></h2>
 <p>Yay.</p>
-<button id="refreshData" onclick="getProfile()">Refresh Data</button>
-<button id="logout" class="ml-2">Logout</button>
+<button id="logout">Logout</button>
 </div>
 
 
@@ -78,7 +73,7 @@
 <textarea id="userAbout" rows="5" value=""></textarea>
 
 <div id="userErrMsg"></div>
-<input type="submit" value="Submit">
+<input type="submit" class="w-100" value="Submit">
 </form>
 </div>
 
@@ -93,13 +88,16 @@
 <div id="userImgMsg"></div>
 <form method="POST" enctype="multipart/form-data" id="userImgForm">
 <input type="file" id="userImgFile" required>
-<button type="submit" name="submit">Upload Photo</button>
+<button type="submit" class="w-100">Upload Photo</button>
 </form>
 </div>
 
 <div class="card">
 <h2>Change Password</h2>
 
+<label for="newPwd">New Password</label>
+<input type="password" id="newPwd" required>
+<button id="newPwdBtn" class="w-100">Change Password</button>
 </div>
 
 
@@ -107,18 +105,16 @@
 <h2>Update Email</h2>
 <p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification.</p>
 
-<form id="updateEmailForm">
 <label for="newEmail">Enter new email</label>
 <input type="email" id="newEmail" value="" required>
-<input type="submit" value="Submit">
-</form>
+<button id="updateEmailBtn" class="w-100">Submit</button>
 </div>
 
 
 
 <div class="card">
 
-<button id="deleteAcc">Delete Account</button>
+<button id="deleteAcc" class="w-100">Delete Account</button>
 
 
 </div>

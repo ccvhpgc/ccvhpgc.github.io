@@ -18,9 +18,9 @@ const userArea=_("userArea")
 
 const displayEmail=_("displayEmail")
 
-const signupForm=_("signupForm")
 const signupEmail=_("signupEmail")
 const signupPwd=_("signupPwd")
+const signupBtn=_("signupBtn")
 
 const loginForm=_("loginForm")
 const loginEmail=_("loginEmail")
@@ -28,13 +28,18 @@ const loginPwd=_("loginPwd")
 
 const logout=_("logout")
 
-const resetPwdForm=_("resetPwdForm")
+
 const resetPwdEmail=_("resetPwdEmail")
+const resetPwdBtn=_("resetPwdBtn")
 
 const deleteAcc=_("deleteAcc")
 
-const updateEmailForm=_("updateEmailForm")
-const newEmail=_("newEmail")
+
+const newEmailEl=_("newEmail")
+const updateEmailBtn=_("updateEmailBtn")
+
+const newPwdEl=_("newPwd")
+const newPwdBtn=_("newPwdBtn")
 
 const userDetailsForm=_("userDetailsForm")
 const userFullName=_("userFullName")
@@ -66,12 +71,16 @@ guestArea.style.display="block"
 userArea.style.display="none"}
 })
 
-signupForm.addEventListener("submit", (e)=>{e.preventDefault()
+signupBtn.addEventListener("click", ()=>{
+signupBtn.disabled="true"
 const email=signupEmail.value
 const pwd=signupPwd.value
 auth.createUserWithEmailAndPassword(email, pwd).then(cred=>{sendVerificationEmail()
-signupForm.reset()
-}).catch(error=>alert(error.message))
+signupEmail.value=""
+signupBtn.disabled=""
+}).catch(error=>{alert(error.message)
+signupBtn.disabled=""
+})
 })
 
 const sendVerificationEmail=()=>{
@@ -95,11 +104,16 @@ auth.signOut()
 .catch(error=>alert(error))
 })
 
-resetPwdForm.addEventListener("submit", (e)=>{e.preventDefault()
+resetPwdBtn.addEventListener("click", ()=>{
+resetPwdBtn.disabled="true"
 const email=resetPwdEmail.value
 auth.sendPasswordResetEmail(email)
-.then(()=>alert("Pwd Reset Email Sent."))
-.catch(error=>alert(error))
+.then(()=>{
+alert("Password Reset Email Sent. Wait for 15 minutes.")
+})
+.catch(error=>{alert(error)
+resetPwdBtn.disabled=""
+})
 })
 
 const createCredential=user=>{
@@ -110,16 +124,29 @@ pwd)
 return credential}
 
 
+function deleteUserDB(){
+fetch('https://rexarvind.000webhostapp.com/api/cc/delete/'+userID)
+.then(res=>res.text())
+.then(res=>alert(res))
+.catch(err=>alert("Info:"+err))}
+
+
+
 deleteAcc.addEventListener("click", ()=>{
+deleteAcc.disabled="true"
 let user=firebase.auth().currentUser
 const credential=createCredential(user)
 user.reauthenticateWithCredential(credential)
-.then(()=>{user.delete()
-alert("Your Account Has Been Deleted.") })
-.catch(error=>alert(error))
+.then(()=>{let resDEL=deleteUserDB();
+user.delete();
+deleteAcc.disabled=""
+})
+.catch(error=>{alert("Message:"+error)
+deleteAcc.disabled=""})
 })
 
-updateEmailForm.addEventListener("submit", (e)=>{e.preventDefault()
+updateEmailBtn.addEventListener("click", ()=>{
+updateEmailBtn.disabled="true"
 const user=auth.currentUser;
 const newEmail=newEmailEl.value
 const credential = createCredential(user)
@@ -129,10 +156,49 @@ changeEmail(user, credential, newEmail)
 const changeEmail=(user, credential, newEmail)=>{
 user.reauthenticateWithCredential(credential)
 .then(()=>{user.updateEmail(newEmail)
-.then(()=>alert('Email Updated!'))
-.catch(error=>alert(error))
-}).catch(error =>alert(error))
+.then(()=>{alert('Email Updated!')
+updateEmailBtn.disabled=""
+})
+.catch(error=>{alert(error)
+updateEmailBtn.disabled=""
+})
+}).catch(error =>{alert(error)
+updateEmailBtn.disabled=""
+})
 }
+
+
+
+
+
+newPwdBtn.addEventListener("click", ()=>{
+newPwdBtn.disabled="true"
+const user=auth.currentUser;
+const newPwd=newPwdEl.value
+const credential = createCredential(user)
+changePwd(user, credential, newPwd)
+})
+
+const changePwd=(user, credential, newPwd)=>{
+user.reauthenticateWithCredential(credential)
+.then(()=>{user.updatePassword(newPwd)
+.then(()=>{alert('Password Updated!')
+newPwdBtn.disabled=""
+})
+.catch(error=>{alert(error)
+newPwdBtn.disabled=""
+})
+}).catch(error =>{alert(error)
+newPwdBtn.disabled=""
+})
+}
+
+
+
+
+
+
+
 
 
 
@@ -171,7 +237,7 @@ function getProfile(){
 fetch('https://rexarvind.000webhostapp.com/api/cc/get/'+userID)
 .then(res=>res.json())
 .then(res=>showProfile(res))
-.catch(err=>alert(err))
+.catch(err=>console.log(err))
 }
 
 
@@ -184,7 +250,8 @@ output=`<b>Name:</b> ${data[0].name}<br>
 <b>Email:</b> ${data[0].email}<br>
 <b>WhatsApp:</b> ${data[0].whatsapp}<br>
 <b>Phone:</b> ${data[0].phone}<br>
-<b>About:</b><span style="white-space: pre-wrap"> ${data[0].about}</span>`;
+<b>About:</b><span style="white-space: pre-wrap"> ${data[0].about}</span>
+<br><button id="refreshData" onclick="getProfile()">Refresh Data</button>`;
 
 userDetailsOutput.innerHTML=output
 
