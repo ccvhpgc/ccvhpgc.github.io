@@ -41,7 +41,6 @@ const updateEmailBtn=_("updateEmailBtn")
 const newPwdEl=_("newPwd")
 const newPwdBtn=_("newPwdBtn")
 
-const userDetailsForm=_("userDetailsForm")
 const userFullName=_("userFullName")
 const userClass=_("userClass")
 const userEmail=_("userEmail")
@@ -49,6 +48,7 @@ const userWhatsApp=_("userWhatsApp")
 const userPhone=_("userPhone")
 const userAbout=_("userAbout")
 const userErrMsg=_("userErrMsg")
+const userDetailsBtn=_("userDetailsBtn")
 
 const userDetailsOutput=_("userDetailsOutput")
 
@@ -203,8 +203,7 @@ newPwdBtn.disabled=""
 
 
 
-userDetailsForm.addEventListener("submit", (e)=> {e.preventDefault()
-
+userDetailsBtn.addEventListener("click", ()=> {
 let fd=new FormData()
 fd.append("uid", userID)
 fd.append("name", userFullName.value)

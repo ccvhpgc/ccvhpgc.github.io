@@ -53,15 +53,14 @@
 
 <div class="card">
 <h2>Submit Details</h2>
-<form id="userDetailsForm">
-<label for="userFullName">Name</label>
-<input type="text" id="userFullName" value="" required><br>
+<label for="userFullName">Full Name <small>(Required)</small></label>
+<input type="text" id="userFullName" value=""><br>
 
 <label for="userClass">Class</label>
 <input type="text" id="userClass" value=""><br>
 
 <label for="userEmail">Email</label>
-<input type="email" id="userEmail" value=""><br>
+<input type="text" id="userEmail" value=""><br>
 
 <label for="userWhatsApp">WhatsApp</label>
 <input type="text" id="userWhatsApp" value=""><br>
@@ -73,8 +72,7 @@
 <textarea id="userAbout" rows="5" value=""></textarea>
 
 <div id="userErrMsg"></div>
-<input type="submit" class="w-100" value="Submit">
-</form>
+<button id="userDetailsBtn" class="w-100">Submit Details</butto>
 </div>
 
 <div class="card">
