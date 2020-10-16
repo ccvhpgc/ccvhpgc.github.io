@@ -51,7 +51,7 @@ hr {display:block;box-sizing:content-box;
 
 i::before {vertical-align:-4%}
 
-img {border-style:none;max-width:100%}
+img {border-style:none;max-width:100%; border-radius:4px}
 
 input, select {vertical-align:middle}
 
@@ -91,10 +91,6 @@ template {display: none}
 
 textarea {overflow: auto}
 
-button, [type="button"], [type="reset"],
-[type="submit"] {-webkit-appearance:button;
-border-radius:5px; outline:0; padding:9px 15px}
-
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
@@ -120,12 +116,20 @@ box-sizing: border-box; padding: 0}
 [type="search"]::-webkit-search-decoration {
  -webkit-appearance:none}
 
-::-webkit-file-upload-button {font:inherit;
- -webkit-appearance:button}
+button, [type="button"], [type="reset"],
+[type="submit"], ::-webkit-file-upload-button{
+outline:0;font:inherit;font-weight:500;
+border-radius:4px;text-align:center;
+text-overflow:ellipsis;text-transform:uppercase;
+padding:4px 9px;border-color:#2196f3;
+background:#1e88e5;color:#fff;
+margin-bottom:5px;
+-webkit-appearance:button}
 
 [hidden] {display: none}
 
-body {
+body { background:#e3f2fd;
+font-family: sans-serif;
  height:100%; font-size:1.5rem;}
 
 #wrapper{position:relative; overflow:hidden;
@@ -133,6 +137,44 @@ body {
  min-height:100%; padding:14px;
  -webkit-tap-highlight-color:rgba(0,0,0,0)}
 
+
+.btn{border-radius:4px;  padding:0 16px;
+height:36px; line-height:36px; vertical-align: middle;
+cursor: pointer;
+text-align: center; text-overflow: ellipsis;
+text-transform:uppercase;
+background-color: #1e88e5;
+ color:#fafafa
+; font-weight:500;
+box-shadow: 0 0 4px #999;
+background-position: center;
+  transition: background 0.8s;
+}
+
+
+.btn:hover{
+background: #2196f3 radial-gradient(circle, transparent 1%, #2196f3 1%) center/15000%;
+}
+
+
+
+
+.card{margin-bottom:16px; padding:16px; border-radius:4px;
+overflow: hidden;
+width: inherit;
+border:1px solid #eee;
+background:#fafafa;
+box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+}
+
+.card h1, .card h2{
+
+text-align: center;
+margin-bottom:9px;
+
+
+}
 
 input, button, select, textarea{line-height:inherit;
  font-family:inherit; font-size:inherit}
@@ -148,19 +190,25 @@ input[type="radio"], input[type="checkbox"] {
  display:inline-block; min-height:2rem;
  min-width:2rem; vertical-align:-20%}
 
+#formFile{
+width:100%;
+border:1px solid #ccc;
+border-radius:4px;
+margin-bottom:9px;
+}
 
-.form-input {margin:-2px 0 10px 0}
 
-.form-textarea {margin:-1px 0; height:100px}
 
-.consent {font-size:1.5rem;display:block}
 
-form .btn {width:100%}
 
-#profileErrMsg { background:#222; color:#fff;
+form [type="submit"] {width:100%}
+
+#userErrMsg { border:1px solid #222;
 text-align: center;
 border-radius:5px;
 margin-bottom:4px;
+padding:8px;
+display:none;
 
 }
 

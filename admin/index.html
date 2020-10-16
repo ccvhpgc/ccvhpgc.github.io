@@ -2,100 +2,129 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Commerce Council Admin</title>
+<title>CC Admin Area</title>
 <link rel="stylesheet" href="main.css" />
 </head><body><div id="wrapper">
 
-<div class="guest">
-<h1>Commerce Council Admin Area</h1>
+<div id="guestArea">
+<div class="card">
+<h1>Admin Area</h1>
 <p>Update your profile for the landing page.</p>
+</div>
 
-<hr>
-
+<div class="card">
 <h2>Login</h2>
 <form id="loginForm">
 <label for="loginEmail">Email</label>
 <input type="email" id="loginEmail" name="loginEmail" required>
 <label for="loginPwd">Password</label>
 <input type="password" id="loginPwd" name="loginPwd" required>
-<input type="submit" class="btn" name="submit" value="Submit">
+<input type="submit" name="submit" value="Submit">
 </form>
+</div>
 
-<hr>
-
-<h2>Forgot your password?</h2>
-<p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
-<form id="resetPwdForm">
-<label for="resetPwdEmail">Email</label>
-<input type="email" id="resetPwdEmail" required>
-<input type="submit" class="btn" name="submit" value="Reset Password">
-</form>
-
-<hr>
-
+<div class="card">
 <h2>Create Account</h2>
 <form id="signupForm">
 <label for="signupEmail">Email</label>
 <input type="email" id="signupEmail" name="signupEmail" required>
 <label for="signupPwd">Password</label>
 <input type="password" id="signupPwd" name="signupPwd" required>
-<input type="submit" class="btn" name="submit" value="Submit">
+<input type="submit" name="submit" value="Submit">
 </form>
+</div>
 
-<hr>
+<div class="card">
+<h2>Forgot your password?</h2>
+<p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
+<form id="resetPwdForm">
+<label for="resetPwdEmail">Email</label>
+<input type="email" id="resetPwdEmail" required>
+<input type="submit" name="submit" value="Reset Password">
+</form>
+</div>
 <br>
-</div> <!-- guest -->
+</div> <!-- guestArea -->
 
 
-<div class="member">
-<h1>You are logged in.</h1>
+<div id="userArea">
+<div class="card">
+<h2 id="displayEmail"></h2>
 <p>Yay.</p>
 <button id="refreshData" onclick="getProfile()">Refresh Data</button>
 <button id="logout" class="ml-2">Logout</button>
+</div>
 
-<hr>
 
-<h2>Submit Profile Details</h2>
-<form id="profileForm">
-<label for="profileName">Name</label>
-<input type="text" id="profileName" value="" required><br>
+<div class="card">
+<h2>Submit Details</h2>
+<form id="userDetailsForm">
+<label for="userFullName">Name</label>
+<input type="text" id="userFullName" value="" required><br>
 
-<label for="profileClass">Class</label>
-<input type="text" id="profileClass" value=""><br>
+<label for="userClass">Class</label>
+<input type="text" id="userClass" value=""><br>
 
-<label for="profileEmail">Email</label>
-<input type="email" id="profileEmail" value=""><br>
+<label for="userEmail">Email</label>
+<input type="email" id="userEmail" value=""><br>
 
-<label for="profileWA">WhatsApp</label>
-<input type="text" id="profileWA" value=""><br>
+<label for="userWhatsApp">WhatsApp</label>
+<input type="text" id="userWhatsApp" value=""><br>
 
-<label for="profilePhone">Phone No.</label>
-<input type="text" id="profilePhone" value=""><br>
+<label for="userPhone">Phone No.</label>
+<input type="text" id="userPhone" value=""><br>
 
-<div id="profileErrMsg"></div>
-<input type="submit" class="btn" value="Submit">
+<label for="userAbout">About</label>
+<textarea id="userAbout" rows="5" value=""></textarea>
+
+<div id="userErrMsg"></div>
+<input type="submit" value="Submit">
 </form>
+</div>
 
-<hr>
+<div class="card">
+<h2>Profile Details:</h2>
+<div id="userDetailsOutput"></div>
+</div>
 
-<div id="profileOutput"></div>
+<div class="card">
+<h2>Change Photo</h2>
+<img id="userImg" src="">
+<div id="userImgMsg"></div>
+<form method="POST" enctype="multipart/form-data" id="userImgForm">
+<input type="file" id="userImgFile" required>
+<button type="submit" name="submit">Upload Photo</button>
+</form>
+</div>
 
-<hr>
+<div class="card">
+<h2>Change Password</h2>
 
-<h2>Change Email</h2>
+</div>
+
+
+<div class="card">
+<h2>Update Email</h2>
+<p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification.</p>
+
+<form id="updateEmailForm">
+<label for="newEmail">Enter new email</label>
+<input type="email" id="newEmail" value="" required>
+<input type="submit" value="Submit">
+</form>
+</div>
 
 
 
-
-<hr>
+<div class="card">
 
 <button id="deleteAcc">Delete Account</button>
 
 
+</div>
+<br>
 
-<hr><br>
-
-</div> <!-- member -->
+</div> <!-- userArea -->
 
 </div> <!-- wrapper -->
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
