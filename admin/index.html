@@ -14,24 +14,26 @@
 </nav>
 </header>
 
-<main class="flex-shrink-0 pt-4">
+<main class="flex-shrink-0 pt-3">
 
 <!-- guestArea start -->
 <div id="guestArea" class="container pt-5">
 
 
-<div class="card h-100 mb-3 shadow-sm">
-<div class="card-body">
-<h1>Admin Area</h1>
-<p>Update your profile for the landing page.</p>
+<div class="card h-100 mb-3">
+<span class="h5 card-header">Admin Area</span>
+<div class="card-body pb-0">
+<p>This is administrator's area of Commerce Council. </p>
 </div>
-<div class="card-footer p-0"></div>
+<div class="card-footer">
+<a href="https://api.whatsapp.com/send?&phone=918181040977&text=Hey%20Arvind%2C%0AI%20wanna%20report%20an%20error" class="btn btn-dark btn-block">Report Error</a>
+</div>
 </div>
 
 
-<div class="card h-100 mb-3 shadow-sm">
-<div class="card-body">
-<h2>Login</h2>
+<div class="card h-100 mb-3">
+<span class="h5 card-header">Login</span>
+<div class="card-body pb-0">
 <label for="loginEmail" class="form-label mb-0">Email</label>
 <input type="email" id="loginEmail" class="form-control mb-3" required>
 <label for="loginPwd" class="form-label mb-0">Password</label>
@@ -42,9 +44,9 @@
 </div>
 
 
-<div class="card h-100 mb-3 shadow-sm">
-<div class="card-body">
-<h2>Create Account</h2>
+<div class="card h-100 mb-3">
+<span class="h5 card-header">Create Account</span>
+<div class="card-body pb-0">
 <label for="signupEmail" class="form-label mb-0">Email</label>
 <input type="email" id="signupEmail" class="form-control mb-3" required>
 <label for="signupPwd" class="form-label mb-0">Password</label>
@@ -56,10 +58,10 @@
 </div>
 
 
-<div class="card h-100 mb-3 shadow-sm">
-<div class="card-body">
-<h2>Forgot your password?</h2>
-<p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
+<div class="card h-100 mb-3">
+<span class="h5 card-header">Forgot your password?</span>
+<div class="card-body pb-0">
+<p>Enter your email below to request a new password. A password reset link will be sent via email with instructions to reset your password. Email may take few minutes to arrive.</p>
 <label for="resetPwdEmail" class="form-label mb-0">Email</label>
 <input type="email" id="resetPwdEmail" class="form-control mb-3" required>
 </div>
@@ -76,12 +78,10 @@
 <div id="userArea" class="container pt-5">
 
 
-<div class="card h-100 mb-3 shadow-sm">
+<div class="card h-100 mb-3">
+<span id="displayEmail" class="h5 card-header text-truncate"></span>
 <div class="card-body pb-0">
-<h2>Welcome Back&#33;</h2>
-<p>
-<br>&#128240;<span id="displayEmail"></span>
-</p>
+<p>Here you check the email address with which you are loggeg in. If you change your email then refresh/reload this page to see changes.</p>
 </div>
 <div class="card-footer">
 <button id="logout" class="btn btn-dark btn-block">Logout</button>
@@ -89,9 +89,10 @@
 </div>
 
 
-<div class="card h-100 mb-3 shadow-sm">
+<div class="card h-100 mb-3">
+<span class="h5 card-header">Submit Details</span>
 <div class="card-body pb-0">
-<h2>Submit Details</h2>
+<p>If you are entering emojis and they show up as question mark (?), then refresh data to see changes.<br>You don&apos;t need to submit details to preview your YouTube video, after entering the code just tap anywhere else and video preview will refresh.</p>
 <label for="userFullName" class="form-label mb-0">Full Name <small>(Required)</small></label>
 <input type="text" id="userFullName" class="form-control mb-3" value="">
 
@@ -110,7 +111,7 @@
 <label for="userAbout" class="form-label mb-0">About</label>
 <textarea id="userAbout" rows="5" class="form-control mb-3" value=""></textarea>
 
-<label for="userVideo" class="form-label mb-0">Share YouTube video id</label>
+<label for="userVideo" class="form-label mb-0">Enter YouTube video id</label>
 <input type="text" id="userVideo" class="form-control" placeholder="MWDPYfgu7jw">
 <div class="form-text mb-3">https://youtu.be/<b>MWDPYfgu7jw</b></div>
 
@@ -125,9 +126,10 @@
 
 
 
-<div class="card h-100 mb-3 shadow-sm">
+<div class="card h-100 mb-3">
+<span class="h5 card-header">View Profile Details</span>
 <div class="card-body">
-<h2>Profile Details:</h2>
+<p>If you are entering emojis and they show up as question mark (?), then refresh data to see changes.</p>
 <div id="userDetailsOutput"></div>
 </div>
 <div class="card-footer"><button id="refreshData" onclick="getProfile()" class="btn btn-dark btn-block">Refresh Data</button>
@@ -136,14 +138,15 @@
 
 
 
-<div class="card h-100 mb-3 shadow-sm">
+<div class="card h-100 mb-3">
+<span class="h5 card-header">Change Photo</span>
 <div class="card-body pb-0">
-<h2>Change Photo</h2>
+<p>Allowed file types include jpg, jpeg and png having maximum size of 2 megabytes.</p>
 <img id="userImg" src="" class="img-fluid rounded mb-2">
-<div id="userImgMsg"></div>
+<div id="userImgMsg" class="alert alert-primary d-none"></div>
 <form method="POST" enctype="multipart/form-data" id="userImgForm">
 
-<div class="form-file custom-file mb-2">
+<div class="form-file custom-file mb-2 overflow-hidden">
 <input type="file" class="form-file-input custom-file-input" id="userImgFile" required>
 <label class="form-file-label" for="customFile">
 <span class="form-file-text custom-file-label">Choose file...</span>
@@ -162,9 +165,10 @@
 
 
 
-<div class="card mb-3 shadow-sm">
+<div class="card mb-3">
+<span class="h5 card-header">Change Password</span>
 <div class="card-body pb-0">
-<h2>Change Password</h2>
+<p>You will be promoted to enter your old password as security measure.</p>
 <label for="newPwd" class="form-label mb-0">New Password</label>
 <input type="password" id="newPwd" class="form-control mb-3" required></div>
 <div class="card-footer">
@@ -173,10 +177,10 @@
 
 
 
-<div class="card mb-3 shadow-sm">
+<div class="card mb-3">
+<span class="h5 card-header">Update Email</span>
 <div class="card-body pb-0">
-<h2>Update Email</h2>
-<p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification.</p>
+<p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification. A confirmation email will be sent to the old email to notify about this change.</p>
 <label for="newEmail" class="form-label mb-0">Enter new email</label>
 <input type="email" id="newEmail" value="" class="form-control mb-3" required></div>
 <div class="card-footer">
@@ -185,10 +189,10 @@
 
 
 
-<div class="card mb-3 shadow-sm">
+<div class="card mb-3">
+<span class="h5 card-header">Delete Account</span>
 <div class="card-body pb-0">
-<h2>Delete Account</h2>
-<p>Your data with this website will be deleted.</p>
+<p>Your data with this website will be deleted and this action can not be undone. You will be asked to enter your password for security reasons.</p>
 </div>
 <div class="card-footer">
 <button id="deleteAcc" class="btn btn-dark btn-block">Delete Account</button></div>
@@ -198,6 +202,32 @@
 
 <hr class="mt-5 mb-0 invisible"></div>
 <!-- userArea end -->
+
+
+
+
+
+
+<!-- custom alertBS start -->
+<div class="modal fade" id="alertBSModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header py-2">
+<h5 class="modal-title">Alert&#33;</h5>
+<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+</div>
+<div id="alertBSBody" class="modal-body"></div>
+<div class="modal-footer py-2">
+<button data-dismiss="modal" class="btn btn-outline-dark w-50">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!-- custom alert end -->
+
+
+
+
 
 </main>
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>

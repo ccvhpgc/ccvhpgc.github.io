@@ -62,6 +62,10 @@ const userImgForm=_("userImgForm")
 const userImgFile=_("userImgFile")
 const userImgMsg=_("userImgMsg")
 
+const alertBSModal=_("alertBSModal")
+const alertBSBody=_("alertBSBody")
+const aBox=new bootstrap.Modal(alertBSModal)
+
 
 
 userVideo.addEventListener("blur", ()=>{
@@ -85,6 +89,13 @@ guestArea.style.display="block"
 userArea.style.display="none"}
 })
 
+
+function alertBS(text){
+alertBSBody.innerHTML=text
+aBox.toggle()}
+
+
+
 signupBtn.addEventListener("click", ()=>{
 signupBtn.disabled="true"
 const email=signupEmail.value
@@ -92,7 +103,7 @@ const pwd=signupPwd.value
 auth.createUserWithEmailAndPassword(email, pwd).then(cred=>{sendVerificationEmail()
 signupEmail.value=""
 signupBtn.disabled=""
-}).catch(error=>{alert(error.message)
+}).catch(error=>{alertBS(error.message)
 signupBtn.disabled=""
 })
 })
@@ -100,7 +111,7 @@ signupBtn.disabled=""
 const sendVerificationEmail=()=>{
 auth.currentUser.sendEmailVerification()
 .then(()=>console.log("Email sent"))
-.catch(error=>alert(error))
+.catch(error=>alertBS(error))
 }
 
 loginBtn.addEventListener("click", ()=> {
@@ -108,14 +119,14 @@ const email=loginEmail.value
 const pwd=loginPwd.value
 auth.signInWithEmailAndPassword(email, pwd)
 .then(cred=>loginEmail.value="")
-.catch(error=>alert(error.message))
+.catch(error=>alertBS(error.message))
 })
 
 logout.addEventListener("click", ()=>{
 let user=firebase.auth().currentUser
 auth.signOut()
-.then(()=>console.log("logged out."))
-.catch(error=>alert(error))
+.then(()=>alertBS("Logged out."))
+.catch(error=>alertBS(error))
 })
 
 resetPwdBtn.addEventListener("click", ()=>{
@@ -123,9 +134,9 @@ resetPwdBtn.disabled="true"
 const email=resetPwdEmail.value
 auth.sendPasswordResetEmail(email)
 .then(()=>{
-alert("Password Reset Email Sent. Wait for 15 minutes.")
+alertBS("Password Reset Email Sent. Check your inbox.")
 })
-.catch(error=>{alert(error)
+.catch(error=>{alertBS(error)
 resetPwdBtn.disabled=""
 })
 })
@@ -141,8 +152,8 @@ return credential}
 function deleteUserDB(){
 fetch('https://rexarvind.000webhostapp.com/api/cc/delete/'+userID)
 .then(res=>res.text())
-.then(res=>alert(res))
-.catch(err=>alert("Info:"+err))}
+.then(res=>alertBS(res))
+.catch(err=>alertBS("Info:"+err))}
 
 
 
@@ -153,7 +164,7 @@ user.reauthenticateWithCredential(credential)
 .then(()=>{let resDEL=deleteUserDB();
 user.delete();
 })
-.catch(error=>{alert("Message:"+error)})
+.catch(error=>{alertBS(error)})
 })
 
 updateEmailBtn.addEventListener("click", ()=>{
@@ -167,13 +178,13 @@ changeEmail(user, credential, newEmail)
 const changeEmail=(user, credential, newEmail)=>{
 user.reauthenticateWithCredential(credential)
 .then(()=>{user.updateEmail(newEmail)
-.then(()=>{alert('Email Updated!')
+.then(()=>{alertBS('Email Updated!')
 updateEmailBtn.disabled=""
 })
-.catch(error=>{alert(error)
+.catch(error=>{alertBS(error)
 updateEmailBtn.disabled=""
 })
-}).catch(error =>{alert(error)
+}).catch(error =>{alertBS(error)
 updateEmailBtn.disabled=""
 })
 }
@@ -193,13 +204,13 @@ changePwd(user, credential, newPwd)
 const changePwd=(user, credential, newPwd)=>{
 user.reauthenticateWithCredential(credential)
 .then(()=>{user.updatePassword(newPwd)
-.then(()=>{alert('Password Updated!')
+.then(()=>{alertBS('Password Updated!')
 newPwdBtn.disabled=""
 })
-.catch(error=>{alert(error)
+.catch(error=>{alertBS(error)
 newPwdBtn.disabled=""
 })
-}).catch(error =>{alert(error)
+}).catch(error =>{alertBS(error)
 newPwdBtn.disabled=""
 })
 }
@@ -223,6 +234,8 @@ fd.append("email", userEmail.value)
 fd.append("whatsapp", userWhatsApp.value)
 fd.append("phone", userPhone.value)
 fd.append("about", userAbout.value)
+fd.append("video", userVideo.value)
+
 
 var xhr=new XMLHttpRequest()
 
@@ -251,6 +264,8 @@ fetch('https://rexarvind.000webhostapp.com/api/cc/get/'+userID)
 }
 
 
+
+
 function showProfile(data){
 data=data.message
 let output="";
@@ -270,22 +285,25 @@ userEmail.value=data[0].email
 userWhatsApp.value=data[0].whatsapp
 userPhone.value=data[0].phone
 userAbout.value=data[0].about
-userImg.src=ROOT_URL+'/uploads/cc/'+userID+'-0.jpg?'+Math.random()
+userImg.src=ROOT_URL+'/uploads/cc/'+userID+'-0.jpg';
 }
+
+
 
 
 
 
 userImgForm.addEventListener("submit", (e)=>{
 e.preventDefault();
-userImgMsg.innerHTML="Please wait..."
 let img=userImgFile.files[0];
 
 if(img.size > 2000000){
-alert("Maximum file size should be 2MB")
-
+alertBS("Maximum file size is 2MB")
+return
 }
 
+userImgMsg.classList.remove("d-none");
+userImgMsg.innerHTML="Please wait..."
 var imgFD = new FormData();	
 imgFD.append("img", img);
 imgFD.append("uid", userID);
@@ -297,7 +315,7 @@ ajax.addEventListener("load", userImgComplete, false);
 ajax.onreadystatechange=function(){
   if(ajax.readyState==4 && ajax.status==200) {
       userImgMsg.innerHTML=ajax.responseText;
-      setTimeout(()=>{userImgMsg.innerHTML=""},3000)
+      setTimeout(()=>{userImgMsg.classList.add("d-none");},3000)
   }
 }
 ajax.send(imgFD)
