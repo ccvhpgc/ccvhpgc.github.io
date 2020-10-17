@@ -24,9 +24,9 @@ const signupEmail=_("signupEmail")
 const signupPwd=_("signupPwd")
 const signupBtn=_("signupBtn")
 
-const loginForm=_("loginForm")
 const loginEmail=_("loginEmail")
 const loginPwd=_("loginPwd")
+const loginBtn=_("loginBtn")
 
 const logout=_("logout")
 
@@ -90,11 +90,11 @@ auth.currentUser.sendEmailVerification()
 .catch(error=>alert(error))
 }
 
-loginForm.addEventListener("submit", (e)=> {e.preventDefault()
+loginBtn.addEventListener("click", ()=> {
 const email=loginEmail.value
 const pwd=loginPwd.value
 auth.signInWithEmailAndPassword(email, pwd)
-.then(cred=>loginForm.reset())
+.then(cred=>loginEmail.value="")
 .catch(error=>alert(error.message))
 })
 
@@ -250,8 +250,7 @@ output=`<b>Name:</b> ${data[0].name}<br>
 <b>Email:</b> ${data[0].email}<br>
 <b>WhatsApp:</b> ${data[0].whatsapp}<br>
 <b>Phone:</b> ${data[0].phone}<br>
-<b>About:</b><span style="white-space: pre-wrap"> ${data[0].about}</span>
-<br><button id="refreshData" onclick="getProfile()" class="btn btn-dark btn-block mt-3">Refresh Data</button>`;
+<b>About:</b><span style="white-space: pre-wrap"> ${data[0].about}</span>`;
 
 userDetailsOutput.innerHTML=output
 

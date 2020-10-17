@@ -29,36 +29,44 @@
 </div>
 
 <div class="col-sm-6">
-<form id="loginForm" class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2>Login</h2>
 <label for="loginEmail" class="form-label mb-0">Email</label>
 <input type="email" id="loginEmail" class="form-control mb-3" required>
 <label for="loginPwd" class="form-label mb-0">Password</label>
-<input type="password" id="loginPwd" class="form-control mb-3" required>
-<input type="submit" class="btn btn-dark btn-block" value="Login">
-</form>
+<input type="password" id="loginPwd" class="form-control mb-3" required></div>
+<div class="card-footer">
+<button type="submit" id="loginBtn" class="btn btn-dark btn-block">Login</button>
 </div>
+</div></div>
 
 <div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2>Create Account</h2>
 <label for="signupEmail" class="form-label mb-0">Email</label>
 <input type="email" id="signupEmail" class="form-control mb-3" required>
 <label for="signupPwd" class="form-label mb-0">Password</label>
 <input type="password" id="signupPwd" class="form-control mb-3" required>
+</div>
+<div class="card-footer">
 <button id="signupBtn" class="btn btn-dark btn-block">Create Account</button>
 </div>
-</div>
+</div></div>
 
 <div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2>Forgot your password?</h2>
 <p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
 <label for="resetPwdEmail" class="form-label mb-0">Email</label>
 <input type="email" id="resetPwdEmail" class="form-control mb-3" required>
+</div>
+<div class="card-footer">
 <button id="resetPwdBtn" class="btn btn-dark btn-block">Reset Password</button>
 </div>
-</div>
+</div></div>
 
 </div>
 
@@ -72,12 +80,21 @@
 <div class="row gy-4">
 
 <div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2 id="displayEmail"></h2>
 <p>Yay.</p>
+</div>
+<div class="card-footer">
 <button id="logout" class="btn btn-dark btn-block">Logout</button>
 </div>
-</div>
+</div></div>
+
+<div class="col-sm-6">
+<div class="card h-100 shadow-sm">
+
+
+</div></div>
 
 <div class="col-sm-6">
 <div class="card p-3 h-100 shadow-sm">
@@ -106,9 +123,13 @@
 </div>
 
 <div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2>Profile Details:</h2>
 <div id="userDetailsOutput"></div>
+</div>
+<div class="card-footer"><button id="refreshData" onclick="getProfile()" class="btn btn-dark btn-block">Refresh Data</button>
+</div>
 </div></div>
 
 
