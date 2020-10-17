@@ -9,7 +9,7 @@
 <header>
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark py-0 border-bottom border-secondary shadow">
 <div class="container-lg">
-<a class="navbar-brand font-weight-bold mx-auto" href="index.html">Commerce Council</a>
+<a class="navbar-brand font-weight-bold mx-auto py-1" href="index.html">COMMERCE COUNCIL</a>
 </div>
 </nav>
 </header>
@@ -17,19 +17,19 @@
 <main class="flex-shrink-0 pt-4">
 
 <!-- guestArea start -->
-<div id="guestArea" class="container-lg pt-5">
+<div id="guestArea" class="container pt-5">
 
-<div class="row gy-4">
 
-<div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 mb-3 shadow-sm">
+<div class="card-body">
 <h1>Admin Area</h1>
 <p>Update your profile for the landing page.</p>
 </div>
+<div class="card-footer p-0"></div>
 </div>
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
+
+<div class="card h-100 mb-3 shadow-sm">
 <div class="card-body">
 <h2>Login</h2>
 <label for="loginEmail" class="form-label mb-0">Email</label>
@@ -39,10 +39,10 @@
 <div class="card-footer">
 <button type="submit" id="loginBtn" class="btn btn-dark btn-block">Login</button>
 </div>
-</div></div>
+</div>
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
+
+<div class="card h-100 mb-3 shadow-sm">
 <div class="card-body">
 <h2>Create Account</h2>
 <label for="signupEmail" class="form-label mb-0">Email</label>
@@ -53,10 +53,10 @@
 <div class="card-footer">
 <button id="signupBtn" class="btn btn-dark btn-block">Create Account</button>
 </div>
-</div></div>
+</div>
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
+
+<div class="card h-100 mb-3 shadow-sm">
 <div class="card-body">
 <h2>Forgot your password?</h2>
 <p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
@@ -66,8 +66,6 @@
 <div class="card-footer">
 <button id="resetPwdBtn" class="btn btn-dark btn-block">Reset Password</button>
 </div>
-</div></div>
-
 </div>
 
 <hr class="mt-5 mb-0 invisible"></div>
@@ -75,33 +73,24 @@
 
 
 <!-- userArea end -->
-<div id="userArea" class="container-lg pt-5">
+<div id="userArea" class="container pt-5">
 
-<div class="row gy-4">
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
-<div class="card-body">
-<h2 id="displayEmail"></h2>
-<p>Yay.</p>
+<div class="card h-100 mb-3 shadow-sm">
+<div class="card-body pb-0">
+<h2>Welcome Back&#33;</h2>
+<p>
+<br>&#128240;<span id="displayEmail"></span>
+</p>
 </div>
 <div class="card-footer">
 <button id="logout" class="btn btn-dark btn-block">Logout</button>
 </div>
-</div></div>
-
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
-<div class="card-body">
-<h2>Additional Details</h2>
 </div>
-<div class="card-footer">
-<button class="btn btn-dark btn-block disabled">Disabled Button</button>
-</div>
-</div></div>
 
-<div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+
+<div class="card h-100 mb-3 shadow-sm">
+<div class="card-body pb-0">
 <h2>Submit Details</h2>
 <label for="userFullName" class="form-label mb-0">Full Name <small>(Required)</small></label>
 <input type="text" id="userFullName" class="form-control mb-3" value="">
@@ -121,24 +110,34 @@
 <label for="userAbout" class="form-label mb-0">About</label>
 <textarea id="userAbout" rows="5" class="form-control mb-3" value=""></textarea>
 
+<label for="userVideo" class="form-label mb-0">Share YouTube video id</label>
+<input type="text" id="userVideo" class="form-control" placeholder="MWDPYfgu7jw">
+<div class="form-text mb-3">https://youtu.be/<b>MWDPYfgu7jw</b></div>
+
+<div class="ratio ratio-16x9 mb-3"><iframe id="userVideoOutput" src="" title="YouTube video" class="rounded shadow-sm border bg-grey" allowfullscreen></iframe></div>
+
 <div id="userErrMsg" class="alert alert-primary d-none"></div>
+</div>
+<div class="card-footer">
 <button id="userDetailsBtn" class="btn btn-dark btn-block">Submit Details</button>
 </div>
 </div>
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
+
+
+<div class="card h-100 mb-3 shadow-sm">
 <div class="card-body">
 <h2>Profile Details:</h2>
 <div id="userDetailsOutput"></div>
 </div>
 <div class="card-footer"><button id="refreshData" onclick="getProfile()" class="btn btn-dark btn-block">Refresh Data</button>
 </div>
-</div></div>
+</div>
 
 
-<div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+
+<div class="card h-100 mb-3 shadow-sm">
+<div class="card-body pb-0">
 <h2>Change Photo</h2>
 <img id="userImg" src="" class="img-fluid rounded mb-2">
 <div id="userImgMsg"></div>
@@ -151,59 +150,50 @@
 <span class="form-file-button">Browse</span>
 </label>
 </div>
-<input type="submit" class="btn btn-dark btn-block" value="Upload Photo">
-</form>
-</div></div>
-
-
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
-<div class="card-body">
-<h2>Share video</h2>
-<div class="ratio ratio-16x9 mb-3"><iframe id="userVideoOutput" src="https://www.youtube.com/embed/DUrnc86XuxY?rel=0" title="YouTube video" class="rounded shadow-sm border" allowfullscreen></iframe></div>
-<label for="userVideo" class="form-label mb-0">Share YouTube video id</label>
-<input type="text" id="userVideo" class="form-control" placeholder="MWDPYfgu7jw">
-<div class="form-text">https://youtu.be/<b>MWDPYfgu7jw</b></div>
 </div>
 <div class="card-footer">
-<button class="btn btn-dark btn-block">Update</button></div>
-</div></div>
+<input type="submit" class="btn btn-dark btn-block" value="Upload Photo">
+</form>
+</div>
+</div>
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
-<div class="card-body">
+
+
+
+
+
+<div class="card mb-3 shadow-sm">
+<div class="card-body pb-0">
 <h2>Change Password</h2>
 <label for="newPwd" class="form-label mb-0">New Password</label>
 <input type="password" id="newPwd" class="form-control mb-3" required></div>
 <div class="card-footer">
 <button id="newPwdBtn" class="btn btn-dark btn-block">Change Password</button></div>
-</div></div>
+</div>
 
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
-<div class="card-body">
+
+<div class="card mb-3 shadow-sm">
+<div class="card-body pb-0">
 <h2>Update Email</h2>
 <p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification.</p>
 <label for="newEmail" class="form-label mb-0">Enter new email</label>
 <input type="email" id="newEmail" value="" class="form-control mb-3" required></div>
 <div class="card-footer">
 <button id="updateEmailBtn" class="btn btn-dark btn-block">Submit</button></div>
-</div></div>
+</div>
 
 
-<div class="col-sm-6">
-<div class="card h-100 shadow-sm">
-<div class="card-body">
+
+<div class="card mb-3 shadow-sm">
+<div class="card-body pb-0">
 <h2>Delete Account</h2>
 <p>Your data with this website will be deleted.</p>
 </div>
 <div class="card-footer">
 <button id="deleteAcc" class="btn btn-dark btn-block">Delete Account</button></div>
-</div></div>
-
-
 </div>
+
 
 
 <hr class="mt-5 mb-0 invisible"></div>

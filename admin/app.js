@@ -147,16 +147,13 @@ fetch('https://rexarvind.000webhostapp.com/api/cc/delete/'+userID)
 
 
 deleteAcc.addEventListener("click", ()=>{
-deleteAcc.disabled="true"
 let user=firebase.auth().currentUser
 const credential=createCredential(user)
 user.reauthenticateWithCredential(credential)
 .then(()=>{let resDEL=deleteUserDB();
 user.delete();
-deleteAcc.disabled=""
 })
-.catch(error=>{alert("Message:"+error)
-deleteAcc.disabled=""})
+.catch(error=>{alert("Message:"+error)})
 })
 
 updateEmailBtn.addEventListener("click", ()=>{
