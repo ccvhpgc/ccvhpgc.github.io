@@ -100,7 +100,7 @@
 <label for="userAbout" class="form-label mb-0">About</label>
 <textarea id="userAbout" rows="5" class="form-control mb-3" value=""></textarea>
 
-<div id="userErrMsg" class="alert alert-dark d-none"></div>
+<div id="userErrMsg" class="alert alert-primary d-none"></div>
 <button id="userDetailsBtn" class="btn btn-dark btn-block">Submit Details</button>
 </div>
 </div>
@@ -118,8 +118,15 @@
 <img id="userImg" src="" class="img-fluid rounded mb-2">
 <div id="userImgMsg"></div>
 <form method="POST" enctype="multipart/form-data" id="userImgForm">
-<input type="file" id="userImgFile" required>
-<input type="submit" class="btn btn-dark btn-block mt-2" value="Upload Photo">
+
+<div class="form-file custom-file mb-2">
+<input type="file" class="form-file-input custom-file-input" id="userImgFile" required>
+<label class="form-file-label" for="customFile">
+<span class="form-file-text custom-file-label">Choose file...</span>
+<span class="form-file-button">Browse</span>
+</label>
+</div>
+<input type="submit" class="btn btn-dark btn-block" value="Upload Photo">
 </form>
 </div></div>
 
@@ -137,43 +144,22 @@
 <div class="card p-3 h-100 shadow-sm">
 <h2>Update Email</h2>
 <p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification.</p>
-
 <label for="newEmail" class="form-label mb-0">Enter new email</label>
 <input type="email" id="newEmail" value="" class="form-control mb-3" required>
 <button id="updateEmailBtn" class="btn btn-dark btn-block">Submit</button>
 </div></div>
 
 
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="card">
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Delete Account</h2>
 <p>Your data with this website will be deleted.</p>
-<button id="deleteAcc" class="w-100">Delete Account</button>
+<button id="deleteAcc" class="btn btn-dark btn-block">Delete Account</button>
+</div></div>
 
 
 </div>
-<br>
+
 
 <hr class="mt-5 mb-0 invisible"></div>
 <!-- userArea end -->
@@ -183,4 +169,5 @@
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
 <script src="../lib/lazysizes.min.js"></script>
 <script src="../lib/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 <script src="app.js"></script></body></html>

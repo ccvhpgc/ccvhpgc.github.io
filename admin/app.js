@@ -9,6 +9,8 @@ appId:"1:685927662051:web:252add00d42a851bc320d6"}
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
 
+bsCustomFileInput.init()
+
 const _=id=>document.getElementById(id)
 
 const ROOT_URL="https://rexarvind.000webhostapp.com"
