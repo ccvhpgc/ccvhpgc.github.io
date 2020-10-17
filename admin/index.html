@@ -92,8 +92,12 @@
 
 <div class="col-sm-6">
 <div class="card h-100 shadow-sm">
-
-
+<div class="card-body">
+<h2>Additional Details</h2>
+</div>
+<div class="card-footer">
+<button class="btn btn-dark btn-block disabled">Disabled Button</button>
+</div>
 </div></div>
 
 <div class="col-sm-6">
@@ -153,29 +157,49 @@
 
 
 <div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
+<h2>Share video</h2>
+<div class="ratio ratio-16x9 mb-3"><iframe id="userVideoOutput" src="https://www.youtube.com/embed/DUrnc86XuxY?rel=0" title="YouTube video" class="rounded shadow-sm border" allowfullscreen></iframe></div>
+<label for="userVideo" class="form-label mb-0">Share YouTube video id</label>
+<input type="text" id="userVideo" class="form-control" placeholder="MWDPYfgu7jw">
+<div class="form-text">https://youtu.be/<b>MWDPYfgu7jw</b></div>
+</div>
+<div class="card-footer">
+<button class="btn btn-dark btn-block">Update</button></div>
+</div></div>
+
+<div class="col-sm-6">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2>Change Password</h2>
 <label for="newPwd" class="form-label mb-0">New Password</label>
-<input type="password" id="newPwd" class="form-control mb-3" required>
-<button id="newPwdBtn" class="btn btn-dark btn-block">Change Password</button>
+<input type="password" id="newPwd" class="form-control mb-3" required></div>
+<div class="card-footer">
+<button id="newPwdBtn" class="btn btn-dark btn-block">Change Password</button></div>
 </div></div>
 
 
 <div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2>Update Email</h2>
 <p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification.</p>
 <label for="newEmail" class="form-label mb-0">Enter new email</label>
-<input type="email" id="newEmail" value="" class="form-control mb-3" required>
-<button id="updateEmailBtn" class="btn btn-dark btn-block">Submit</button>
+<input type="email" id="newEmail" value="" class="form-control mb-3" required></div>
+<div class="card-footer">
+<button id="updateEmailBtn" class="btn btn-dark btn-block">Submit</button></div>
 </div></div>
 
 
 <div class="col-sm-6">
-<div class="card p-3 h-100 shadow-sm">
+<div class="card h-100 shadow-sm">
+<div class="card-body">
 <h2>Delete Account</h2>
 <p>Your data with this website will be deleted.</p>
-<button id="deleteAcc" class="btn btn-dark btn-block">Delete Account</button>
+</div>
+<div class="card-footer">
+<button id="deleteAcc" class="btn btn-dark btn-block">Delete Account</button></div>
 </div></div>
 
 

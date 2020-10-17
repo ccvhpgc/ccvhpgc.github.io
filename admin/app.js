@@ -53,10 +53,23 @@ const userDetailsBtn=_("userDetailsBtn")
 
 const userDetailsOutput=_("userDetailsOutput")
 
+const userVideo=_("userVideo")
+const userVideoOutput=_("userVideoOutput")
+
+
 const userImg=_("userImg")
 const userImgForm=_("userImgForm")
 const userImgFile=_("userImgFile")
 const userImgMsg=_("userImgMsg")
+
+
+
+userVideo.addEventListener("blur", ()=>{
+
+userVideoOutput.src="https://www.youtube.com/embed/"+userVideo.value+"?rel=0";
+})
+
+
 
 
 
