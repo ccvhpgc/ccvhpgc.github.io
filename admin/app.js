@@ -28,7 +28,6 @@ const loginPwd=_("loginPwd")
 
 const logout=_("logout")
 
-
 const resetPwdEmail=_("resetPwdEmail")
 const resetPwdBtn=_("resetPwdBtn")
 
@@ -221,9 +220,9 @@ xhr.onreadystatechange = function(){
   if(xhr.readyState==4 && xhr.status==200){
     output=JSON.parse(xhr.responseText)
     userErrMsg.innerHTML=output.message
-    userErrMsg.style.display="block";
+    userErrMsg.classList.remove("d-none");
     setTimeout(()=>{
-    userErrMsg.style.display="none";},3000)
+    userErrMsg.classList.add("d-none")},3000)
     getProfile()
   }
 }
@@ -250,7 +249,7 @@ output=`<b>Name:</b> ${data[0].name}<br>
 <b>WhatsApp:</b> ${data[0].whatsapp}<br>
 <b>Phone:</b> ${data[0].phone}<br>
 <b>About:</b><span style="white-space: pre-wrap"> ${data[0].about}</span>
-<br><button id="refreshData" onclick="getProfile()">Refresh Data</button>`;
+<br><button id="refreshData" onclick="getProfile()" class="btn btn-dark btn-block mt-3">Refresh Data</button>`;
 
 userDetailsOutput.innerHTML=output
 
@@ -270,6 +269,11 @@ userImgForm.addEventListener("submit", (e)=>{
 e.preventDefault();
 userImgMsg.innerHTML="Please wait..."
 let img=userImgFile.files[0];
+
+if(img.size > 2000000){
+alert("Maximum file size should be 2MB")
+
+}
 
 var imgFD = new FormData();	
 imgFD.append("img", img);

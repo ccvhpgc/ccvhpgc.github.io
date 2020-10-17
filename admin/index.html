@@ -3,124 +3,184 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CC Admin Area</title>
+<link rel="stylesheet" href="../lib/bootstrap.min.css">
 <link rel="stylesheet" href="main.css" />
-</head><body><div id="wrapper">
+</head><body class="bg-light">
+<header>
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark py-0 border-bottom border-secondary shadow">
+<div class="container-lg">
+<a class="navbar-brand font-weight-bold mx-auto" href="index.html">Commerce Council</a>
+</div>
+</nav>
+</header>
 
-<div id="guestArea">
-<div class="card">
+<main class="flex-shrink-0 pt-4">
+
+<!-- guestArea start -->
+<div id="guestArea" class="container-lg pt-5">
+
+<div class="row gy-4">
+
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h1>Admin Area</h1>
 <p>Update your profile for the landing page.</p>
 </div>
+</div>
 
-<div class="card">
+<div class="col-sm-6">
+<form id="loginForm" class="card p-3 h-100 shadow-sm">
 <h2>Login</h2>
-<form id="loginForm">
-<label for="loginEmail">Email</label>
-<input type="email" id="loginEmail" name="loginEmail" required>
-<label for="loginPwd">Password</label>
-<input type="password" id="loginPwd" name="loginPwd" required>
-<input type="submit" class="w-100" value="Submit">
+<label for="loginEmail" class="form-label mb-0">Email</label>
+<input type="email" id="loginEmail" class="form-control mb-3" required>
+<label for="loginPwd" class="form-label mb-0">Password</label>
+<input type="password" id="loginPwd" class="form-control mb-3" required>
+<input type="submit" class="btn btn-dark btn-block" value="Login">
 </form>
 </div>
 
-<div class="card">
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Create Account</h2>
-<label for="signupEmail">Email</label>
-<input type="email" id="signupEmail" name="signupEmail" required>
-<label for="signupPwd">Password</label>
-<input type="password" id="signupPwd" name="signupPwd" required>
-<button id="signupBtn" class="w-100">Create Account</button>
+<label for="signupEmail" class="form-label mb-0">Email</label>
+<input type="email" id="signupEmail" class="form-control mb-3" required>
+<label for="signupPwd" class="form-label mb-0">Password</label>
+<input type="password" id="signupPwd" class="form-control mb-3" required>
+<button id="signupBtn" class="btn btn-dark btn-block">Create Account</button>
+</div>
 </div>
 
-<div class="card">
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Forgot your password?</h2>
 <p>Enter your email below to request a new password. A password reset link will be sent via email.</p>
-<label for="resetPwdEmail">Email</label>
-<input type="email" id="resetPwdEmail" required>
-<button id="resetPwdBtn" class="w-100">Reset Password</button>
+<label for="resetPwdEmail" class="form-label mb-0">Email</label>
+<input type="email" id="resetPwdEmail" class="form-control mb-3" required>
+<button id="resetPwdBtn" class="btn btn-dark btn-block">Reset Password</button>
 </div>
-<br>
-</div> <!-- guestArea -->
+</div>
+
+</div>
+
+<hr class="mt-5 mb-0 invisible"></div>
+<!-- guestArea end -->
 
 
-<div id="userArea">
-<div class="card">
+<!-- userArea end -->
+<div id="userArea" class="container-lg pt-5">
+
+<div class="row gy-4">
+
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2 id="displayEmail"></h2>
 <p>Yay.</p>
-<button id="logout">Logout</button>
+<button id="logout" class="btn btn-dark btn-block">Logout</button>
+</div>
 </div>
 
-
-<div class="card">
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Submit Details</h2>
-<label for="userFullName">Full Name <small>(Required)</small></label>
-<input type="text" id="userFullName" value=""><br>
+<label for="userFullName" class="form-label mb-0">Full Name <small>(Required)</small></label>
+<input type="text" id="userFullName" class="form-control mb-3" value="">
 
-<label for="userClass">Class</label>
-<input type="text" id="userClass" value=""><br>
+<label for="userClass" class="form-label mb-0">Class</label>
+<input type="text" id="userClass" class="form-control mb-3" value="">
 
-<label for="userEmail">Email</label>
-<input type="text" id="userEmail" value=""><br>
+<label for="userEmail" class="form-label mb-0">Email</label>
+<input type="text" id="userEmail" class="form-control mb-3" value="">
 
-<label for="userWhatsApp">WhatsApp</label>
-<input type="text" id="userWhatsApp" value=""><br>
+<label for="userWhatsApp" class="form-label mb-0">WhatsApp</label>
+<input type="text" id="userWhatsApp" class="form-control mb-3" value="">
 
-<label for="userPhone">Phone No.</label>
-<input type="text" id="userPhone" value=""><br>
+<label for="userPhone" class="form-label mb-0">Phone No.</label>
+<input type="text" id="userPhone" class="form-control mb-3" value="">
 
-<label for="userAbout">About</label>
-<textarea id="userAbout" rows="5" value=""></textarea>
+<label for="userAbout" class="form-label mb-0">About</label>
+<textarea id="userAbout" rows="5" class="form-control mb-3" value=""></textarea>
 
-<div id="userErrMsg"></div>
-<button id="userDetailsBtn" class="w-100">Submit Details</butto>
+<div id="userErrMsg" class="alert alert-dark d-none"></div>
+<button id="userDetailsBtn" class="btn btn-dark btn-block">Submit Details</button>
+</div>
 </div>
 
-<div class="card">
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Profile Details:</h2>
 <div id="userDetailsOutput"></div>
-</div>
+</div></div>
 
-<div class="card">
+
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Change Photo</h2>
-<img id="userImg" src="">
+<img id="userImg" src="" class="img-fluid rounded mb-2">
 <div id="userImgMsg"></div>
 <form method="POST" enctype="multipart/form-data" id="userImgForm">
 <input type="file" id="userImgFile" required>
-<button type="submit" class="w-100">Upload Photo</button>
+<input type="submit" class="btn btn-dark btn-block mt-2" value="Upload Photo">
 </form>
-</div>
+</div></div>
 
-<div class="card">
+
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Change Password</h2>
+<label for="newPwd" class="form-label mb-0">New Password</label>
+<input type="password" id="newPwd" class="form-control mb-3" required>
+<button id="newPwdBtn" class="btn btn-dark btn-block">Change Password</button>
+</div></div>
 
-<label for="newPwd">New Password</label>
-<input type="password" id="newPwd" required>
-<button id="newPwdBtn" class="w-100">Change Password</button>
-</div>
 
-
-<div class="card">
+<div class="col-sm-6">
+<div class="card p-3 h-100 shadow-sm">
 <h2>Update Email</h2>
 <p>Change the email associated with this account. After clicking submit button, wait for few seconds then enter your password for verification.</p>
 
-<label for="newEmail">Enter new email</label>
-<input type="email" id="newEmail" value="" required>
-<button id="updateEmailBtn" class="w-100">Submit</button>
+<label for="newEmail" class="form-label mb-0">Enter new email</label>
+<input type="email" id="newEmail" value="" class="form-control mb-3" required>
+<button id="updateEmailBtn" class="btn btn-dark btn-block">Submit</button>
+</div></div>
+
+
+
+
+
+
+
 </div>
 
 
 
-<div class="card">
 
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="card">
+<h2>Delete Account</h2>
+<p>Your data with this website will be deleted.</p>
 <button id="deleteAcc" class="w-100">Delete Account</button>
 
 
 </div>
 <br>
 
-</div> <!-- userArea -->
+<hr class="mt-5 mb-0 invisible"></div>
+<!-- userArea end -->
 
-</div> <!-- wrapper -->
+</main>
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+<script src="../lib/lazysizes.min.js"></script>
+<script src="../lib/bootstrap.bundle.min.js"></script>
 <script src="app.js"></script></body></html>
