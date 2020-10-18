@@ -1,0 +1,225 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, button,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i, dl, dt, dd, ol, ul, li, fieldset, form, 
+input, select, textarea, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {margin:0;
+padding:0; -webkit-box-sizing:border-box;
+box-sizing:border-box}
+
+html {-webkit-text-size-adjust:100%;height:100%;
+font-size:62.5%;line-height:1.4;
+scroll-behavior:smooth}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+display:block}
+
+a {vertical-align:baseline;color:#03dac5;
+background-color:transparent;font-weight:700;
+text-decoration:none}
+
+a:hover {text-decoration:underline}
+
+abbr[title], dfn[title] {cursor:help;
+border-bottom:none;text-decoration:underline;
+text-decoration:underline dotted}
+
+b, strong {font-weight:bolder}
+
+blockquote, q {quotes:none}
+
+blockquote:before, blockquote:after,
+q:before, q:after {content:'';content:none}
+
+code, kbd, samp {font-size:1em;
+font-family:monospace,monospace}
+
+del {text-decoration:line-through}
+
+fieldset {padding:0.35em 0.75em 0.625em}
+
+h1 {font-size:2.5rem;line-height:1.35;
+margin-bottom:1rem}
+
+hr {display:block;box-sizing:content-box;
+ height:1px; overflow:visible; border:0;
+ margin:2rem 0; padding:0;
+ background-color:#757575}
+
+i::before {vertical-align:-4%}
+
+img {border-style:none;max-width:100%; border-radius:4px}
+
+input, select {vertical-align:middle}
+
+ins {background-color:#ff9; color:#000;
+ text-decoration:none}
+
+legend {color: inherit; display: table;
+ max-width: 100%; white-space: normal}
+
+mark {background-color:#ff9; color:#000;
+ font-style:italic; font-weight:bold}
+
+ol li, ul li {margin-left:2rem}
+
+p {margin-bottom:1.4rem}
+
+pre {font-family: monospace, monospace;
+ font-size: 1em}
+
+progress {vertical-align: baseline}
+
+small {font-size: 80%}
+
+sub, sup {font-size: 75%; line-height: 0;
+ position: relative; vertical-align: baseline}
+
+sub {bottom: -0.25em}
+
+sup {top: -0.5em}
+
+summary {display:list-item}
+
+table {border-collapse:collapse;
+ border-spacing:0}
+
+template {display: none}
+
+textarea {overflow: auto}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+ border-style: none; padding: 0}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+ outline: 1px dotted ButtonText}
+
+[type="checkbox"], [type="radio"] {
+box-sizing: border-box; padding: 0}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+ height:auto}
+
+[type="search"] { -webkit-appearance: textfield;
+ outline-offset: -2px}
+
+[type="search"]::-webkit-search-decoration {
+ -webkit-appearance:none}
+
+button, [type="button"], [type="reset"],
+[type="submit"], ::-webkit-file-upload-button{
+outline:0;font:inherit;font-weight:500;
+border-radius:4px;text-align:center;
+text-overflow:ellipsis;text-transform:uppercase;
+padding:4px 9px; border-color:#2196f3;
+background:#1976d2; color:#fff;
+margin-top:5px;
+-webkit-appearance:button}
+
+[hidden] {display: none}
+
+body { background:#e3f2fd;
+font-family: sans-serif;
+ height:100%; font-size:1.5rem;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+
+#wrapper{position:relative; overflow:hidden;
+ margin:auto; max-width:480px;
+ min-height:100%; padding:14px;
+ -webkit-tap-highlight-color:rgba(0,0,0,0)}
+
+
+.btn{border-radius:4px;  padding:0 16px;
+height:36px; line-height:36px; vertical-align: middle;
+cursor: pointer;
+text-align: center; text-overflow: ellipsis;
+text-transform:uppercase;
+background-color: #1e88e5;
+ color:#fafafa
+; font-weight:500;
+box-shadow: 0 0 4px #999;
+background-position: center;
+  transition: background 0.8s;
+}
+
+
+.btn:hover{
+background: #2196f3 radial-gradient(circle, transparent 1%, #2196f3 1%) center/15000%;
+}
+
+
+
+
+.card{margin-bottom:16px; padding:16px; border-radius:4px;
+overflow: hidden;
+width: inherit;
+border:1px solid #eee;
+background:#fafafa;
+box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+}
+
+.card h1, .card h2{
+
+text-align: center;
+margin-bottom:9px;
+
+
+}
+
+input, button, select, textarea{line-height:inherit;
+ font-family:inherit; font-size:inherit}
+
+input[type="text"], input[type="email"], input[type="password"], textarea{ outline:0;
+ width:100%; resize:vertical; border-radius:5px;
+ padding:0.5rem; border:1px solid #212121;
+ background:#f5f5f5; margin-bottom:9px}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus{-webkit-box-shadow: 0 0 0px 1000px #f5f5f5 inset}
+
+input[type="radio"], input[type="checkbox"] {
+ display:inline-block; min-height:2rem;
+ min-width:2rem; vertical-align:-20%}
+
+input[type="file"]{outline:0}
+
+#formFile{
+width:100%;
+border:1px solid #ccc;
+border-radius:4px;
+margin-bottom:9px;
+}
+
+
+
+
+
+.w-100{width:100%}
+
+#userErrMsg { border:1px solid #222;
+text-align: center;
+border-radius:5px;
+margin-bottom:4px;
+padding:8px;
+display:none;
+
+}
+
+
+
+
+
+
+#guestArea, #userArea{display:none}

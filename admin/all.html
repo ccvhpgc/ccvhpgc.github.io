@@ -1,0 +1,178 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CC Admin Area</title>
+<link rel="stylesheet" href="../lib/bootstrap.min.css">
+<link rel="stylesheet" href="main.css" />
+</head><body class="bg-light">
+<header>
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark py-0 border-bottom border-secondary shadow">
+<div class="container-lg">
+<a class="navbar-brand font-weight-bold mx-auto py-1" href="../index.html">ALL USERS</a>
+</div>
+</nav>
+</header>
+<main class="flex-shrink-0 pt-5">
+
+<div class="container">
+<ul class="pagination flex-wrap justify-content-center d-none" id="paginationBtns">
+</ul>
+</div>
+
+<div class="container-lg">
+<div class="row" id="results_box"></div>
+</div>
+
+<!-- custom alertBS start -->
+<div class="modal fade" id="alertBSModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header py-2">
+<h5 class="modal-title">Information &#33;</h5>
+<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+</div>
+<div id="alertBSBody" class="modal-body"></div>
+<div class="modal-footer py-2">
+<button data-dismiss="modal" class="btn btn-outline-dark w-50">Close</button>
+</div>
+</div>
+</div>
+</div>
+<!-- custom alert end -->
+
+</main>
+<script src="../lib/bootstrap.bundle.min.js"></script>
+<script>
+const _=id=>document.getElementById(id)
+const ROOT_URL="https://rexarvind.000webhostapp.com"
+const alertBSModal=_("alertBSModal")
+const alertBSBody=_("alertBSBody")
+const aBox=new bootstrap.Modal(alertBSModal)
+function alertBS(text){
+alertBSBody.innerHTML=text
+aBox.toggle()}
+
+
+let uid;
+let totalRows;
+var rpp = 2;
+
+
+const results_box=_("results_box")
+const pagination_controls=_("paginationBtns")
+
+
+function showUserDetails(rank,role,uid){
+let content=`
+Rank: ${rank}<br>
+Role: ${role}<br>
+<img src="${ROOT_URL}/uploads/cc/${uid}-0.jpg" class="img-fluid rounded" onerror="this.style.display='none'"/>`
+alertBS(content)
+}
+
+
+function showAllData(data){
+if (data.status==false){
+results_box.innerHTML=`<div class="text-center mb-5"><div class="my-5">${data.message}</div></div>`
+pagination_controls.style.display="none"
+return }
+pagination_controls.classList.remove("d-none")
+var html_output= "";
+data=data.data
+data.forEach(data=>{
+html_output +=`
+<div class="col-sm-6 col-md-4">
+<div class="card mb-2">
+<div class="card-body p-1">
+<img src="${ROOT_URL}/uploads/cc/${data.uid}-0.jpg" class="img-fluid w-25 float-right rounded" onerror="this.style.display='none'"/>
+Name: ${data.name}<br>
+Class: ${data.class}<br>
+Email: ${data.email}<br>
+Whatsapp: ${data.whatsapp}<br>
+Phone: ${data.phone}<br>
+Rank: ${data.about}
+</div>
+<div class="card-footer">
+<button class="btn btn-dark btn-block btn-sm" onclick="showUserDetails('${data.rank}','${data.role}','${data.uid}')">Full Details</button></div>
+</div>
+</div>`
+})
+
+results_box.innerHTML = html_output;
+
+
+}
+
+
+
+
+
+function request_page(pn){
+
+var last = Math.ceil(totalRows/rpp);
+if (last < 1){last = 1}
+
+results_box.innerHTML = '<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
+
+var hr=new XMLHttpRequest();
+pathUrl=`http://rexarvind.000webhostapp.com/api/cc/all.php?pn=${pn}&uid=${uid}&rpp=${rpp}&last=${last}`;
+
+hr.open("GET", pathUrl, true);
+
+
+hr.onreadystatechange = function() {
+    if(hr.readyState == 4 && hr.status == 200) {
+        var xhrRes=JSON.parse(hr.responseText);
+        showAllData(xhrRes)
+    }
+}
+hr.send();
+
+var paginationCtrls = "";
+
+if (last != 1){
+    if (pn > 1){
+        paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn-1)+')" class="page-link shadow-none">&lt;</span></li>';
+        for(let i = pn-3; i < pn; i++){
+            if(i > 0){
+                paginationCtrls += '<li class="page-item"><span onclick="request_page('+i+')" class="page-link shadow-none">'+i+'</span></li>';
+            }
+        }
+    }
+
+    paginationCtrls += '<li class="page-item active"><span class="page-link shadow-none">'+pn+'</span></li>';
+
+    for(let j = pn+1; j <= last; j++){
+        paginationCtrls += '<li class="page-item"><span onclick="request_page('+j+')" class="page-link shadow-none">'+j+'</span></li>';
+        if (j >= pn+3){
+            break;
+        }
+    }
+    if (pn != last){
+        paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn+1)+')" class="page-link shadow-none">&gt;</span></li>';
+    }
+}
+pagination_controls.innerHTML = paginationCtrls;
+}
+
+
+
+
+fetch("http://rexarvind.000webhostapp.com/api/cc/count/")
+.then(res=>res.text())
+.then(res=>{totalRows=res
+uid=sessionStorage.getItem("key");
+request_page(1);
+})
+.catch(err=>alert(err))
+
+
+/*
+
+document.addEventListener("DOMContentLoaded", function(event) {
+document.querySelectorAll('img').forEach(function(img){
+img.onerror = function(){this.style.display='none';}; }) });
+*/
+
+</script></body></html>

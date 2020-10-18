@@ -168,7 +168,6 @@ user.delete();
 })
 
 updateEmailBtn.addEventListener("click", ()=>{
-updateEmailBtn.disabled="true"
 const user=auth.currentUser;
 const newEmail=newEmailEl.value
 const credential = createCredential(user)
@@ -178,15 +177,8 @@ changeEmail(user, credential, newEmail)
 const changeEmail=(user, credential, newEmail)=>{
 user.reauthenticateWithCredential(credential)
 .then(()=>{user.updateEmail(newEmail)
-.then(()=>{alertBS('Email Updated!')
-updateEmailBtn.disabled=""
-})
-.catch(error=>{alertBS(error)
-updateEmailBtn.disabled=""
-})
-}).catch(error =>{alertBS(error)
-updateEmailBtn.disabled=""
-})
+.then(()=>{alertBS('Email Updated!')})
+}).catch(error =>{alertBS(error)})
 }
 
 
@@ -194,7 +186,6 @@ updateEmailBtn.disabled=""
 
 
 newPwdBtn.addEventListener("click", ()=>{
-newPwdBtn.disabled="true"
 const user=auth.currentUser;
 const newPwd=newPwdEl.value
 const credential = createCredential(user)
@@ -205,18 +196,18 @@ const changePwd=(user, credential, newPwd)=>{
 user.reauthenticateWithCredential(credential)
 .then(()=>{user.updatePassword(newPwd)
 .then(()=>{alertBS('Password Updated!')
-newPwdBtn.disabled=""
 })
 .catch(error=>{alertBS(error)
-newPwdBtn.disabled=""
 })
 }).catch(error =>{alertBS(error)
-newPwdBtn.disabled=""
 })
 }
 
 
 
+/* Remove extra characters */
+const shave=(str, n)=>
+(str.length>n) ? str.substr(0, n-3)+'...' : str;
 
 
 
@@ -228,7 +219,7 @@ newPwdBtn.disabled=""
 userDetailsBtn.addEventListener("click", ()=> {
 let fd=new FormData()
 fd.append("uid", userID)
-fd.append("name", userFullName.value)
+fd.append("name", shave(userFullName.value,8))
 fd.append("class", userClass.value)
 fd.append("email", userEmail.value)
 fd.append("whatsapp", userWhatsApp.value)
@@ -326,7 +317,10 @@ userImg.src=ROOT_URL+'/uploads/cc/'+userID+'-0.jpg?'+Math.random()
 }
 
 
-
+/* opens all.html */
+const allPage=()=>{
+sessionStorage.setItem("key", userID)
+document.location.href="all.html"}
 
 
 
