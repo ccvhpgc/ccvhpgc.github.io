@@ -219,13 +219,13 @@ const shave=(str, n)=>
 userDetailsBtn.addEventListener("click", ()=> {
 let fd=new FormData()
 fd.append("uid", userID)
-fd.append("name", shave(userFullName.value,8))
-fd.append("class", userClass.value)
-fd.append("email", userEmail.value)
-fd.append("whatsapp", userWhatsApp.value)
-fd.append("phone", userPhone.value)
-fd.append("about", userAbout.value)
-fd.append("video", userVideo.value)
+fd.append("name", shave(userFullName.value,150))
+fd.append("class", shave(userClass.value,250))
+fd.append("email", shave(userEmail.value,250))
+fd.append("whatsapp", shave(userWhatsApp.value,250))
+fd.append("phone", shave(userPhone.value,250))
+fd.append("about", shave(userAbout.value,250))
+fd.append("video", shave(userVideo.value,50))
 
 
 var xhr=new XMLHttpRequest()
@@ -269,6 +269,7 @@ output=`<b>Name:</b> ${data[0].name}<br>
 <b>Email:</b> ${data[0].email}<br>
 <b>WhatsApp:</b> ${data[0].whatsapp}<br>
 <b>Phone:</b> ${data[0].phone}<br>
+<b>Video code:</b> ${data[0].video}<br>
 <b>About:</b><span style="white-space: pre-wrap"> ${data[0].about}</span>`;
 
 userDetailsOutput.innerHTML=output
@@ -278,8 +279,10 @@ userClass.value=data[0].class
 userEmail.value=data[0].email
 userWhatsApp.value=data[0].whatsapp
 userPhone.value=data[0].phone
+userVideo.value=data[0].video
 userAbout.value=data[0].about
 userImg.src=ROOT_URL+'/uploads/cc/'+userID+'-0.jpg';
+userVideoOutput.src="https://www.youtube.com/embed/"+data[0].video+"?rel=0";
 }
 
 
