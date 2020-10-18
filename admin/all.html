@@ -159,20 +159,12 @@ pagination_controls.innerHTML = paginationCtrls;
 
 
 
-fetch("http://rexarvind.000webhostapp.com/api/cc/count/")
+fetch("http://rexarvind.000webhostapp.com/api/cc/count")
 .then(res=>res.text())
 .then(res=>{totalRows=res
 uid=sessionStorage.getItem("key");
 request_page(1);
 })
 .catch(err=>alertBS(err))
-
-
-/*
-
-document.addEventListener("DOMContentLoaded", function(event) {
-document.querySelectorAll('img').forEach(function(img){
-img.onerror = function(){this.style.display='none';}; }) });
-*/
 
 </script></body></html>
