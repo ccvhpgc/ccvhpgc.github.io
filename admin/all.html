@@ -116,7 +116,7 @@ if (last < 1){last = 1}
 results_box.innerHTML = '<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
 
 var hr=new XMLHttpRequest();
-pathUrl=`http://rexarvind.000webhostapp.com/api/cc/all.php?pn=${pn}&uid=${uid}&rpp=${rpp}&last=${last}`;
+pathUrl=`https://rexarvind.000webhostapp.com/api/cc/all.php?pn=${pn}&uid=${uid}&rpp=${rpp}&last=${last}`;
 
 hr.open("GET", pathUrl, true);
 
