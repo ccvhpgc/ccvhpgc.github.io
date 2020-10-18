@@ -234,8 +234,8 @@ xhr.open("POST", "https://rexarvind.000webhostapp.com/api/cc/post.php" , true)
 
 xhr.onreadystatechange = function(){
   if(xhr.readyState==4 && xhr.status==200){
-    output=JSON.parse(xhr.responseText)
-    userErrMsg.innerHTML=output.message
+    output=xhr.responseText
+    userErrMsg.innerHTML=output
     userErrMsg.classList.remove("d-none");
     setTimeout(()=>{
     userErrMsg.classList.add("d-none")},3000)
@@ -258,7 +258,10 @@ fetch('https://rexarvind.000webhostapp.com/api/cc/get/'+userID)
 
 
 function showProfile(data){
-data=data.message
+if (data.status==false){
+alertBS(data.message)
+}
+data=data.data
 let output="";
 
 output=`<b>Name:</b> ${data[0].name}<br>

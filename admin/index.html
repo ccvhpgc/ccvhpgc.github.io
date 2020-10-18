@@ -142,7 +142,7 @@
 <span class="h5 card-header">Change Photo</span>
 <div class="card-body pb-0">
 <p>Allowed file types include jpg, jpeg and png having maximum size of 2 megabytes.</p>
-<img id="userImg" src="" class="img-fluid rounded mb-2">
+<img id="userImg" src="" class="img-fluid rounded mb-2" onerror="this.style.display='none'" />
 <div id="userImgMsg" class="alert alert-primary d-none"></div>
 <form method="POST" enctype="multipart/form-data" id="userImgForm">
 
