@@ -1,11 +1,12 @@
 var firebaseConfig={
-apiKey:"AIzaSyAIBhvdbyFlTqZLgtNA7uTWHymjHOpzyMU",
-authDomain:"rexarvind.firebaseapp.com",
-databaseURL:"https://rexarvind.firebaseio.com",
-projectId:"rexarvind",
-storageBucket:"rexarvind.appspot.com",
-messagingSenderId:"685927662051",
-appId:"1:685927662051:web:252add00d42a851bc320d6"}
+apiKey:"AIzaSyBN-tGMjWsrJylOpVTLnyrXAfYvrx9gCEU",
+authDomain:"ccvhpgc.firebaseapp.com",
+databaseURL:"https://ccvhpgc.firebaseio.com",
+projectId:"ccvhpgc",
+storageBucket:"ccvhpgc.appspot.com",
+messagingSenderId:"396547340937",
+appId:"1:396547340937:web:fc1280a69df6f029c4e458",
+measurementId:"G-T37JYYJ6NE"};
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
 
@@ -13,7 +14,7 @@ bsCustomFileInput.init()
 
 const _=id=>document.getElementById(id)
 
-const ROOT_URL="https://rexarvind.000webhostapp.com"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com"
 
 const guestArea=_("guestArea")
 const userArea=_("userArea")
@@ -150,7 +151,7 @@ return credential}
 
 
 function deleteUserDB(){
-fetch('https://rexarvind.000webhostapp.com/api/cc/delete/'+userID)
+fetch('https://ccvhpgc.000webhostapp.com/api/cc/delete/'+userID)
 .then(res=>res.text())
 .then(res=>alertBS(res))
 .catch(err=>alertBS("Info:"+err))}
@@ -230,7 +231,7 @@ fd.append("video", shave(userVideo.value,50))
 
 var xhr=new XMLHttpRequest()
 
-xhr.open("POST", "https://rexarvind.000webhostapp.com/api/cc/post.php" , true)
+xhr.open("POST", "https://ccvhpgc.000webhostapp.com/api/cc/post.php" , true)
 
 xhr.onreadystatechange = function(){
   if(xhr.readyState==4 && xhr.status==200){
@@ -248,7 +249,7 @@ xhr.send(fd)
 
 
 function getProfile(){
-fetch('https://rexarvind.000webhostapp.com/api/cc/get/'+userID)
+fetch('https://ccvhpgc.000webhostapp.com/api/cc/get/'+userID)
 .then(res=>res.json())
 .then(res=>showProfile(res))
 .catch(err=>console.log(err))
@@ -306,7 +307,7 @@ imgFD.append("img", img);
 imgFD.append("uid", userID);
 
 var ajax = new XMLHttpRequest();
-ajax.open("POST", "https://rexarvind.000webhostapp.com/api/cc/photo.php");
+ajax.open("POST", "https://ccvhpgc.000webhostapp.com/api/cc/photo.php");
 
 ajax.addEventListener("load", userImgComplete, false);
 ajax.onreadystatechange=function(){

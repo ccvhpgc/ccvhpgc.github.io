@@ -45,7 +45,7 @@
 <script src="../lib/bootstrap.bundle.min.js"></script>
 <script>
 const _=id=>document.getElementById(id)
-const ROOT_URL="https://rexarvind.000webhostapp.com"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com"
 const alertBSModal=_("alertBSModal")
 const alertBSBody=_("alertBSBody")
 const aBox=new bootstrap.Modal(alertBSModal)
@@ -116,7 +116,7 @@ if (last < 1){last = 1}
 results_box.innerHTML = '<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
 
 var hr=new XMLHttpRequest();
-pathUrl=`https://rexarvind.000webhostapp.com/api/cc/all.php?pn=${pn}&uid=${uid}&rpp=${rpp}&last=${last}`;
+pathUrl=`https://ccvhpgc.000webhostapp.com/api/cc/all.php?pn=${pn}&uid=${uid}&rpp=${rpp}&last=${last}`;
 
 hr.open("GET", pathUrl, true);
 
@@ -159,7 +159,7 @@ pagination_controls.innerHTML = paginationCtrls;
 
 
 
-fetch("https://rexarvind.000webhostapp.com/api/cc/count")
+fetch("https://ccvhpgc.000webhostapp.com/api/cc/count")
 .then(res=>res.text())
 .then(res=>{totalRows=res
 uid=sessionStorage.getItem("key");
