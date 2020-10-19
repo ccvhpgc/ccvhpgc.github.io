@@ -1,1 +1,188 @@
-div
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nowledge November Quiz</title>
+<link rel="stylesheet" href="../lib/bootstrap.min.css">
+<style>
+.answer:hover{background:#eee}
+</style>
+</head><body class="bg-dark">
+<header>
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark py-0 border-bottom border-secondary shadow">
+<div class="container-lg">
+<a class="navbar-brand font-weight-bold mx-auto py-1" href="index.html">COMMERCE COUNCIL</a>
+</div>
+</nav>
+</header>
+
+<main class="flex-shrink-0 pt-5">
+<div class="container">
+
+
+<div id="quesCard" class="card mt-5 d-none">
+<span class="card-header d-flex justify-content-between align-items-center h5">
+<span>Time: <span id="remainingTime"></span></span>
+<span id="remainingQues"></span>
+</span>
+
+
+<div class="card-body text-center">
+<p id="question" class="h5 mb-4"></p>
+
+<div class="answer p-2 rounded shadow-sm border mb-2"></div>
+<div class="answer p-2 rounded shadow-sm border mb-2"></div>
+<div class="answer p-2 rounded shadow-sm border mb-2"></div>
+<div class="answer p-2 rounded shadow-sm border mb-2"></div>
+
+</div>
+<div class="card-footer">
+<button id="nextQuesBtn" class="btn btn-dark btn-block font-weight-bold" disabled>Next Question</button>
+</div>
+
+</div>
+
+
+
+<br><br><br><br><br>
+
+</div>
+</main>
+<script>
+const _=id=>document.getElementById(id)
+const qsa=x=>document.querySelectorAll(x)
+const quesCard=_("quesCard")
+const remainingTime=_("remainingTime")
+const remainingQues=_("remainingQues")
+const question=_("question")
+const answers=qsa(".answer")
+const nextQuesBtn=_("nextQuesBtn")
+
+const ROOT_URL="https://raw.githubusercontent.com/rexarvind/rexarvind.github.io/main"
+const QUIZAPI=ROOT_URL+"/api/quiz.json"
+const CORRECT_BONUS=10;
+const MAX_QUES=5;
+const MAX_TIME=5;
+
+
+let score=0;
+let quesCounter=0;
+let availableQues=[];
+
+fetch(QUIZAPI).then(res=>res.json())
+.then(res=>checkData(res))
+.catch(err=>{
+quesCard.innerHTML=`
+<p class="text-center p-3">${err}</p>`
+quesCard.classList.remove("d-none")
+})
+
+const checkData=res=>{
+if(res.status==false){
+quesCard.innerHTML=`
+<p class="text-center p-3">${res.message}</p>`
+quesCard.classList.remove("d-none")
+return
+} else if(res.status==true){
+quesCard.classList.remove("d-none")
+startQuiz(res.data)
+}
+}
+
+const startQuiz=data=>{
+quesCounter=0;
+score=0;
+availableQues=[...data];
+getNewQues();
+}
+
+
+const shuffle=array=>{
+var currentIndex = array.length;
+var temporaryValue;
+var randomIndex;
+while (0 !== currentIndex) {
+randomIndex=Math.floor(Math.random() * currentIndex);
+currentIndex -= 1; 
+temporaryValue = array[currentIndex];
+array[currentIndex] = array[randomIndex];
+array[randomIndex] = temporaryValue;
+}
+return array; } 
+
+
+
+
+
+const quesTimer=()=>{
+currentTime=MAX_TIME
+setInterval(()=>{
+remainingTime.innerHTML=currentTime
+currentTime--
+if(currentTime<0){
+remainingTime.innerHTML="0"
+nextQuesBtn.disabled=""
+currentTime=0
+showAns()
+return }
+},1000)
+}
+
+
+
+
+
+
+
+
+const getNewQues=()=>{
+  if(availableQues.length === 0 || quesCounter >= MAX_QUES){
+  //save score and goto final page
+    alert("Save score & give certificate for 75%")
+    return
+  }
+
+  quesCounter++;
+  remainingQues.innerHTML=quesCounter+" of "+MAX_QUES
+  nextQuesBtn.disabled="true"
+
+  let quesIndex=Math.floor(Math.random() * availableQues.length);
+  currentQues=availableQues[quesIndex];
+  question.innerHTML=currentQues.ques;
+  availableQues.splice(quesIndex, 1);
+
+  var answered= Array.from(answers);
+  shuffle(answered)
+
+  answered.forEach((answer,index)=>{
+  answer.classList.remove("bg-success", "text-white")
+  qnum=index+1
+  a="ans"+qnum
+  answer.innerHTML=currentQues[a]
+  answer.setAttribute("data-ans", qnum);
+  })
+
+
+quesTimer()
+}
+
+
+const showAns=()=>{
+
+answers.forEach((answer)=>{
+x=answer.getAttribute("data-ans")
+
+if(x==currentQues.correct){
+answer.classList.add("bg-success", "text-white")
+}
+})
+
+}
+
+
+nextQuesBtn.addEventListener("click", getNewQues)
+
+
+
+
+</script></body></html>
