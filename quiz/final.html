@@ -52,23 +52,9 @@
 
 <script>
 const _=id=>document.getElementById(id)
-const startQuizBtn=_("startQuizBtn")
-const loginBtn=_("loginBtn")
-let quizStatus;
 
-quizStatus=sessionStorage.getItem("quiz")
-if(quizStatus == "1"){
-  startQuizBtn.classList.remove("d-none")
-    startQuizBtn.addEventListener("click", ()=>{
-    document.location.href="process.html"
-  })
-} else {
-  loginBtn.classList.remove("d-none")
-  loginBtn.addEventListener("click", ()=>{
-    sessionStorage.setItem("quiz", "0")
-    document.location.href="../admin/index.html"
-  })
-}
+
+
 
 const date=new Date();
 _("copyYear").innerText=date.getFullYear();
