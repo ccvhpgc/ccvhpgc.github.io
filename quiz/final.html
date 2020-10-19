@@ -21,18 +21,24 @@
 
 <div class="card mt-5 mx-auto">
 <span class="card-header h5 text-center">Nowledge November Quiz</span>
-<div class="card-body">
-<p>A little paragraph describing what it is.</p>
+<div class="card-body text-center">
+<p>Congratulations. you have completed the quiz.</p>
 
-<ul>
-<li>You will have 30 seconds to answer the question.<li>
-<li>You need to login to start the quiz, so that we can give you Certificate on successful completion.</li>
-</ul>
+<p class="font-weight-bold">Total Score: <span id="totalScore">...</span></p>
+
+<div id="certificateBox" class="">
+<form action="https://ccvhpgc.000webhostapp.com/api/quiz/certificate.php" method="POST" target="_blank">
+<p>Enter your full name below. This will be shown on certificate, please take a second to make sure there are not any spelling mistakes.</p>
+<input type="hidden" id="quizKey" name="key" value="">
+<input type="text" id="certificateName" name="name" placeholder="for ex: Arvind Kumar" class="form-control text-center border-dark">
+<div class="form-text mb-3">Remaining characters: <span id="nameCounter"></span></div>
+<button id="certificateBtn" class="btn btn-dark btn-block font-weight-bold">Get Certificate</button>
+</form>
+</div>
+
 </div>
 <div class="card-footer">
-<button id="startQuizBtn" class="btn btn-dark btn-block font-weight-bold d-none">Start Quiz</button>
-
-<button id="loginBtn" class="btn btn-dark btn-block font-weight-bold d-none">Login</button>
+<a href="https://api.whatsapp.com/send?&text=Hey%20checkout%20this%20awesome%20quiz%20and%20get%20a%20free%20certificate.%0A%0Ahttps%3A%2F%2Fccvhpgc.github.io%2Fquiz%2F" class="btn btn-dark btn-block font-weight-bold">Share on Whatsapp</a>
 </div>
 </div>
 
@@ -52,8 +58,31 @@
 
 <script>
 const _=id=>document.getElementById(id)
+const totalScore=_("totalScore")
+const certificateBox=_("certificateBox")
+const quizKey=_("quizKey")
+const certificateName=_("certificateName")
+const certificateBtn=_("certificateBtn")
+const nameCounter=_("nameCounter")
+const MAX_NAME=20
 
+nameCounter.innerText=MAX_NAME
+quizKey.value=sessionStorage.getItem("key");
 
+certificateName.addEventListener("keyup",()=>{
+  totalLength=certificateName.value.length
+  nameCounter.innerText=MAX_NAME-totalLength
+  counterBox=nameCounter.parentElement
+
+  if(totalLength>MAX_NAME){
+    counterBox.classList.add("text-danger")
+    certificateBtn.disabled="true"
+  } else if(totalLength<=MAX_NAME){
+    counterBox.classList.remove("text-danger")
+    certificateBtn.disabled=""
+  }
+
+})
 
 
 const date=new Date();
