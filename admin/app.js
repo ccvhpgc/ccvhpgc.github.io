@@ -85,6 +85,7 @@ userArea.style.display="block"
 userID=user.uid
 displayEmail.innerHTML=user.email
 getProfile()
+checkQuizStatus()
 }else{
 guestArea.style.display="block"
 userArea.style.display="none"}
@@ -323,6 +324,15 @@ function userImgComplete(e){
 userImg.src=ROOT_URL+'/uploads/cc/'+userID+'-0.jpg?'+Math.random()
 }
 
+
+const checkQuizStatus=()=>{
+  quizStatus=sessionStorage.getItem("quiz")
+  if(quizStatus=="0"){
+    sessionStorage.setItem("key", userID)
+    sessionStorage.setItem("quiz", "1")
+    document.location.href="../quiz/index.html"
+  } else return
+}
 
 /* opens all.html */
 const allPage=()=>{
