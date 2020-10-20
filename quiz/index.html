@@ -105,6 +105,9 @@ const startQuiz=()=>{
       checkStatus(resStatus)
     }
   }
+  xhr.onerror = function(){
+    alert("Request Error...")
+  }
   xhr.send(fd)
 }
 
