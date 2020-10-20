@@ -88,7 +88,8 @@ fetch(quizPath).then(res=>res.json())
 .then(res=>checkData(res))
 .catch(err=>{
   quesCard.innerHTML=`
-  <p class="text-center p-3">${err}</p>`
+  <p class="text-center p-3">${err}
+  ${quizPath}</p>`
   quesCard.classList.remove("d-none")
 })
 
