@@ -69,6 +69,7 @@ const question=_("question")
 const answers=qsa(".answer")
 
 const QUIZAPI="https://ccvhpgc.000webhostapp.com/api/quiz/get/"
+const ADD_SCORE="https://ccvhpgc.000webhostapp.com/api/quiz/addScore"
 const CORRECT_BONUS=2;
 const MAX_QUES=2;
 const MAX_TIME=5;
@@ -104,9 +105,14 @@ const checkData=res=>{
   }
 }
 
-const submitQuizData=()=>{
+const submitQuizData=score=>{
+maxScore = MAX_QUES * CORRECT_BONUS;
+ques = (MAX_QUES / maxScore) * score;
+maxQues = MAX_QUES;
 
-alert("yay")
+businesses=score +" and "+ maxScore +" and "+ ques +" and "+ maxQues +" some"+ userID ;
+
+alert(businesses)
 
 }
 
@@ -159,7 +165,7 @@ const showAns=()=>{
 const getNewQues=()=>{
   if(availableQues.length === 0 || quesCounter >= MAX_QUES){
   nextQuesBtn.innerHTML="Please wait..."
-  submitQuizData()
+  submitQuizData(score)
   return
   }
 
