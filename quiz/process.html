@@ -95,6 +95,16 @@ fetch(quizPath).then(res=>res.json())
 
 const checkData=res=>{
   if(res.status==false){
+  alert(res.message)
+  return
+  } else if(res.status==true){
+  sessionStorage.setItem("key", userID)
+  document.location.href="final.html"
+  }
+}
+
+const checkScoreRes=resStatus=>{
+  if(res.status==false){
   quesCard.innerHTML=`
   <p class="text-center p-3">${res.message}</p>`
   quesCard.classList.remove("d-none")
@@ -106,14 +116,23 @@ const checkData=res=>{
 }
 
 const submitQuizData=score=>{
-maxScore = MAX_QUES * CORRECT_BONUS;
-ques = (MAX_QUES / maxScore) * score;
-maxQues = MAX_QUES;
-
-businesses=score +" and "+ maxScore +" and "+ ques +" and "+ maxQues +" some"+ userID ;
-
-alert(businesses)
-
+  let fd=new FormData()
+  fd.append("uid", userID)
+  fd.append("score", score)
+  fd.append("maxQues", MAX_QUES)
+  fd.append("correctBonus", CORRECT_BONUS)
+  var xhr=new XMLHttpRequest()
+  xhr.open("POST", ADD_SCORE, true)
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState==4 && xhr.status==200){
+      resStatus=JSON.parse(xhr.responseText)
+      checkScoreRes(resStatus)
+    }
+  }
+  xhr.onerror = function(){
+    alert("Request Error...")
+  }
+  xhr.send(fd)
 }
 
 const startQuiz=data=>{
