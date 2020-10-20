@@ -101,8 +101,10 @@ const startQuiz=()=>{
   xhr.open("POST", "https://ccvhpgc.000webhostapp.com/api/quiz/addUser", true)
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
-      resStatus=JSON.parse(xhr.responseText)
-      checkStatus(resStatus)
+      resStatus=xhr.responseText
+      alert(resStatus)
+      /* checkStatus(resStatus)
+*/
     }
   }
   xhr.onerror = function(){
