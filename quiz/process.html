@@ -125,8 +125,9 @@ const submitQuizData=score=>{
   xhr.open("POST", ADD_SCORE, true)
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
-      resStatus=JSON.parse(xhr.responseText)
-      checkScoreRes(resStatus)
+      resStatus=xhr.responseText
+     alert(resStatus)
+      /* checkScoreRes(resStatus) */
     }
   }
   xhr.onerror = function(){
