@@ -182,7 +182,7 @@ const showAns=()=>{
 }
 
 const getNewQues=()=>{
-  if(availableQues.length === 0 || quesCounter >= MAX_QUES){
+  if(quesCounter >= MAX_QUES){
   nextQuesBtn.innerHTML="Please wait..."
   submitQuizData(score)
   return
