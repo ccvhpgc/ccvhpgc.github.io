@@ -56,6 +56,7 @@ messagingSenderId:"396547340937",
 appId:"1:396547340937:web:fc1280a69df6f029c4e458",
 measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
+const ROOT_URL="https://ccvhpgc.000webhostapp.com"
 const auth=firebase.auth()
 const _=id=>document.getElementById(id)
 const playBtn=_("playBtn")
@@ -121,6 +122,7 @@ const startQuiz=()=>{
 
 const checkStatus=resStatus=>{
   if(resStatus.status==true){
+    sessionStorage.setItem("key", userID)
     document.location.href="process.html"
   } else if(resStatus.status==false){
     playBtn.disabled=""

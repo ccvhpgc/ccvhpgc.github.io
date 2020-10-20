@@ -68,38 +68,29 @@ const nextQuesBtn=_("nextQuesBtn")
 const question=_("question")
 const answers=qsa(".answer")
 
-const ROOT_URL="https://raw.githubusercontent.com/rexarvind/rexarvind.github.io/main"
-const QUIZAPI=ROOT_URL+"/api/quiz.json"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com"
+const QUIZAPI=ROOT_URL+"/api/quiz/get/"
 const CORRECT_BONUS=2;
-const MAX_QUES=7;
+const MAX_QUES=2;
 const MAX_TIME=5;
 
 let score=quesCounter=0;
 let acceptAns=false;
 let availableQues=[];
-let uid, quizStatus;
+let userID, quizPath
 
-uid=sessionStorage.getItem("key");
-quizStatus=sessionStorage.getItem("quiz");
+userID=sessionStorage.getItem("key")
+sessionStorage.removeItem("key")
+sessionStorage.clear()
 
-/*  add uid with forward slash in apiPath */
-
-const fetchQues=()=>{
-  fetch(QUIZAPI).then(res=>res.json())
-  .then(res=>checkData(res))
-  .catch(err=>{
-    quesCard.innerHTML=`
-    <p class="text-center p-3">${err}</p>`
-    quesCard.classList.remove("d-none")
-  })
-}
-
-if(quizStatus == "1"){
-  fetchQues()
-} else {
-  document.location.href="index.html"
-}
-
+quizPath=ROOT_URL+QUIZAPI+userID
+fetch(quizPath).then(res=>res.json())
+.then(res=>checkData(res))
+.catch(err=>{
+  quesCard.innerHTML=`
+  <p class="text-center p-3">${err}</p>`
+  quesCard.classList.remove("d-none")
+})
 
 const checkData=res=>{
   if(res.status==false){
@@ -115,12 +106,7 @@ const checkData=res=>{
 
 const submitQuizData=()=>{
 
-
-
-/* 
-
 alert(uid+" and "+score)
-make ajax post request and redirect to final page for certificate if they scored high enough */
 
 }
 
