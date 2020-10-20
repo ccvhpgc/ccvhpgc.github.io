@@ -106,7 +106,7 @@ const checkData=res=>{
 
 const submitQuizData=()=>{
 
-alert(uid+" and "+score)
+alert("yay")
 
 }
 
@@ -158,7 +158,6 @@ const showAns=()=>{
 
 const getNewQues=()=>{
   if(availableQues.length === 0 || quesCounter >= MAX_QUES){
-  //save score and goto final page
   nextQuesBtn.innerHTML="Please wait..."
   submitQuizData()
   return
