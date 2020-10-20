@@ -68,8 +68,7 @@ const nextQuesBtn=_("nextQuesBtn")
 const question=_("question")
 const answers=qsa(".answer")
 
-const ROOT_URL="https://ccvhpgc.000webhostapp.com"
-const QUIZAPI=ROOT_URL+"/api/quiz/get/"
+const QUIZAPI="https://ccvhpgc.000webhostapp.com/api/quiz/get/"
 const CORRECT_BONUS=2;
 const MAX_QUES=2;
 const MAX_TIME=5;
@@ -83,7 +82,7 @@ userID=sessionStorage.getItem("key")
 sessionStorage.removeItem("key")
 sessionStorage.clear()
 
-quizPath=ROOT_URL+QUIZAPI+userID
+quizPath=QUIZAPI+userID
 fetch(quizPath).then(res=>res.json())
 .then(res=>checkData(res))
 .catch(err=>{
