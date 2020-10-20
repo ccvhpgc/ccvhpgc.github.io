@@ -50,7 +50,7 @@ const loginUser=()=>{
 
 /* trim extra letters */
 const shave=(str, n)=>
-(str.length>n) ? str.substr(0, n-3)+'...' : str;
+(str.length>n) ? str.substr(0, n-2)+'..' : str;
 
 /* check API response status */
 const checkStatus=resStatus=>{
