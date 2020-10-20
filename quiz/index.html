@@ -30,9 +30,9 @@
 </ul>
 </div>
 <div class="card-footer">
-<button id="startQuizBtn" class="btn btn-dark btn-block font-weight-bold d-none">Start Quiz</button>
+<button id="playBtn" class="btn btn-dark btn-block font-weight-bold d-none">Start Quiz</button>
 
-<button id="loginBtn" class="btn btn-dark btn-block font-weight-bold d-none">Login</button>
+<button id="loginBtn" class="btn btn-dark btn-block font-weight-bold d-none">Login to Play</button>
 </div>
 </div>
 
@@ -40,35 +40,71 @@
 </div>
 </main>
 
-<!-- footer start -->
 <footer class="footer mt-auto pt-5 bg-dark text-muted text-center">
 <div class="container">
 <p>RexArvind Web Services &copy; <span id="copyYear">...</span></p>
 </div>
 </footer>
-<!-- footer end -->
-
-
-
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
 <script>
+var firebaseConfig={
+apiKey:"AIzaSyBN-tGMjWsrJylOpVTLnyrXAfYvrx9gCEU",
+authDomain:"ccvhpgc.firebaseapp.com",
+databaseURL:"https://ccvhpgc.firebaseio.com",
+projectId:"ccvhpgc",
+storageBucket:"ccvhpgc.appspot.com",
+messagingSenderId:"396547340937",
+appId:"1:396547340937:web:fc1280a69df6f029c4e458",
+measurementId:"G-T37JYYJ6NE"}
+firebase.initializeApp(firebaseConfig)
+const auth=firebase.auth()
 const _=id=>document.getElementById(id)
-const startQuizBtn=_("startQuizBtn")
 const loginBtn=_("loginBtn")
-let quizStatus;
+const playBtn=_("playBtn")
+let userID, userName, userEmail, userPhoto;
 
-quizStatus=sessionStorage.getItem("quiz")
-if(quizStatus == "1"){
-  startQuizBtn.classList.remove("d-none")
-    startQuizBtn.addEventListener("click", ()=>{
-    document.location.href="process.html"
+auth.onAuthStateChanged(user=>{
+  if(user){
+    userID=user.uid
+    userName=user.displayName
+    userEmail=user.email
+    userPhoto=user.photoURL
+    loginBtn.classList.add("d-none")
+    playBtn.disabled=""
+    playBtn.classList.remove("d-none")
+  } else {
+    loginBtn.classList.remove("d-none")
+    playBtn.classList.add("d-none")
+    playBtn.disabled=""}
+})
+
+loginBtn.addEventListener("click", ()=>{
+  const googleProvider = new firebase.auth.GoogleAuthProvider()
+  auth.signInWithRedirect(googleProvider)
+  .then(()=>{
+    addUserToDB()
+  }).catch(error=>{
+    console.error(error)
   })
-} else {
-  loginBtn.classList.remove("d-none")
-  loginBtn.addEventListener("click", ()=>{
-    sessionStorage.setItem("quiz", "0")
-    document.location.href="../admin/index.html"
-  })
+})
+
+playBtn.addEventListener("click", ()=>{
+
+detailsd=`${userID} and ${userName} and ${userEmail} and ${userPhoto}`
+alert(detailsd)
+
+
+})
+
+const addUserToDB=()=>{
+
+details=`${userID} and ${userName} and ${userEmail} and ${userPhoto}`
+
+alert(details)
 }
+
+
 
 const date=new Date();
 _("copyYear").innerText=date.getFullYear();
