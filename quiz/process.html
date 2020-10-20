@@ -80,7 +80,6 @@ let availableQues=[];
 let userID, quizPath
 
 userID=sessionStorage.getItem("key")
-sessionStorage.removeItem("key")
 sessionStorage.clear()
 
 quizPath=QUIZAPI+userID
@@ -103,14 +102,14 @@ const checkData=res=>{
   }
 }
 
-const checkScoreRes=(resStatus, score)=>{
+const checkScoreRes=(resStatus)=>{
   if(res.status==false){
   quesCard.innerHTML=`
   <p class="text-center p-3">${res.message}</p>`
   return
   } else if(res.status==true){
   sessionStorage.setItem("key", userID)
-  sessionStorage.setItem("score", score)
+  alert(score)
   document.location.href="final.html"
   }
 }
@@ -126,8 +125,7 @@ const submitQuizData=score=>{
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
       resStatus=JSON.parse(xhr.responseText)
-    alert(JSON.stringify(resStatus))
-      checkScoreRes(resStatus, score)
+      checkScoreRes(resStatus)
     }
   }
   xhr.onerror = function(){
