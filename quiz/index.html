@@ -84,14 +84,18 @@ auth.onAuthStateChanged(user=>{
 const loginUser=()=>{
   const googleProvider = new firebase.auth.GoogleAuthProvider()
   auth.signInWithRedirect(googleProvider)
-  .then(()=>startQuiz())
-  .catch(error=>alert(error))
+  .then(()=>{
+    playBtn.addEventListener("click", startQuiz)
+    playBtn.innerText="Start Game"
+  }).catch(error=>alert(error))
 }
 
 const shave=(str, n)=>
 (str.length>n) ? str.substr(0, n-3)+'...' : str;
 
 const startQuiz=()=>{
+  playBtn.disabled="true"
+  playBtn.innerText="Loading..."
   let fd=new FormData()
   fd.append("uid", userID)
   fd.append("name", shave(userName,250))
@@ -101,13 +105,15 @@ const startQuiz=()=>{
   xhr.open("POST", "https://ccvhpgc.000webhostapp.com/api/quiz/addUser", true)
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
-      resStatus=xhr.responseText
-      alert(resStatus)
-      /* checkStatus(resStatus)
-*/
+      resStatus=JSON.parse(xhr.responseText)
+      playBtn.disabled="true"
+      playBtn.innerText="Redirecting..."
+      checkStatus(resStatus)
     }
   }
   xhr.onerror = function(){
+    playBtn.disabled=""
+    playBtn.innerText="Retry"
     alert("Request Error...")
   }
   xhr.send(fd)
@@ -115,8 +121,10 @@ const startQuiz=()=>{
 
 const checkStatus=resStatus=>{
   if(resStatus.status==true){
-    alert(resStatus.message)
-  } else if(resStatus.status==false) {
+    document.location.href="process.html"
+  } else if(resStatus.status==false){
+    playBtn.disabled=""
+    playBtn.innerText="Start Game"
     alert(resStatus.message)
   }
 }
