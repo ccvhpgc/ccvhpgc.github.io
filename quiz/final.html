@@ -4,9 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nowledge November Quiz</title>
 <link rel="stylesheet" href="../lib/bootstrap.min.css">
-<style>
-.card{max-width:500px}
-</style>
+<link rel="stylesheet" href="main.css">
 </head><body class="d-flex flex-column h-100 bg-dark">
 <header>
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark py-0 border-bottom border-secondary shadow">
@@ -17,6 +15,8 @@
 </header>
 
 <main class="flex-shrink-0 pt-5">
+
+
 <div class="container">
 
 <div class="card mt-5 mx-auto">
@@ -43,75 +43,39 @@
 
 
 </div>
+
+
+<!-- custom alert modal start -->
+<div class="modal fade" id="alertBSModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header py-2">
+<h5 class="modal-title">Information &#33;</h5>
+<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+</div>
+<div id="alertBSBody" class="modal-body">
+</div>
+<div class="modal-footer py-2">
+<button data-dismiss="modal" class="btn btn-outline-dark w-50">Close</button>
+</div>
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog --> 
+</div> <!-- modal -->
+<!-- custom alert modal end -->
+
 </main>
 
-<!-- footer start -->
-<footer class="footer mt-auto pt-5 bg-dark text-muted text-center">
+<footer class="footer mt-auto py-2 bg-dark text-muted text-center">
 <div class="container">
 <p>RexArvind Web Services &copy; <span id="copyYear">...</span></p>
 </div>
 </footer>
-<!-- footer end -->
-
-
-
+<script src="../lib/bootstrap.bundle.min.js"></script>
 <script>
-const _=id=>document.getElementById(id)
-const totalScore=_("totalScore")
-const totalPercentage=_("totalPercentage")
-const quizKey=_("quizKey")
-const certificateForm=_("certificateForm")
-const certificateName=_("certificateName")
-const certificateBtn=_("certificateBtn")
-const nameCounter=_("nameCounter")
-const MAX_NAME=4
-const PASS_SCORE=75;
-const CHECK_SCORE="https://ccvhpgc.000webhostapp.com/api/quiz/getScore/";
+/* maximum characters of name on certificate and passing percentage for certificate. MAKE SURE TO UPDATE THESE ON SERVER ALSO */
+const MAX_NAME=25
+const PASS_SCORE=75
 
-const shave=(str, n)=>
-(str.length>n) ? str.substr(0, n-2)+'..' : str;
-
-nameCounter.innerText=MAX_NAME
-
-uid=sessionStorage.getItem("key");
-sessionStorage.clear()
-quizKey.value=uid
-
-fetch(CHECK_SCORE+uid).then(res=>res.json())
-.then(res=>{
-  if(res.status==true){
-    data=res.data
-    totalScore.innerText=data[0].score
-    totalPercentage.innerText=data[0].percentage
-    certificateName.value=shave(data[0].name,MAX_NAME)
-    if(data[0].percentage > PASS_SCORE){
-    certificateForm.classList.remove("d-none")
-    }
-  } else {
-    alert(res.message)
-  }
-})
-.catch(err=>alert(err))
-
-
-
-
-certificateName.addEventListener("input",()=>{
-  totalLength=certificateName.value.length
-  nameCounter.innerText=MAX_NAME-totalLength
-  counterBox=nameCounter.parentElement
-
-  if(totalLength>MAX_NAME){
-    counterBox.classList.add("text-danger")
-    certificateBtn.disabled="true"
-  } else if(totalLength<=MAX_NAME){
-    counterBox.classList.remove("text-danger")
-    certificateBtn.disabled=""
-  }
-
-})
-
-
-const date=new Date();
-_("copyYear").innerText=date.getFullYear();
+const ROOT_URL="https://ccvhpgc.000webhostapp.com"
+const GET_SCORE=ROOT_URL+"/api/quiz/getScore/"
 </script></body></html>

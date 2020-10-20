@@ -12,8 +12,6 @@ const scoreText=_("scoreText")
 const nextQuesBtn=_("nextQuesBtn")
 const question=_("question")
 const answers=qsa(".answer")
-const alertBSModal=_("alertBSModal")
-const alertBSBody=_("alertBSBody")
 
 /* define variables */
 let score=quesCounter=0;
@@ -22,6 +20,8 @@ let availableQues=[];
 let userID, quizPath
 
 /* use custom alert by alertBS(x) */
+const alertBSModal=_("alertBSModal")
+const alertBSBody=_("alertBSBody")
 const alertBS=text=>{
   const aBS=new bootstrap.Modal(alertBSModal)
   alertBSBody.innerHTML=text

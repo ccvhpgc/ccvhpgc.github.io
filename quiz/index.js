@@ -3,14 +3,14 @@ const _=id=>document.getElementById(id)
 
 /* get DOM elements */
 const playBtn=_("playBtn")
-const alertBSModal=_("alertBSModal")
-const alertBSBody=_("alertBSBody")
 
 /* define variables */
 let userID, userName, userEmail, userPhoto;
 let resStatus;
 
 /* use custom alert by alertBS(x) */
+const alertBSModal=_("alertBSModal")
+const alertBSBody=_("alertBSBody")
 const alertBS=text=>{
   const aBS=new bootstrap.Modal(alertBSModal)
   alertBSBody.innerHTML=text
