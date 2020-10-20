@@ -30,7 +30,7 @@
 <form id="certificateForm" action="https://ccvhpgc.000webhostapp.com/api/quiz/certificate.php" method="POST" target="_blank" class="d-none">
 <p>Enter your full name below. This will be shown on certificate, please take a second to make sure there are not any spelling mistakes.</p>
 <input type="hidden" id="quizKey" name="key" value="">
-<input type="text" id="certificateName" name="name" placeholder="for ex: Arvind Kumar" class="form-control text-center border-dark">
+<input type="text" id="certificateName" name="name" placeholder="" class="form-control text-center border-dark">
 <div class="form-text mb-3">Remaining characters: <span id="nameCounter"></span></div>
 <button id="certificateBtn" class="btn btn-dark btn-block font-weight-bold">Request Certificate</button>
 </form>
@@ -80,7 +80,7 @@ fetch(CHECK_SCORE+uid).then(res=>res.json())
     data=res.data
     totalScore.innerText=data[0].score
     totalPercentage.innerText=data[0].percentage
-    certificateName.value=data[0].name
+    certificateName.placeholder=data[0].name
     if(data[0].percentage > PASS_SCORE){
     certificateForm.classList.remove("d-none")
     }
