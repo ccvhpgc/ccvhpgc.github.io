@@ -98,8 +98,7 @@ const checkData=res=>{
   alert(res.message)
   return
   } else if(res.status==true){
-  sessionStorage.setItem("key", userID)
-  document.location.href="final.html"
+  startQuiz(res.data)
   }
 }
 
