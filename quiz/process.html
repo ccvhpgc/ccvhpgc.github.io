@@ -103,7 +103,7 @@ const checkData=res=>{
   }
 }
 
-const checkScoreRes=resStatus=>{
+const checkScoreRes=(resStatus, score)=>{
   if(res.status==false){
   quesCard.innerHTML=`
   <p class="text-center p-3">${res.message}</p>`
@@ -126,7 +126,7 @@ const submitQuizData=score=>{
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
       resStatus=JSON.parse(xhr.responseText)
-      checkScoreRes(resStatus)
+      checkScoreRes(resStatus, score)
     }
   }
   xhr.onerror = function(){
