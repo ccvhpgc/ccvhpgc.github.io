@@ -24,7 +24,8 @@
 <div class="card-body text-center">
 <p>Congratulations. you have completed the quiz.</p>
 
-<p class="font-weight-bold">Total Score: <span id="totalScore">...</span></p>
+<p class="font-weight-bold">Total Score: <span id="totalScore">...</span>
+<br>Total Percentage: <span id="totalPercentage">...</span></p>
 
 <form id="certificateForm" action="https://ccvhpgc.000webhostapp.com/api/quiz/certificate.php" method="POST" target="_blank" class="d-none">
 <p>Enter your full name below. This will be shown on certificate, please take a second to make sure there are not any spelling mistakes.</p>
@@ -57,45 +58,39 @@
 <script>
 const _=id=>document.getElementById(id)
 const totalScore=_("totalScore")
+const totalPercentage=_("totalPercentage")
 const quizKey=_("quizKey")
 const certificateForm=_("certificateForm")
 const certificateName=_("certificateName")
 const certificateBtn=_("certificateBtn")
 const nameCounter=_("nameCounter")
 const MAX_NAME=20
+const PASS_SCORE=75;
 const CHECK_SCORE="https://ccvhpgc.000webhostapp.com/api/quiz/getScore/";
+
 nameCounter.innerText=MAX_NAME
 
-
-uid="oStUngGaR3egdhYNrmZGZfZxHIO2"
-
-/* sessionStorage.getItem("key");
-*/
+uid=sessionStorage.getItem("key");
 sessionStorage.clear()
 quizKey.value=uid
 
-
-
-
-fetch("https://ccvhpgc.000webhostapp.com/api/quiz/getScore/oStUngGaR3egdhYNrmZGZfZxHIO2").then(res=>res.json())
-.then(res=>{ alert(res)
-/*
+fetch(CHECK_SCORE+uid).then(res=>res.json())
+.then(res=>{
   if(res.status==true){
-  data=res.data
-  alert(data[0].percentage)
-    
+    data=res.data
+    totalScore.innerText=data[0].score
+    totalPercentage.innerText=data[0].percentage
+    certificateName.value=data[0].name
+    if(data[0].percentage > PASS_SCORE){
+    certificateForm.classList.remove("d-none")
+    }
   } else {
     alert(res.message)
   }
-*/
 })
 .catch(err=>alert(err))
 
 
-/*
-totalScore.innerText=sessionStorage.getItem("score");
-*/
-/*
 
 certificateName.addEventListener("keyup",()=>{
   totalLength=certificateName.value.length
@@ -112,7 +107,7 @@ certificateName.addEventListener("keyup",()=>{
 
 })
 
-*/
+
 const date=new Date();
 _("copyYear").innerText=date.getFullYear();
 </script></body></html>
