@@ -102,14 +102,14 @@ const checkData=res=>{
   }
 }
 
-const checkScoreRes=(resStatus)=>{
+const checkScoreRes=res=>{
   if(res.status==false){
   quesCard.innerHTML=`
   <p class="text-center p-3">${res.message}</p>`
   return
   } else if(res.status==true){
   sessionStorage.setItem("key", userID)
-  alert(score)
+  sessionStorage.setItem("score", score)
   document.location.href="final.html"
   }
 }
