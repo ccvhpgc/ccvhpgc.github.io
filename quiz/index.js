@@ -56,7 +56,7 @@ const shave=(str, n)=>
 const checkStatus=resStatus=>{
   if(resStatus.status==true){
     sessionStorage.setItem("key", userID)
-    document.location.href="process.html"
+    document.location.href="quiz.html"
   } else if(resStatus.status==false){
     playBtn.disabled=""
     playBtn.innerText="Start Game"
