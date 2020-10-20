@@ -24,6 +24,7 @@
 <div class="card-body">
 <p>A little paragraph describing what it is.</p>
 
+<img src="" id="testImg" class="img-fluid">
 <ul>
 <li>You will have 30 seconds to answer the question.<li>
 <li>You need to login to start the quiz, so that we can give you Certificate on successful completion.</li>
@@ -94,6 +95,7 @@ const loginUser=()=>{
 
 const startQuiz=()=>{
 detailsd=`${userID} and ${userName} and ${userEmail} and ${userPhoto}`
+_("testImg").src=userPhoto
 alert(detailsd)
 }
 
