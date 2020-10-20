@@ -68,6 +68,9 @@ const MAX_NAME=20
 const PASS_SCORE=75;
 const CHECK_SCORE="https://ccvhpgc.000webhostapp.com/api/quiz/getScore/";
 
+const shave=(str, n)=>
+(str.length>n) ? str.substr(0, n-2)+'..' : str;
+
 nameCounter.innerText=MAX_NAME
 
 uid=sessionStorage.getItem("key");
@@ -80,7 +83,7 @@ fetch(CHECK_SCORE+uid).then(res=>res.json())
     data=res.data
     totalScore.innerText=data[0].score
     totalPercentage.innerText=data[0].percentage
-    certificateName.value=data[0].name
+    certificateName.value=shave(data[0].name,5)
     if(data[0].percentage > PASS_SCORE){
     certificateForm.classList.remove("d-none")
     }
