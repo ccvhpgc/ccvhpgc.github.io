@@ -29,9 +29,11 @@ const alertBS=text=>{
   aBS.toggle()
 }
 
+
 /* get user id for getting questions */
 userID=sessionStorage.getItem("key")
 sessionStorage.clear()
+
 
 /* fetch questions fron database with user id */
 quizPath=QUIZAPI+userID
@@ -39,28 +41,32 @@ fetch(quizPath).then(res=>res.json())
 .then(res=>checkQues(res))
 .catch(err=>alertBS(err))
 
+
 /* check question before starting quiz */
 const checkQues=res=>{
   if(res.status==false){
-  alertBS(res.message)
-  return
+    document.location.href="index.html"
   } else if(res.status==true){
-  quesCard.classList.remove("d-none")
-  startQuiz(res.data)
+    quesCard.classList.remove("d-none")
+    startQuiz(res.data)
   }
 }
 
+
+/* checking if data is stored successfully */
 const checkScoreRes=res=>{
   if(res.status==false){
-  quesCard.innerHTML=`
-  <p class="text-center p-3">${res.message}</p>`
-  return
+    alertBS(res.message)
+    return
   } else if(res.status==true){
-  sessionStorage.setItem("key", userID)
-  document.location.href="final.html"
+    /* sending to final page on perfect request */
+    sessionStorage.setItem("key", userID)
+    document.location.href="final.html"
   }
 }
 
+
+/* sending all details of quiz to database */
 const submitQuizData=score=>{
   let fd=new FormData()
   fd.append("uid", userID)
@@ -72,14 +78,18 @@ const submitQuizData=score=>{
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
       resStatus=JSON.parse(xhr.responseText)
+      /* checking response from API */
       checkScoreRes(resStatus)
     }
   }
+  /* displaying error if any */
   xhr.onerror = function(){
-    alert("Request Error...")
+    alertBS("Request Error...")
   }
+  /* sending ajax request */
   xhr.send(fd)
 }
+
 
 /* reset score, copy questions and start quiz */
 const startQuiz=data=>{
@@ -87,6 +97,7 @@ const startQuiz=data=>{
   availableQues=[...data];
   getNewQues();
 }
+
 
 /* shuffle array */
 const shuffle=array=>{
@@ -103,6 +114,8 @@ const shuffle=array=>{
   return array;
 } 
 
+
+/* updating timer on question card */
 const quesTimer=()=>{
   currentTime=MAX_TIME
   timer=setInterval(countdown,1000)
@@ -110,9 +123,11 @@ const quesTimer=()=>{
     remainingTime.innerHTML=currentTime
     currentTime--
     if(currentTime < 0){
+      /* disabling click after time is over */
       acceptAns=false
       remainingTime.innerHTML="0"
       currentTime=0
+      /* showing right answer if time is over */
       showAns()
     }
   }
@@ -139,10 +154,12 @@ const showAns=()=>{
 /* show question, it is main function of quiz */
 const getNewQues=()=>{
   if(availableQues.length === 0 || quesCounter >= MAX_QUES){
-  nextQuesBtn.disabled="true"
-  nextQuesBtn.innerHTML="Please wait..."
-  submitQuizData(score)
-  return
+    /* disable btn and save score to database */
+    nextQuesBtn.disabled="true"
+    nextQuesBtn.innerHTML="Please wait..."
+    /* sending score for storing in database */
+    submitQuizData(score)
+    return
   }
 
   /* update question counter */

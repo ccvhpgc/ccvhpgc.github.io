@@ -18,8 +18,10 @@ const alertBS=text=>{
   aBS.toggle()
 }
 
+
 /* enable button after authentication check */
 playBtn.disabled="true"
+
 
 /* check change in user authentication */
 auth.onAuthStateChanged(user=>{
@@ -38,6 +40,7 @@ auth.onAuthStateChanged(user=>{
   }
 })
 
+
 /* login with Google Firebase Auth */
 const loginUser=()=>{
   const googleProvider=new firebase.auth.GoogleAuthProvider()
@@ -48,9 +51,11 @@ const loginUser=()=>{
   }).catch(error=>alertBS(error))
 }
 
+
 /* trim extra letters */
 const shave=(str, n)=>
 (str.length>n) ? str.substr(0, n-2)+'..' : str;
+
 
 /* check API response status */
 const checkStatus=resStatus=>{
@@ -63,6 +68,7 @@ const checkStatus=resStatus=>{
     alertBS(resStatus.message)
   }
 }
+
 
 /* save user data on database */
 const startQuiz=()=>{
@@ -90,6 +96,7 @@ const startQuiz=()=>{
   }
   xhr.send(fd)
 }
+
 
 /* update copyright year */
 const date=new Date();
