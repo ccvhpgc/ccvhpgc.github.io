@@ -107,11 +107,11 @@ const checkScoreRes=resStatus=>{
   if(res.status==false){
   quesCard.innerHTML=`
   <p class="text-center p-3">${res.message}</p>`
-  quesCard.classList.remove("d-none")
   return
   } else if(res.status==true){
-  quesCard.classList.remove("d-none")
-  startQuiz(res.data)
+  sessionStorage.setItem("key", userID)
+  sessionStorage.setItem("score", score)
+  document.location.href="final.html"
   }
 }
 
@@ -125,9 +125,8 @@ const submitQuizData=score=>{
   xhr.open("POST", ADD_SCORE, true)
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
-      resStatus=xhr.responseText
-     alert(resStatus)
-      /* checkScoreRes(resStatus) */
+      resStatus=JSON.parse(xhr.responseText)
+      checkScoreRes(resStatus)
     }
   }
   xhr.onerror = function(){

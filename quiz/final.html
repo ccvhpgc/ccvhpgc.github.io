@@ -26,15 +26,13 @@
 
 <p class="font-weight-bold">Total Score: <span id="totalScore">...</span></p>
 
-<div id="certificateBox" class="">
 <form action="https://ccvhpgc.000webhostapp.com/api/quiz/certificate.php" method="POST" target="_blank">
 <p>Enter your full name below. This will be shown on certificate, please take a second to make sure there are not any spelling mistakes.</p>
 <input type="hidden" id="quizKey" name="key" value="">
 <input type="text" id="certificateName" name="name" placeholder="for ex: Arvind Kumar" class="form-control text-center border-dark">
 <div class="form-text mb-3">Remaining characters: <span id="nameCounter"></span></div>
-<button id="certificateBtn" class="btn btn-dark btn-block font-weight-bold">Get Certificate</button>
+<button id="certificateBtn" class="btn btn-dark btn-block font-weight-bold">Request Certificate</button>
 </form>
-</div>
 
 </div>
 <div class="card-footer">
@@ -59,7 +57,6 @@
 <script>
 const _=id=>document.getElementById(id)
 const totalScore=_("totalScore")
-const certificateBox=_("certificateBox")
 const quizKey=_("quizKey")
 const certificateName=_("certificateName")
 const certificateBtn=_("certificateBtn")
@@ -68,6 +65,7 @@ const MAX_NAME=20
 
 nameCounter.innerText=MAX_NAME
 quizKey.value=sessionStorage.getItem("key");
+totalScore.innerText=sessionStorage.getItem("score");
 
 certificateName.addEventListener("keyup",()=>{
   totalLength=certificateName.value.length
