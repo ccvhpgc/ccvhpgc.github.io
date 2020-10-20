@@ -95,22 +95,22 @@ const _=id=>document.getElementById(id)
 const ques=_("ques")
 const quesCounter=_("quesCounter")
 const submitBtn=_("submitBtn")
-let pagination_controls=_("paginationBtns")
+const pagination_controls=_("paginationBtns")
 const results_box=_("results_box")
 const ADD_URL=""
-const COUNT_URL="https://ccvhpgc.000webhostapp.com/api/quiz/count.php"
-const LIMIT_URL="https://ccvhpgc.000webhostapp.com/api/quiz/limit.php"
+const COUNT_URL="https://ccvhpgc.000webhostapp.com/api/quiz/count"
+const LIMIT_URL="https://ccvhpgc.000webhostapp.com/api/quiz/limit"
 
-let uid
-let totalRows;
-var rpp = 1;
+let uid, totalRows, rpp = 1;
+
+const shave=(str, n)=>
+(str.length>n) ? str.substr(0, n-2)+'..' : str;
+
 
 function request_page(pn){
-
-var last = Math.ceil(totalRows/rpp);
-if (last < 1){last = 1}
-
-results_box.innerHTML = '<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
+  let last=Math.ceil(totalRows/rpp)
+  if(last < 1){last = 1}
+  results_box.innerHTML='<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
 
   let fd=new FormData()
   fd.append("uid", uid)
@@ -118,46 +118,42 @@ results_box.innerHTML = '<div class="text-center mb-5"><div class="spinner-borde
   fd.append("last", last)
   fd.append("pn", pn)
 
-var xhr=new XMLHttpRequest();
-
-xhr.open("POST", LIMIT_URL, true);
-
-
-xhr.onreadystatechange = function() {
-    if(xhr.readyState == 4 && xhr.status == 200) {
+  var xhr=new XMLHttpRequest()
+  xhr.open("POST", LIMIT_URL, true)
+  xhr.onreadystatechange=()=>{
+    if(xhr.readyState == 4 && xhr.status == 200){
         var xhrRes=xhr.responseText;
         results_box.innerHTML=xhrRes
     }
-}
-xhr.send(fd);
+  }
+  xhr.onerror = function(){
+    alert("Request Error...")
+  }
+  xhr.send(fd)
 
-var paginationCtrls = "";
-
-if (last != 1){
-    if (pn > 1){
-        paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn-1)+')" class="page-link shadow-none">&lt;</span></li>';
-        for(let i = pn-3; i < pn; i++){
-            if(i > 0){
-                paginationCtrls += '<li class="page-item"><span onclick="request_page('+i+')" class="page-link shadow-none">'+i+'</span></li>';
-            }
+  var paginationCtrls = "";
+  if(last != 1){
+    if(pn > 1){
+      paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn-1)+')" class="page-link shadow-none">&lt;</span></li>';
+      for(let i = pn-3; i < pn; i++){
+        if(i > 0){
+          paginationCtrls += '<li class="page-item"><span onclick="request_page('+i+')" class="page-link shadow-none">'+i+'</span></li>';
         }
+      }
     }
-
-
     paginationCtrls += '<li class="page-item active"><span class="page-link shadow-none">'+pn+'</span></li>';
 
-
     for(let j = pn+1; j <= last; j++){
-        paginationCtrls += '<li class="page-item"><span onclick="request_page('+j+')" class="page-link shadow-none">'+j+'</span></li>';
-        if (j >= pn+3){
-            break;
-        }
+      paginationCtrls += '<li class="page-item"><span onclick="request_page('+j+')" class="page-link shadow-none">'+j+'</span></li>';
+      if(j >= pn+3){
+        break;
+      }
     }
-    if (pn != last){
-        paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn+1)+')" class="page-link shadow-none">&gt;</span></li>';
+    if(pn != last){
+      paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn+1)+')" class="page-link shadow-none">&gt;</span></li>';
     }
-}
-pagination_controls.innerHTML=paginationCtrls;
+  }
+  pagination_controls.innerHTML=paginationCtrls
 }
 
 
@@ -179,8 +175,7 @@ request_page(1);
 
 
 
-const shave=(str, n)=>
-(str.length>n) ? str.substr(0, n-2)+'..' : str;
+
 
 
 submitBtn.addEventListener("click", ()=>{
@@ -204,7 +199,6 @@ submitBtn.addEventListener("click", ()=>{
   }
   xhr.send(fd)
 })
-
 
 const date=new Date();
 _("copyYear").innerText=date.getFullYear();
