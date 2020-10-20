@@ -24,7 +24,6 @@
 <div class="card-body">
 <p>A little paragraph describing what it is.</p>
 
-<img src="" id="testImg" class="img-fluid">
 <ul>
 <li>You will have 30 seconds to answer the question.<li>
 <li>You need to login to start the quiz, so that we can give you Certificate on successful completion.</li>
@@ -62,6 +61,7 @@ const _=id=>document.getElementById(id)
 const playBtn=_("playBtn")
 
 let userID, userName, userEmail, userPhoto;
+let resStatus;
 
 playBtn.disabled="true"
 
@@ -84,31 +84,37 @@ auth.onAuthStateChanged(user=>{
 const loginUser=()=>{
   const googleProvider = new firebase.auth.GoogleAuthProvider()
   auth.signInWithRedirect(googleProvider)
-  .then(()=>{
-    addUserToDB()
-  }).catch(error=>{
-    console.error(error)
-  })
+  .then(()=>startQuiz())
+  .catch(error=>alert(error))
 }
 
-
+const shave=(str, n)=>
+(str.length>n) ? str.substr(0, n-3)+'...' : str;
 
 const startQuiz=()=>{
-detailsd=`${userID} and ${userName} and ${userEmail} and ${userPhoto}`
-_("testImg").src=userPhoto
-alert(detailsd)
+  let fd=new FormData()
+  fd.append("uid", userID)
+  fd.append("name", shave(userName,250))
+  fd.append("email", shave(userEmail,250))
+  fd.append("photoURL", shave(userPhoto,250))
+  var xhr=new XMLHttpRequest()
+  xhr.open("POST", "https://ccvhpgc.000webhostapp.com/api/quiz/addUser", true)
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState==4 && xhr.status==200){
+      resStatus=JSON.parse(xhr.responseText)
+      checkStatus(resStatus)
+    }
+  }
+  xhr.send(fd)
 }
 
-
-
-const addUserToDB=()=>{
-
-details=`${userID} and ${userName} and ${userEmail} and ${userPhoto}`
-
-alert(details)
+const checkStatus=resStatus=>{
+  if(resStatus.status==true){
+    alert(resStatus.message)
+  } else if(resStatus.status==false) {
+    alert(resStatus.message)
+  }
 }
-
-
 
 const date=new Date();
 _("copyYear").innerText=date.getFullYear();
