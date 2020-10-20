@@ -4,9 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Nowledge November Quiz</title>
 <link rel="stylesheet" href="../lib/bootstrap.min.css">
-<style>
-.card{max-width:500px}
-</style>
+<link rel="stylesheet" href="main.css">
 </head><body class="d-flex flex-column h-100 bg-dark">
 <header>
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark py-0 border-bottom border-secondary shadow">
@@ -17,13 +15,12 @@
 </header>
 
 <main class="flex-shrink-0 pt-5">
-<div class="container">
 
+<div class="container">
 <div class="card mt-5 mx-auto">
 <span class="card-header h5 text-center">Nowledge November Quiz</span>
 <div class="card-body">
 <p>A little paragraph describing what it is.</p>
-
 <ul>
 <li>You will have 30 seconds to answer the question.<li>
 <li>You need to login to start the quiz, so that we can give you Certificate on successful completion.</li>
@@ -32,19 +29,37 @@
 <div class="card-footer">
 <button id="playBtn" class="btn btn-dark btn-block font-weight-bold">Loading...</button>
 </div>
-</div>
+</div> <!-- card -->
+</div> <!-- container -->
 
-
+<!-- custom alert modal start -->
+<div class="modal fade" id="alertBSModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header py-2">
+<h5 class="modal-title">Information &#33;</h5>
+<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 </div>
+<div id="alertBSBody" class="modal-body">
+</div>
+<div class="modal-footer py-2">
+<button data-dismiss="modal" class="btn btn-outline-dark w-50">Close</button>
+</div>
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog --> 
+</div> <!-- modal -->
+<!-- custom alert modal end -->
+
 </main>
 
-<footer class="footer mt-auto pt-5 bg-dark text-muted text-center">
+<footer class="footer mt-auto py-2 bg-dark text-muted text-center">
 <div class="container">
 <p>RexArvind Web Services &copy; <span id="copyYear">...</span></p>
 </div>
 </footer>
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+<script src="../lib/bootstrap.bundle.min.js"></script>
 <script>
 var firebaseConfig={
 apiKey:"AIzaSyBN-tGMjWsrJylOpVTLnyrXAfYvrx9gCEU",
@@ -58,79 +73,7 @@ measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
 const ROOT_URL="https://ccvhpgc.000webhostapp.com"
 const auth=firebase.auth()
-const _=id=>document.getElementById(id)
-const playBtn=_("playBtn")
-
-let userID, userName, userEmail, userPhoto;
-let resStatus;
-
-playBtn.disabled="true"
-
-auth.onAuthStateChanged(user=>{
-  if(user){
-    userID=user.uid
-    userName=user.displayName
-    userEmail=user.email
-    userPhoto=user.photoURL
-    playBtn.addEventListener("click", startQuiz)
-    playBtn.disabled=""
-    playBtn.innerText="Start Game"
-  } else {
-    playBtn.addEventListener("click", loginUser)
-    playBtn.disabled=""
-    playBtn.innerText="Login to Play"
-  }
-})
-
-const loginUser=()=>{
-  const googleProvider = new firebase.auth.GoogleAuthProvider()
-  auth.signInWithRedirect(googleProvider)
-  .then(()=>{
-    playBtn.addEventListener("click", startQuiz)
-    playBtn.innerText="Start Game"
-  }).catch(error=>alert(error))
-}
-
-const shave=(str, n)=>
-(str.length>n) ? str.substr(0, n-3)+'...' : str;
-
-const startQuiz=()=>{
-  playBtn.disabled="true"
-  playBtn.innerText="Loading..."
-  let fd=new FormData()
-  fd.append("uid", userID)
-  fd.append("name", shave(userName,250))
-  fd.append("email", shave(userEmail,250))
-  fd.append("photoURL", shave(userPhoto,250))
-  var xhr=new XMLHttpRequest()
-  xhr.open("POST", "https://ccvhpgc.000webhostapp.com/api/quiz/addUser", true)
-  xhr.onreadystatechange = function(){
-    if(xhr.readyState==4 && xhr.status==200){
-      resStatus=JSON.parse(xhr.responseText)
-      playBtn.disabled="true"
-      playBtn.innerText="Redirecting..."
-      checkStatus(resStatus)
-    }
-  }
-  xhr.onerror = function(){
-    playBtn.disabled=""
-    playBtn.innerText="Retry"
-    alert("Request Error...")
-  }
-  xhr.send(fd)
-}
-
-const checkStatus=resStatus=>{
-  if(resStatus.status==true){
-    sessionStorage.setItem("key", userID)
-    document.location.href="process.html"
-  } else if(resStatus.status==false){
-    playBtn.disabled=""
-    playBtn.innerText="Start Game"
-    alert(resStatus.message)
-  }
-}
-
-const date=new Date();
-_("copyYear").innerText=date.getFullYear();
-</script></body></html>
+const ADD_USER="https://ccvhpgc.000webhostapp.com/api/quiz/addUser"
+</script>
+<script src="index.js"></script>
+</body></html>
