@@ -20,7 +20,7 @@
 <div class="row justify-content-center">
 <div class="col-sm-8 col-lg-5">
 
-<div class="card my-5 mx-auto">
+<div class="card my-5 mx-auto shadow">
 <span class="card-header h5">
 Website Under Construction
 </span>
@@ -30,7 +30,7 @@ In the meantime, check out our <a href="https://instagram.com/cc.vhpgc">Instagra
 </p>
 </div>
 <div class="card-footer text-right">
-<a href="https://api.whatsapp.com/send?phone=918172816199&text=Hii" class="btn btn-dark font-weight-bold">Contact us</a>
+<a href="https://api.whatsapp.com/send?phone=918172816199&text=Hii" rel="noopener noreferrer" class="btn btn-dark font-weight-bold">Contact us</a>
 </div>
 </div> <!-- card -->
 
@@ -44,10 +44,21 @@ In the meantime, check out our <a href="https://instagram.com/cc.vhpgc">Instagra
 <footer class="footer mt-auto py-2 bg-dark text-muted text-center border-top border-secondary">
 <div class="container">
 <a href="https://rexarvind.github.io/" target="_blank" rel="noopener noreferrer" class="link-secondary text-decoration-none">Commerce Council &copy; <span id="copyYear"></span></a>
+<p>Page Views: <span id="page-views"></span></p>
 </div>
 </footer>
 <script>
 const _=x=>document.getElementById(x)
+
+function updateViews(){
+const pageViews = _("page-views")
+fetch('https://api.countapi.xyz/update/ccvhpgc/home/?amount=1').then(res =>res.json())
+.then(res=>{
+  pageViews.innerText = res.value})
+.catch(err=>{pageViews.innerText=err})
+}
+updateViews()
+
 
 const date=new Date()
 _("copyYear").innerText=date.getFullYear()
