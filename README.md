@@ -2,5 +2,6 @@
 Commerce Council
 
 ## [Admin Area](https://ccvhpgc.github.io/admin/)
-## [Nowledge November Quiz](https://ccvhpgc.github.io/quiz/)
+## [NN GitHub](https://ccvhpgc.github.io/quiz/)
+## [NN Netlify](https://ccvhpgc.netlify.app/quiz/)
 ---
