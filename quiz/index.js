@@ -290,15 +290,16 @@ const userAns=(el)=>{
 
 
 const getScore=id=>{
+alert(id)
   quizKey.value=id
-  fetch(ROOT_URL+"get-score/"+uid)
+  fetch(ROOT_URL+"get-score/"+id)
   .then(res=>res.json())
   .then(res=>{
   if(res.status==true){
     data=res.data
    certificateName.value=shave(data.name,28)
    userPercentage.innerHTML=data.percentage
-  }
+  } 
 })
 .catch(err=>alertBS("Can not load Scores.<br>"+err))
 
