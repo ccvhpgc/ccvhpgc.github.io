@@ -26,9 +26,21 @@ const paginationBtns=_("paginationBtns")
 const resultsBox=_("resultsBox")
 const quizKey=_("quizKey")
 const certificateName=_("certificateName")
+const nameCounter=_("nameCounter")
+const certificateBtn=_("certificateBtn")
 const userPercentage=_("userPercentage")
+const guestQues=_("guestQues")
+const guestAns1=_("guestAns1")
+const guestAns2=_("guestAns2")
+const guestAns3=_("guestAns3")
+const guestAns4=_("guestAns4")
+const guestCorrect=_("guestCorrect")
+const guestDesc=_("guestDesc")
+const guestSubmitBtn=_("guestSubmitBtn")
+
 
 /* define variables */
+const MAX_NAME=29
 let userID, userName, userEmail, userPhoto;
 let resStatus, totalRows, pn, rpp=6;
 
@@ -226,35 +238,7 @@ fetch(COUNT_HIGH_SCORE)
 
 
 
-if ('serviceWorker' in navigator){
-  navigator.serviceWorker
-  .register('/sw.js')
-  .then(function(){
-    console.log('Service Worker Registered')
-  })
-}
 
-let deferredPrompt;
-const pwaBtn = _("pwaBtn");
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  pwaBtn.classList.remove("d-none");
-
-  pwaBtn.addEventListener('click', (e) => {
-    pwaBtn.classList.add("d-none");
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) =>{
-    if (choiceResult.outcome === 'accepted') {
-    console.log('User accepted the A2HS prompt');
-    } else {
-    console.log('User dismissed the A2HS prompt');
-    }
-    deferredPrompt = null;
-    });
-  });
-});
 
 
 
@@ -290,7 +274,6 @@ const userAns=(el)=>{
 
 
 const getScore=id=>{
-alert(id)
   quizKey.value=id
   fetch(ROOT_URL+"get-score/"+id)
   .then(res=>res.json())
@@ -305,17 +288,86 @@ alert(id)
 
 }
 
+nameCounter.innerText=MAX_NAME
+certificateName.addEventListener("input",()=>{
+  totalLength=certificateName.value.length
+  nameCounter.innerText=MAX_NAME-totalLength
+  if(totalLength>MAX_NAME){
+    certificateBtn.disabled="true"
+  } else if(totalLength<=MAX_NAME){
+    certificateBtn.disabled=""
+  }
+})
 
 
+guestSubmitBtn.addEventListener("click", ()=>{
+  guestSubmitBtn.disabled="true"
+  let fd=new FormData()
+  fd.append("uid", userID)
+  fd.append("name", userName)
+  fd.append("email", userEmail)
+  fd.append("ques", guestQues.value)
+  fd.append("ans1", guestAns1.value)
+  fd.append("ans2", guestAns2.value)
+  fd.append("ans3", guestAns3.value)
+  fd.append("ans4", guestAns4.value)
+  fd.append("correct", guestCorrect.value)
+  fd.append("desc", guestDesc.value)
+  let xhr=new XMLHttpRequest()
+  xhr.open("POST", ROOT_URL+"add-guest-ques", true)
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState==4 && xhr.status==200){
+      res=JSON.parse(xhr.responseText)
+      alertBS(res.message)
+      guestSubmitBtn.disabled=""
+    }
+  }
+  xhr.onerror = function(){
+    alertBS("Connection Error: Question can not be submitted.")
+    guestSubmitBtn.disabled=""
+  }
+  xhr.send(fd)
+})
 
 
 const updateViews=()=>{
 const pageViews=_("page-views")
 fetch('https://api.countapi.xyz/update/ccvhpgc/home/?amount=1').then(res =>res.json())
 .then(res=>{pageViews.innerText = res.value})
-.catch(err=>{pageViews.innerText=err})
+.catch(err=>{pageViews.innerText=err.message})
 }
 updateViews()
 
 const date=new Date();
 _("copyYear").innerText=date.getFullYear()
+
+
+if ('serviceWorker' in navigator){
+  navigator.serviceWorker
+  .register('/sw.js')
+  .then(function(){
+    console.log('Service Worker Registered')
+  })
+}
+
+let deferredPrompt;
+const pwaBtn = _("pwaBtn");
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  pwaBtn.classList.remove("d-none");
+
+  pwaBtn.addEventListener('click', (e) => {
+    pwaBtn.classList.add("d-none");
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) =>{
+    if (choiceResult.outcome === 'accepted') {
+    console.log('User accepted the A2HS prompt');
+    } else {
+    console.log('User dismissed the A2HS prompt');
+    }
+    deferredPrompt = null;
+    });
+  });
+})
