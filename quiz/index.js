@@ -295,9 +295,6 @@ const getScore=id=>{
   .then(res=>{
   if(res.status==true){
     data=res.data
-    totalScore.innerText=data.score
-    totalPercentage.innerText=data.percentage
-    /* put name in certificate form by default */
    certificateName.value=shave(data.name,28)
    userPercentage.innerHTML=data.percentage
 })
