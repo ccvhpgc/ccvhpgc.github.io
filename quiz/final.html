@@ -36,84 +36,35 @@
 
 <main class="flex-shrink-0 pt-4">
 
-<div class="container-lg py-5">
-<div class="row gy-4">
-<div class="col-sm-6">
-<h1>Nowledge November Quiz</h1>
-<p>Welcome, this quiz is a quick way to refresh your web development knowledge and learn something new at the same time. To make this quiz interesting we are shuffling questions and answers both at the server side and the client side; and we will give you certificate of successful completion and show your scores here. More questions are added every week and as JavaScript is the leader in web development, more questions will be related to it. Checkout the rules below before starting the quiz and best of luck&#33;</p>
-<button id="logoutBtn" class="btn btn-danger font-weight-bold mr-2 d-none">Logout</button>
-<button id="playBtn" class="btn btn-success font-weight-bold">Loading Quiz...</button>
-<br /><br />
-</div>
-<div class="col-sm-6">
-<div class="card shadow-sm border-secondary">
-<span class="card-header h5 text-center">Rules</span>
-<div class="card-body pb-0">
-<ul class="pl-3">
-<li>You will get 25 questions in total.</li>
-<li>You will have only 30 seconds to answer each question.</li>
-<li>Once you select your answer, it can&apos;t be undone.</li>
-<li>You can&apos;t select any option once time goes off.</li>
-<li>You&apos;ll get 4 points on every correct answer.</li>
-<li>If you leave the quiz or refresh the browser, your score will be set to 0.</li>
-<li>There is no negative marking.</li>
-<li>You will get certificate if you score atleast 50%.</li>
-<li>You need to login to start the quiz.</li>
-</ul>
-</div>
-</div> <!-- card -->
-</div>
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-sm-8 col-lg-5">
 
-<div class="col-sm-6">
-<div class="card shadow-sm border-secondary">
-<span class="card-header h5 text-center">Certificate Distribution</span>
-<div class="card-body">
-<p>Certificate will be awarded if score is atleast 50%. Your percentage is <span id="userPercentage" class="font-weight-bold">0</span>%.
-<br /><br />Enter your full name below. This will be shown on certificate, please take a second to make sure there are not any spelling mistakes.</p>
-<form action="https://ccvhpgc.000webhostapp.com/api/nn/certificate.php" method="POST" target="_blank">
+<div class="card my-5 mx-auto shadow-sm border-secondary">
+<span class="card-header h5 text-center">Nowledge November Quiz</span>
+<div class="card-body text-center">
+<p>Certificate of completion will be given if score is atleast 50%. You can always play again.</p>
+
+<p class="font-weight-bold">Total Score: <span id="totalScore">...</span>
+<br>Percentage: <span id="totalPercentage">...</span> %</p>
+
+<form id="certificateForm" action="https://ccvhpgc.000webhostapp.com/api/nn/certificate.php" method="POST" target="_blank" class="d-none">
+<p>Enter your full name below. This will be shown on certificate, please take a second to make sure there are not any spelling mistakes.</p>
 <input type="hidden" id="quizKey" name="key" value="">
 <input type="text" id="certificateName" name="name" placeholder="" class="form-control text-center border-dark" required>
 <div class="form-text mb-3">Remaining characters: <span id="nameCounter"></span></div>
 <button id="certificateBtn" class="btn btn-dark btn-block font-weight-bold">Download Certificate</button>
 </form>
+
 </div>
 <div class="card-footer">
-<button onclick="userAns(this)" class="btn btn-success btn-block font-weight-bold">My Answers</button>
+<a href="https://api.whatsapp.com/send?&text=Hey%20checkout%20this%20awesome%20quiz%20and%20get%20a%20free%20certificate.%0A%0Ahttps%3A%2F%2Fccvhpgc.github.io%2Fquiz%2F" class="btn btn-dark btn-block font-weight-bold">Share on Whatsapp</a>
 </div>
 </div> <!-- card -->
-</div>
+
+</div> <!-- col -->
 </div> <!-- row -->
-</div> <!-- container-lg -->
-
-
-
-
-
-
-
-
-<div class="container">
-<ul class="pagination flex-wrap justify-content-center" id="paginationBtns">
-</ul>
-</div>
-
-<div class="container-lg mb-5">
-<div class="row g-2 mb-5" id="resultsBox"></div>
-</div>
-
-
-
-
-<!-- fab left start -->
-<div class="position-fixed bottom-0 left-0 m-2">
-<button id="pwaBtn" class="btn btn-dark btn-sm d-none">Lite App</button>
-</div>
-<!-- fab left end -->
-
-
-
-
-
+</div> <!-- container -->
 
 <br /><br /><br /><br /><br /><br /><br /><br />
 
@@ -125,7 +76,7 @@
 <h5 class="modal-title">Information &#33;</h5>
 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 </div>
-<div id="alertBSBody" class="modal-body" style="white-space:pre-wrap">
+<div id="alertBSBody" class="modal-body">
 </div>
 <div class="modal-footer py-2">
 <button data-dismiss="modal" class="btn btn-outline-dark w-50">Close</button>
@@ -144,8 +95,6 @@
 <br /><a href="https://rexarvind.github.io/" target="_blank" rel="noopener noreferrer" class="link-secondary text-decoration-none">Developed by RexArvind&nbsp;Web&nbsp;Services</a></p>
 </div>
 </footer>
-<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
 <script src="../lib/bootstrap.bundle.min.js"></script>
-<script src="index.js"></script>
+<script src="final.js"></script>
 </body></html>

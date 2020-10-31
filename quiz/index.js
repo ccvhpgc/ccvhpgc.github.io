@@ -144,7 +144,7 @@ const checkScoreStatus=res=>{
     data=res.data
     data.forEach(data=>{
     output+=`<div class="col-sm-6 col-md-4">
-    <div class="card"><span class="card-header h5 text-truncate">${data.name}</span>
+    <div class="card shadow-sm border-secondary"><span class="card-header h5 text-truncate">${data.name}</span>
     <div class="card-body">
     <div class="row gx-1 gy-0">
     <p class="col-8">Percentage: ${data.percentage} &#37; <br>
@@ -310,7 +310,7 @@ const getScore=id=>{
 
 const updateViews=()=>{
 const pageViews=_("page-views")
-fetch('https://api.countapi.xyz/update/rexarvind/home/?amount=1').then(res =>res.json())
+fetch('https://api.countapi.xyz/update/ccvhpgc/home/?amount=1').then(res =>res.json())
 .then(res=>{pageViews.innerText = res.value})
 .catch(err=>{pageViews.innerText=err})
 }
