@@ -1,4 +1,4 @@
-const ROOT_URL="https://rex-arvind.000webhostapp.com/api/nn/"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/"
 const QUIZAPI=ROOT_URL+"get-ques/"
 const ADD_SCORE=ROOT_URL+"add-score"
 const CORRECT_BONUS=4
