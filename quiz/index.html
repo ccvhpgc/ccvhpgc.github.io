@@ -70,7 +70,7 @@
 <div class="card shadow-sm border-secondary">
 <span class="card-header h5 text-center">Certificate Distribution</span>
 <div class="card-body">
-<p>Certificate will be awarded if score is atleast 50%. Your percentage is 0%.
+<p>Certificate will be awarded if score is atleast 50%. Your percentage is <span id="userPercentage" class="font-weight-bold">0</span>%.
 <br /><br />Enter your full name below. This will be shown on certificate, please take a second to make sure there are not any spelling mistakes.</p>
 <form action="https://ccvhpgc.000webhostapp.com/api/nn/certificate.php" method="POST" target="_blank">
 <input type="hidden" id="quizKey" name="key" value="">
@@ -80,7 +80,7 @@
 </form>
 </div>
 <div class="card-footer">
-<a class="btn btn-success btn-block font-weight-bold">My Answers</a>
+<button onclick="userAns(this)" class="btn btn-success btn-block font-weight-bold">My Answers</button>
 </div>
 </div> <!-- card -->
 </div>

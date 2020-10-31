@@ -10,14 +10,11 @@ measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
 
-const ROOT_URL="https://ccvhpgc.000webhostapp.com"
-const ADD_USER=ROOT_URL+"/api/nn/add-user"
-const COUNT_HIGH_SCORE=ROOT_URL+"/api/nn/count-high-score"
-const LIMIT_HIGH_SCORE=ROOT_URL+"/api/nn/limit-high-score.php"
-const USER_ANS=ROOT_URL+"/api/nn/user-ans/"
-
-/* high score results per page */
-let rpp = 6;
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/"
+const ADD_USER=ROOT_URL+"add-user"
+const COUNT_HIGH_SCORE=ROOT_URL+"count-high-score"
+const LIMIT_HIGH_SCORE=ROOT_URL+"limit-high-score.php"
+const USER_ANS=ROOT_URL+"user-ans/"
 
 /* shortcut for getting elements by id */
 const _=x=>document.getElementById(x)
@@ -27,10 +24,13 @@ const playBtn=_("playBtn")
 const logoutBtn=_("logoutBtn")
 const paginationBtns=_("paginationBtns")
 const resultsBox=_("resultsBox")
+const quizKey=_("quizKey")
+const certificateName=_("certificateName")
+const userPercentage=_("userPercentage")
 
 /* define variables */
 let userID, userName, userEmail, userPhoto;
-let resStatus, totalRows, pn;
+let resStatus, totalRows, pn, rpp=6;
 
 /* use custom alert by alertBS(x) */
 const alertBSModal=_("alertBSModal")
@@ -59,6 +59,7 @@ auth.onAuthStateChanged(user=>{
     playBtn.disabled=""
     playBtn.innerText="Click to Start Quiz"
     logoutBtn.classList.remove("d-none")
+    getScore(userID)
   } else {
     playBtn.addEventListener("click", loginUser)
     playBtn.disabled=""
@@ -285,6 +286,29 @@ const userAns=(el)=>{
 
 
 
+
+
+const getScore=id=>{
+  quizKey.value=id
+  fetch(ROOT_URL+"get-score/"+uid)
+  .then(res=>res.json())
+  .then(res=>{
+  if(res.status==true){
+    data=res.data
+    totalScore.innerText=data.score
+    totalPercentage.innerText=data.percentage
+    /* put name in certificate form by default */
+   certificateName.value=shave(data.name,28)
+   userPercentage.innerHTML=data.percentage
+})
+.catch(err=>alertBS("Can not load Scores.<br>"+err))
+
+}
+
+
+
+
+
 const updateViews=()=>{
 const pageViews=_("page-views")
 fetch('https://api.countapi.xyz/update/rexarvind/home/?amount=1').then(res =>res.json())
@@ -293,6 +317,5 @@ fetch('https://api.countapi.xyz/update/rexarvind/home/?amount=1').then(res =>res
 }
 updateViews()
 
-/* update copyright year */
 const date=new Date();
 _("copyYear").innerText=date.getFullYear()
