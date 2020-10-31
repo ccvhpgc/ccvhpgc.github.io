@@ -50,7 +50,6 @@ quizPath=QUIZAPI+userID
 fetch(quizPath).then(res=>res.json())
 .then(res=>checkQues(res))
 .catch(err=>{
- alert(err+" and "+ quizPath)
   document.location.href="index.html"
 })
 
