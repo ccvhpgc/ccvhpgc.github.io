@@ -259,7 +259,7 @@ submitBtn.addEventListener("click", ()=>{
   fd.append("ans3", ans3.value)
   fd.append("ans4", ans4.value)
   fd.append("correct", correct.value)
-  fd.append("desc", desc.innerText)
+  fd.append("desc", desc.value)
   let xhr=new XMLHttpRequest()
   xhr.open("POST", ADD_QUES, true)
   xhr.onreadystatechange = function(){
