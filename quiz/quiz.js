@@ -1,5 +1,5 @@
-const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/"
-const QUIZAPI=ROOT_URL+"get-ques/"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
+const QUIZAPI=ROOT_URL+"ques/"
 const ADD_SCORE=ROOT_URL+"add-score"
 const CORRECT_BONUS=4
 const MAX_TIME=30

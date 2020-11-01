@@ -5,8 +5,8 @@ const MAX_NAME=28
 MAKE SURE TO UPDATE THIS ON SERVER ALSO */
 const PASS_SCORE=50
 
-const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/";
-const GET_SCORE=ROOT_URL+"get-score/";
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/";
+const USER_SCORE=ROOT_URL+"user-score/";
 
 
 /* shortcut for getting elements by id */
@@ -53,7 +53,7 @@ quizKey.value=uid
 
 
 /* get score from database */
-fetch(GET_SCORE+uid).then(res=>res.json())
+fetch(USER_SCORE+uid).then(res=>res.json())
 .then(res=>{
   if(res.status==true){
     data=res.data

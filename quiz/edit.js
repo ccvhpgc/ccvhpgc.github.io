@@ -9,11 +9,10 @@ appId:"1:396547340937:web:fc1280a69df6f029c4e458",
 measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
-const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
 const ADD_QUES=ROOT_URL+"add-ques"
 const DELETE_QUES=ROOT_URL+"delete-ques"
-const COUNT_QUES=ROOT_URL+"count-all-ques"
-const LIMIT_QUES=ROOT_URL+"limit-all-ques"
+const  QUESTIONS=ROOT_URL+"questions"
 
 
 /* customisable variable */
@@ -108,7 +107,7 @@ clearForm.addEventListener("click", ()=>{
   ans3.value=""
   ans4.value=""
   correct.value=""
-  desc.innerHTML=""
+  desc.value=""
 })
 
 
@@ -172,7 +171,7 @@ const showQues=data=>{
 const checkQuesRes=res=>{
   if(res.status==true){
     showQues(res.data)
-    fetch(COUNT_QUES).then(res=>res.json())
+    fetch(QUESTIONS).then(res=>res.json())
     .then(res=>{
       if(res.status==true){
         updateQuesAdded(res.data)
@@ -197,7 +196,7 @@ function request_page(pn){
   fd.append("pn", pn)
 
   var xhr=new XMLHttpRequest()
-  xhr.open("POST", LIMIT_QUES, true)
+  xhr.open("POST", QUESTIONS, true)
   xhr.onreadystatechange=()=>{
     if(xhr.readyState == 4 && xhr.status == 200){
         var xhrRes=JSON.parse(xhr.responseText)
@@ -235,7 +234,7 @@ function request_page(pn){
 }
 
 const getAllQues=()=>{
-fetch(COUNT_QUES).then(res=>res.json())
+fetch(QUESTIONS).then(res=>res.json())
 .then(res=>{
   if(res.status==true){
     totalRows=res.data

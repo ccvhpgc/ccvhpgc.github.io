@@ -10,11 +10,13 @@ measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
 
-const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/"
-const ADD_USER=ROOT_URL+"add-user"
-const COUNT_HIGH_SCORE=ROOT_URL+"count-high-score"
-const LIMIT_HIGH_SCORE=ROOT_URL+"limit-high-score.php"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
+const USER_ADD=ROOT_URL+"user-add"
+const SCORES=ROOT_URL+"scores"
 const USER_ANS=ROOT_URL+"user-ans/"
+const USER_SCORE=ROOT_URL+"user-score/"
+const QUES_ADD_GUEST=ROOT_URL+"ques-add-guest"
+const CERTIFICATE_VERIFY=ROOT_URL+"certificate-verify/"
 
 /* shortcut for getting elements by id */
 const _=x=>document.getElementById(x)
@@ -131,7 +133,7 @@ const startQuiz=()=>{
   fd.append("email", shave(userEmail,250))
   fd.append("photoURL", shave(userPhoto,250))
   var xhr=new XMLHttpRequest()
-  xhr.open("POST", ADD_USER, true)
+  xhr.open("POST", USER_ADD, true)
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
       res=JSON.parse(xhr.responseText)
@@ -187,7 +189,7 @@ function request_page(pn){
   fd.append("pn", pn)
 
   var xhr=new XMLHttpRequest()
-  xhr.open("POST", LIMIT_HIGH_SCORE, true)
+  xhr.open("POST", SCORES, true)
   xhr.onreadystatechange=()=>{
     if(xhr.readyState == 4 && xhr.status == 200){
         var xhrRes=JSON.parse(xhr.responseText)
@@ -226,8 +228,7 @@ function request_page(pn){
 
 
 /* count total users for displaying scores */
-fetch(COUNT_HIGH_SCORE)
-.then(res=>res.json())
+fetch(SCORES).then(res=>res.json())
 .then(res=>{
   if(res.status==true){
     totalRows=res.data
@@ -277,7 +278,7 @@ const userAns=(el)=>{
 
 const getScore=id=>{
   quizKey.value=id
-  fetch(ROOT_URL+"get-score/"+id)
+  fetch(USER_SCORE+id)
   .then(res=>res.json())
   .then(res=>{
   if(res.status==true){
@@ -306,7 +307,7 @@ certificateName.addEventListener("input",()=>{
 cidBtn.addEventListener("click", ()=>{
   cidBtn.disabled="true"
   let id=cid.value, output=""
-  let path=ROOT_URL+"verify-certificate/"+id
+  let path=CERTIFICATE_VERIFY+id
   fetch(path).then(res=>res.json())
   .then(res=>{
     if(res.status){
@@ -340,7 +341,7 @@ guestSubmitBtn.addEventListener("click", ()=>{
   fd.append("correct", guestCorrect.value)
   fd.append("desc", guestDesc.value)
   let xhr=new XMLHttpRequest()
-  xhr.open("POST", ROOT_URL+"add-guest-ques", true)
+  xhr.open("POST", QUES_ADD_GUEST, true)
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
       res=JSON.parse(xhr.responseText)
