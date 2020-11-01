@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="NN Quiz">
 <meta name="application-name" content="NN Quiz">
 <meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="theme-color" content="#212121">
+<meta name="theme-color" content="#263238">
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Nowledge November Quiz" />
@@ -65,7 +65,7 @@
 </div>
 
 <div class="col-sm-6">
-<div class="card shadow-sm border-secondary">
+<div class="card shadow-sm border-secondary h-100">
 <span class="card-header h5 text-center">Certificate Distribution</span>
 <div class="card-body">
 <p>Certificate will be awarded if score is atleast 50%. Your percentage is <span id="userPercentage" class="font-weight-bold">0</span>%.
@@ -76,6 +76,14 @@
 <div class="form-text mb-3">Remaining characters: <span id="nameCounter"></span></div>
 <button id="certificateBtn" class="btn btn-dark btn-block font-weight-bold">Download Certificate</button>
 </form>
+
+<hr>
+
+<p class="mt-5">Verify the distributed certificates here.</p>
+<label for="cid" class="form-label mb-0">Enter Certificate ID</label>
+<input type="number" id="cid" class="form-control mb-2">
+<button id="cidBtn" class="btn btn-dark btn-block font-weight-bold">Verify Certificate</button>
+
 </div>
 <div class="card-footer">
 <button onclick="userAns(this)" class="btn btn-success btn-block font-weight-bold">My Answers</button>
@@ -144,7 +152,7 @@
 
 <!-- fab left start -->
 <div class="position-fixed bottom-0 left-0 m-2">
-<button id="pwaBtn" class="btn btn-dark btn-sm d-none">Lite App</button>
+<button id="pwaBtn" class="btn btn-dark btn-sm font-weight-bold d-none">Lite App</button>
 </div>
 <!-- fab left end -->
 

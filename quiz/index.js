@@ -29,6 +29,8 @@ const certificateName=_("certificateName")
 const nameCounter=_("nameCounter")
 const certificateBtn=_("certificateBtn")
 const userPercentage=_("userPercentage")
+const cid=_("cid")
+const cidBtn=_("cidBtn")
 const guestQues=_("guestQues")
 const guestAns1=_("guestAns1")
 const guestAns2=_("guestAns2")
@@ -280,12 +282,11 @@ const getScore=id=>{
   .then(res=>{
   if(res.status==true){
     data=res.data
-   certificateName.value=shave(data.name,28)
+   certificateName.value=shave(data.name,MAX_NAME)
    userPercentage.innerHTML=data.percentage
   } 
 })
 .catch(err=>alertBS("Can not load Scores.<br>"+err))
-
 }
 
 nameCounter.innerText=MAX_NAME
@@ -297,6 +298,24 @@ certificateName.addEventListener("input",()=>{
   } else if(totalLength<=MAX_NAME){
     certificateBtn.disabled=""
   }
+})
+
+
+
+
+cidBtn.addEventListener("click", ()=>{
+  cidBtn.disabled="true"
+  let id=cid.value
+  let path=ROOT_URL+"verify-certificate/"+id
+  fetch(path).then(res=>res.text())
+  .then(res=>{
+    alertBS(res)
+    cidBtn.disabled=""
+  })
+  .catch(err=>{
+    alertBS(err)
+    cidBtn.disabled=""
+  })
 })
 
 
