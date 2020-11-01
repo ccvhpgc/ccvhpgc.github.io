@@ -2,6 +2,6 @@
 Commerce Council
 
 ## [Admin Area](https://ccvhpgc.github.io/admin/)
-## [NN GitHub](https://ccvhpgc.github.io/quiz/)
-## [NN Netlify](https://ccvhpgc.netlify.app/quiz/)
+## [CM GitHub](https://ccvhpgc.github.io/quiz/)
+## [CM Netlify](https://ccvhpgc.netlify.app/quiz/)
 ---
