@@ -16,7 +16,7 @@ const SCORES=ROOT_URL+"scores"
 const USER_ANS=ROOT_URL+"user-ans/"
 const USER_SCORE=ROOT_URL+"user-score/"
 const QUES_ADD_GUEST=ROOT_URL+"ques-add-guest"
-const CERTIFICATE_VERIFY=ROOT_URL+"certificate-verify/"
+const CERTIFICATE_VERIFY=ROOT_URL+"verify/"
 
 /* shortcut for getting elements by id */
 const _=x=>document.getElementById(x)
