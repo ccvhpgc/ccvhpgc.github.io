@@ -305,11 +305,18 @@ certificateName.addEventListener("input",()=>{
 
 cidBtn.addEventListener("click", ()=>{
   cidBtn.disabled="true"
-  let id=cid.value
+  let id=cid.value, output=""
   let path=ROOT_URL+"verify-certificate/"+id
-  fetch(path).then(res=>res.text())
+  fetch(path).then(res=>res.json())
   .then(res=>{
-    alertBS(res)
+    if(res.status){
+      data=res.data
+      output=`<div class="card shadow-sm border-secondary"><span class="card-header h5">${data.name}</span>
+    <div class="card-body d-flex align-items-center"><p class=" flex-fill">Percentage: ${data.percentage} &#37; <br>Score: ${data.score} out of ${data.maxScore}<br>Answered: ${data.ques} out of ${data.maxQues}</p>
+<img src="${data.photoURL}" class="">
+    </div></div>`
+      alertBS(output)
+   } else { alertBS(res.message) }
     cidBtn.disabled=""
   })
   .catch(err=>{
