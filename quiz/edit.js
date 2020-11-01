@@ -1,19 +1,19 @@
 var firebaseConfig={
-apiKey:"AIzaSyAIBhvdbyFlTqZLgtNA7uTWHymjHOpzyMU",
-authDomain:"rexarvind.firebaseapp.com",
-databaseURL:"https://rexarvind.firebaseio.com",
-projectId:"rexarvind",
-storageBucket:"rexarvind.appspot.com",
-messagingSenderId:"685927662051",
-appId:"1:685927662051:web:252add00d42a851bc320d6",
-measurementId:"G-CCNCD2RK1F"}
+apiKey:"AIzaSyBN-tGMjWsrJylOpVTLnyrXAfYvrx9gCEU",
+authDomain:"ccvhpgc.firebaseapp.com",
+databaseURL:"https://ccvhpgc.firebaseio.com",
+projectId:"ccvhpgc",
+storageBucket:"ccvhpgc.appspot.com",
+messagingSenderId:"396547340937",
+appId:"1:396547340937:web:fc1280a69df6f029c4e458",
+measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
-const ROOT_URL="https://rex-arvind.000webhostapp.com"
-const ADD_QUES=ROOT_URL+"/api/quiz/add-ques"
-const DELETE_QUES=ROOT_URL+"/api/quiz/delete-ques"
-const COUNT_QUES=ROOT_URL+"/api/quiz/count-all-ques"
-const LIMIT_QUES=ROOT_URL+"/api/quiz/limit-all-ques"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/"
+const ADD_QUES=ROOT_URL+"add-ques"
+const DELETE_QUES=ROOT_URL+"delete-ques"
+const COUNT_QUES=ROOT_URL+"count-all-ques"
+const LIMIT_QUES=ROOT_URL+"limit-all-ques"
 
 
 /* customisable variable */
@@ -278,6 +278,13 @@ const updateQuesAdded=(totalQues)=>{
   totalQuesAdded.innerHTML=totalQues
 }
 
-/* update copyright year */
+const updateViews=()=>{
+const pageViews=_("page-views")
+fetch('https://api.countapi.xyz/update/ccvhpgc/home/?amount=1').then(res =>res.json())
+.then(res=>{pageViews.innerText = res.value})
+.catch(err=>{pageViews.innerText=err.message})
+}
+updateViews()
+
 const date=new Date();
 _("copyYear").innerText=date.getFullYear()

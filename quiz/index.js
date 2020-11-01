@@ -367,7 +367,6 @@ updateViews()
 const date=new Date();
 _("copyYear").innerText=date.getFullYear()
 
-
 if ('serviceWorker' in navigator){
   navigator.serviceWorker
   .register('/sw.js')

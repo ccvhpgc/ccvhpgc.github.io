@@ -5,7 +5,7 @@ const MAX_NAME=28
 MAKE SURE TO UPDATE THIS ON SERVER ALSO */
 const PASS_SCORE=50
 
-const ROOT_URL="https://rex-arvind.000webhostapp.com/api/nn/";
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/nn/";
 const GET_SCORE=ROOT_URL+"get-score/";
 
 
