@@ -180,7 +180,7 @@ const checkScoreStatus=res=>{
 function request_page(pn){
   let last=Math.ceil(totalRows/rpp)
   if(last < 1){last = 1}
-  resultsBox.innerHTML='<div class="text-center mb-5"><div class="spinner-border text-light my-5" role="status"></div></div>';
+  resultsBox.innerHTML='<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
   let fd=new FormData()
   fd.append("rpp", rpp)
   fd.append("last", last)

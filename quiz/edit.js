@@ -101,11 +101,11 @@ auth.signOut()
 
 clearForm.addEventListener("click", ()=>{
   quesID.value=""
-  ques.innerHTML=""
-  ans1.innerHTML=""
-  ans2.innerHTML=""
-  ans3.innerHTML=""
-  ans4.innerHTML=""
+  ques.value=""
+  ans1.value=""
+  ans2.value=""
+  ans3.value=""
+  ans4.value=""
   correct.value=""
   desc.innerHTML=""
 })
@@ -154,7 +154,7 @@ const showQues=data=>{
   let output=""
   data.forEach((data)=>{
     output+=`<div class="col-sm-6 col-md-4">
-    <div class="card h-100">
+    <div class="card h-100 shadow-sm border-secondary">
     <span class="card-header h6" style="white-space:pre-wrap">${data.ques}</span><div class="card-body">1. ${data.ans1}<br>2. ${data.ans2}<br>3. ${data.ans3}<br>4. ${data.ans4}<br>Correct Ans: ${data.correct}
     </div><div class="card-footer d-flex justify-content-between">
     <button onclick="deleteQues('${data.id}')" class="btn btn-danger btn-sm flex-fill mr-2">Delete</button>
@@ -187,7 +187,7 @@ const checkQuesRes=res=>{
 function request_page(pn){
   let last=Math.ceil(totalRows/rpp)
   if(last < 1){last = 1}
-  results_box.innerHTML='<div class="text-center mb-5"><div class="spinner-border text-light my-5" role="status"></div></div>';
+  results_box.innerHTML='<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
 
   let fd=new FormData()
   fd.append("uid", userID)
@@ -253,13 +253,13 @@ submitBtn.addEventListener("click", ()=>{
   let fd=new FormData()
   fd.append("uid", userID)
   fd.append("id", quesID.value)
-  fd.append("ques", ques.innerText)
-  fd.append("ans1", ans1.innerText)
-  fd.append("ans2", ans2.innerText)
-  fd.append("ans3", ans3.innerText)
-  fd.append("ans4", ans4.innerText)
+  fd.append("ques", ques.value)
+  fd.append("ans1", ans1.value)
+  fd.append("ans2", ans2.value)
+  fd.append("ans3", ans3.value)
+  fd.append("ans4", ans4.value)
   fd.append("correct", correct.value)
-  fd.append("desc", desc.innerText)
+  fd.append("desc", desc.value)
   var xhr=new XMLHttpRequest()
   xhr.open("POST", ADD_QUES, true)
   xhr.onreadystatechange = function(){

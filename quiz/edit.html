@@ -48,27 +48,26 @@
 <div class="row justify-content-center">
 <div class="col-sm-8 col-lg-5">
 
-<div class="card mb-2 mx-auto">
-<span class="card-header h5">Total Questions: <span id="totalQuesAdded">...</span></span>
+<div class="card mb-2 mx-auto shadow-sm border-secondary">
+<span class="card-header h5">Total Ques: <span id="totalQuesAdded">...</span></span>
 
 <div class="card-body">
 <input type="hidden" id="quesID" value="">
 
-<label class="form-label mb-0">Enter Question</label>
-<div id="ques" class="form-control overflow-auto mb-3" style="max-height:99px;white-space:pre-wrap" contenteditable="true"></div>
+<label for="ques" class="form-label mb-0">Enter Question</label>
+<input type="text" id="ques" class="form-control mb-3">
 
-<label class="form-label mb-0">Choice 1.</label>
-<div id="ans1" class="form-control overflow-auto mb-3" style="max-height:99px;white-space:pre-wrap" contenteditable="true"></div>
+<label for="ans1" class="form-label mb-0">Choice 1.</label>
+<input type="text" id="ans1" class="form-control mb-3">
 
-<label class="form-label mb-0">Choice 2.</label>
-<div id="ans2" class="form-control overflow-auto mb-3" style="max-height:99px;white-space:pre-wrap" contenteditable="true"></div>
+<label for="ans2" class="form-label mb-0">Choice 2.</label>
+<input type="text" id="ans2" class="form-control mb-3">
 
-<label class="form-label mb-0">Choice 3.</label>
-<div id="ans3" class="form-control overflow-auto mb-3" style="max-height:99px;white-space:pre-wrap" contenteditable="true"></div>
+<label for="ans3" class="form-label mb-0">Choice 3.</label>
+<input type="text" id="ans3" class="form-control mb-3">
 
-<label class="form-label mb-0">Choice 4.</label>
-<div id="ans4" class="form-control overflow-auto mb-3" style="max-height:99px;white-space:pre-wrap" contenteditable="true"></div>
-
+<label for="ans4" class="form-label mb-0">Choice 4.</label>
+<input type="text" id="ans4" class="form-control mb-3">
 
 <label for="correct" class="form-label mb-0">Enter correct choice number</label>
 <div class="input-group mb-3">
@@ -76,8 +75,8 @@
 <input type="number" min="1" max="4" class="form-control" id="correct">
 </div>
 
-<label class="form-label mb-0">Answer Description</label>
-<div id="desc" class="form-control overflow-auto mb-3" style="max-height:99px;white-space:pre-wrap" contenteditable="true"></div>
+<label for="desc" class="form-label mb-0">Answer Description</label>
+<textarea id="desc" class="form-control mb-3"></textarea>
 
 
 </div>
