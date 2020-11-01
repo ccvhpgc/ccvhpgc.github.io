@@ -29,6 +29,7 @@ const loginBtn=_("loginBtn")
 const logoutBtn=_("logoutBtn")
 const userCard=_("userCard")
 const totalQuesAdded=_("totalQuesAdded")
+const refreshBtn=_("refreshBtn")
 const quesID=_("quesID")
 const ques=_("ques")
 const ans1=_("ans1")
@@ -247,6 +248,9 @@ fetch(COUNT_QUES).then(res=>res.json())
 })
 .catch(err=>alertBS(err))
 }
+
+
+refreshBtn.addEventListener("click", getAllQues)
 
 
 submitBtn.addEventListener("click", ()=>{
