@@ -23,6 +23,7 @@ let rpp = 6
 const _=id=>document.getElementById(id)
 
 /* get DOM elements */
+const loader=_("loader")
 const guestCard=_("guestCard")
 const loginBtn=_("loginBtn")
 const logoutBtn=_("logoutBtn")
@@ -62,11 +63,13 @@ const alertBS=text=>{
 auth.onAuthStateChanged(user=>{
   if(user){
     userID=user.uid
+    loader.classList.add("d-none")
     guestCard.classList.add("d-none")
     userCard.classList.remove("d-none")
     logoutBtn.classList.remove("d-none")
     getAllQues()
   } else {
+    loader.classList.add("d-none")
     guestCard.classList.remove("d-none")
     userCard.classList.add("d-none")
     logoutBtn.classList.add("d-none")
