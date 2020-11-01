@@ -259,8 +259,11 @@ submitBtn.addEventListener("click", ()=>{
   fd.append("ans3", ans3.value)
   fd.append("ans4", ans4.value)
   fd.append("correct", correct.value)
+
+alert(ADD_QUES)
+
   fd.append("desc", desc.value)
-  var xhr=new XMLHttpRequest()
+  let xhr=new XMLHttpRequest()
   xhr.open("POST", ADD_QUES, true)
   xhr.onreadystatechange = function(){
     if(xhr.readyState==4 && xhr.status==200){
