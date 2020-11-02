@@ -10,8 +10,8 @@ measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
 const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
-const ADD_QUES=ROOT_URL+"add-ques"
-const DELETE_QUES=ROOT_URL+"delete-ques"
+const ADD_QUES=ROOT_URL+"ques-add"
+const DELETE_QUES=ROOT_URL+"ques-del"
 const  QUESTIONS=ROOT_URL+"questions"
 
 
