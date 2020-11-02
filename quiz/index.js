@@ -12,7 +12,7 @@ const auth=firebase.auth()
 
 const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
 const USER_ADD=ROOT_URL+"user-add"
-const SCORES=ROOT_URL+"scores"
+const SCORES=ROOT_URL+"scores/"
 const USER_ANS=ROOT_URL+"user-ans/"
 const USER_SCORE=ROOT_URL+"user-score/"
 const QUES_ADD_GUEST=ROOT_URL+"ques-add-guest"
@@ -46,7 +46,6 @@ const guestSubmitBtn=_("guestSubmitBtn")
 /* define variables */
 const MAX_NAME=29
 let userID, userName, userEmail, userPhoto;
-let resStatus, totalRows, pn, rpp=6;
 
 /* use custom alert by alertBS(x) */
 const alertBSModal=_("alertBSModal")
@@ -153,91 +152,55 @@ const startQuiz=()=>{
 
 
 
-/* check high score response from API */
-const checkScoreStatus=res=>{
-  if(res.status==true){
-    let output=""
-    data=res.data
-    data.forEach(data=>{
-    output+=`<div class="col-sm-6 col-md-4">
-    <div class="card shadow-sm border-secondary"><span class="card-header h5 text-truncate">${data.name}</span>
-    <div class="card-body">
-    <div class="row gx-1 gy-0">
-    <p class="col-8">Percentage: ${data.percentage} &#37; <br>
-    Score: ${data.score} out of ${data.maxScore}<br>Answered: ${data.ques} out of ${data.maxQues}</p>
-<img src="${data.photoURL}" class="col-4">
-    </div>
-    </div>
-    </div></div>`
-    })
-    resultsBox.innerHTML=output
-  } else {
-    alertBS(res.message)
-  }
-}
-
 
 
 /* get scores and show pagination buttons */
 function request_page(pn){
-  let last=Math.ceil(totalRows/rpp)
-  if(last < 1){last = 1}
   resultsBox.innerHTML='<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
-  let fd=new FormData()
-  fd.append("rpp", rpp)
-  fd.append("last", last)
-  fd.append("pn", pn)
 
-  var xhr=new XMLHttpRequest()
-  xhr.open("POST", SCORES, true)
-  xhr.onreadystatechange=()=>{
-    if(xhr.readyState == 4 && xhr.status == 200){
-        var xhrRes=JSON.parse(xhr.responseText)
-        checkScoreStatus(xhrRes)
-    }
-  }
-  xhr.onerror = function(){
-    alertBS("Ajax Request Error...")
-  }
-  xhr.send(fd)
+  let last, paginationCtrls="", output="";
 
-  let paginationCtrls = "";
-  if(last != 1){
-    if(pn > 1){
-      paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn-1)+')" class="page-link shadow-none">&lt;</span></li>';
-      for(let i = pn-3; i < pn; i++){
-        if(i > 0){
-          paginationCtrls += '<li class="page-item"><span onclick="request_page('+i+')" class="page-link shadow-none">'+i+'</span></li>';
+  fetch(SCORES+pn).then(res=>res.json())
+  .then(res=>{
+    if(res.status==false){
+      alertBS(res.message)
+    } else if(res.status==true){
+      last=res.last
+      last=Math.ceil(res.total/res.rpp)
+      if(last < 1){last = 1}
+
+      if(last != 1){
+        if(pn > 1){
+          paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn-1)+')" class="page-link shadow-none">&lt;</span></li>';
+          for(let i = pn-3; i < pn; i++){
+            if(i > 0){
+              paginationCtrls += '<li class="page-item"><span onclick="request_page('+i+')" class="page-link shadow-none">'+i+'</span></li>';
+            }
+          }
+        }
+        paginationCtrls += '<li class="page-item active"><span class="page-link shadow-none">'+pn+'</span></li>';
+
+        for(let j = pn+1; j <= last; j++){
+          paginationCtrls += '<li class="page-item"><span onclick="request_page('+j+')" class="page-link shadow-none">'+j+'</span></li>';
+          if(j >= pn+3){
+            break;
+          }
+        }
+        if(pn != last){
+          paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn+1)+')" class="page-link shadow-none">&gt;</span></li>';
         }
       }
-    }
-    paginationCtrls += '<li class="page-item active"><span class="page-link shadow-none">'+pn+'</span></li>';
+    paginationBtns.innerHTML=paginationCtrls
 
-    for(let j = pn+1; j <= last; j++){
-      paginationCtrls += '<li class="page-item"><span onclick="request_page('+j+')" class="page-link shadow-none">'+j+'</span></li>';
-      if(j >= pn+3){
-        break;
-      }
+      data=res.data
+      data.forEach(data=>{
+        output+=`<div class="col-sm-6 col-md-4"><div class="card shadow-sm border-secondary"><span class="card-header h6 text-truncate p-2">${data.name}</span><div class="card-body p-2"><div class="row gx-1 gy-0"><p class="col-8">Percentage: ${data.percentage} &#37; <br>Score: ${data.score} out of ${data.maxScore}<br>Answered: ${data.ques} out of ${data.maxQues}</p><img src="${data.photoURL}" class="col-4"></div></div></div></div>`
+      })
+      resultsBox.innerHTML=output;
     }
-    if(pn != last){
-      paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn+1)+')" class="page-link shadow-none">&gt;</span></li>';
-    }
-  }
-  paginationBtns.innerHTML=paginationCtrls
+  }).catch(err=>alertBS(err))
 }
-
-
-/* count total users for displaying scores */
-fetch(SCORES).then(res=>res.json())
-.then(res=>{
-  if(res.status==true){
-    totalRows=res.data
-    request_page(1);
-  } else {
-    alertBS(res.message)
-  }
-})
-.catch(err=>alertBS("Can not load High Scores.<br>"+err))
+request_page(1);
 
 
 
