@@ -116,29 +116,27 @@ let confirmRes=confirm("Are you sure you want to delete this question!");
   }
 }
 
-const htmlEscape=str=>{
+const outEntity=str=>{
   return str .replace(/&/g, '&#38;')
   .replace(/"/g, '&#34;') .replace(/'/g, '&#39;')
   .replace(/</g, '&#60;') .replace(/>/g, '&#62;');
 }
 
-/*
-const htmlUn=str=>{
-  return str .replace(/&amp;/g, '&')
+const inEntity=str=>{
+  return str .replace(/&#38;/g, '&')
   .replace(/&#34;/g, '"') .replace(/&#39;/g, "'")
-  .replace(/&lt;/g, '<') .replace(/&gt;/g, '>');
+  .replace(/&#60;/g, '<') .replace(/&#62;/g, '>');
 }
-*/
 
 const editQues=i=>{
-  quesID.value=availableQues[i].id
-  ques.innerHTML=availableQues[i].ques
-  ans1.innerHTML=availableQues[i].ans1
-  ans2.innerHTML=availableQues[i].ans2
-  ans3.innerHTML=availableQues[i].ans3
-  ans4.innerHTML=availableQues[i].ans4
-  correct.value=availableQues[i].correct
-  desc.innerHTML=availableQues[i].desc
+quesID.value=availableQues[i].id
+ques.innerHTML=outEntity(availableQues[i].ques)
+ans1.innerHTML=outEntity(availableQues[i].ans1)
+ans2.innerHTML=outEntity(availableQues[i].ans2)
+ans3.innerHTML=outEntity(availableQues[i].ans3)
+ans4.innerHTML=outEntity(availableQues[i].ans4)
+correct.value=availableQues[i].correct
+desc.innerHTML=outEntity(availableQues[i].desc)
 }
 
 const showQuesDesc=i=>{
@@ -227,13 +225,13 @@ submitBtn.addEventListener("click", ()=>{
   let fd=new FormData()
   fd.append("uid", userID)
   fd.append("id", quesID.value)
-  fd.append("ques", ques.innerHTML)
-  fd.append("ans1", ans1.innerHTML)
-  fd.append("ans2", ans2.innerHTML)
-  fd.append("ans3", ans3.innerHTML)
-  fd.append("ans4", ans4.innerHTML)
+  fd.append("ques", outEntity(ques.innerHTML))
+  fd.append("ans1", outEntity(ans1.innerHTML))
+  fd.append("ans2", outEntity(ans2.innerHTML))
+  fd.append("ans3", outEntity(ans3.innerHTML))
+  fd.append("ans4", outEntity(ans4.innerHTML))
   fd.append("correct", correct.value)
-  fd.append("desc", desc.innerHTML)
+  fd.append("desc", outEntity(desc.innerHTML))
   let xhr=new XMLHttpRequest()
   xhr.open("POST", ADD_QUES, true)
   xhr.onreadystatechange = function(){
