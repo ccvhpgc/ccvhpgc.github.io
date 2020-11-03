@@ -163,13 +163,13 @@ const showQues=data=>{
 function request_page(pn){
   results_box.innerHTML='<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
 
-  let last, paginationCtrls="", output="";
+  let last, paginationCtrls=""
 
   fetch(QUESTIONS+pn+"/"+userID)
   .then(res=>res.json())
   .then(res=>{
     if(res.status==false){
-      alertBS(res.message)
+      alertBS("Error: "+res.message)
     } else if(res.status==true){
       last=Math.ceil(res.total/res.rpp)
       if(last<1){last=1}
