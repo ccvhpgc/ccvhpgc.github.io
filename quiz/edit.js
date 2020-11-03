@@ -229,7 +229,7 @@ submitBtn.addEventListener("click", ()=>{
   fd.append("ans1", outEntity(ans1.value))
   fd.append("ans2", outEntity(ans2.value))
   fd.append("ans3", outEntity(ans3.value))
-  fd.append("ans4", outEntity(ans4.value))
+  fd.append("ans4", outEntity(ans4.innerHTML))
   fd.append("correct", correct.value)
   fd.append("desc", outEntity(desc.value))
   let xhr=new XMLHttpRequest()
