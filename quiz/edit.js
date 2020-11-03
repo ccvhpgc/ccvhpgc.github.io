@@ -96,13 +96,13 @@ auth.signOut()
 
 clearForm.addEventListener("click", ()=>{
   quesID.value=""
-  ques.value=""
-  ans1.value=""
-  ans2.value=""
-  ans3.value=""
-  ans4.value=""
+  ques.innerHTML=""
+  ans1.innerHTML=""
+  ans2.innerHTML=""
+  ans3.innerHTML=""
+  ans4.innerHTML=""
   correct.value=""
-  desc.value=""
+  desc.innerHTML=""
 })
 
 
@@ -132,11 +132,11 @@ const htmlUn=str=>{
 
 const editQues=i=>{
   quesID.value=availableQues[i].id
-  ques.value=availableQues[i].ques
-  ans1.value=availableQues[i].ans1
-  ans2.value=availableQues[i].ans2
-  ans3.value=availableQues[i].ans3
-  ans4.value=availableQues[i].ans4
+  ques.innerHTML=availableQues[i].ques
+  ans1.innerHTML=availableQues[i].ans1
+  ans2.innerHTML=availableQues[i].ans2
+  ans3.innerHTML=availableQues[i].ans3
+  ans4.innerHTML=availableQues[i].ans4
   correct.value=availableQues[i].correct
   desc.innerHTML=availableQues[i].desc
 }
@@ -227,10 +227,10 @@ submitBtn.addEventListener("click", ()=>{
   let fd=new FormData()
   fd.append("uid", userID)
   fd.append("id", quesID.value)
-  fd.append("ques", ques.value)
-  fd.append("ans1", ans1.value)
-  fd.append("ans2", ans2.value)
-  fd.append("ans3", ans3.value)
+  fd.append("ques", ques.innerText)
+  fd.append("ans1", ans1.innerText)
+  fd.append("ans2", ans2.innerHTML)
+  fd.append("ans3", ans3.innerHTML)
   fd.append("ans4", ans4.value)
   fd.append("correct", correct.value)
   fd.append("desc", desc.value)
