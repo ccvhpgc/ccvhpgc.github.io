@@ -25,7 +25,6 @@ const loginBtn=_("loginBtn")
 const logoutBtn=_("logoutBtn")
 const userCard=_("userCard")
 const totalQuesAdded=_("totalQuesAdded")
-const refreshBtn=_("refreshBtn")
 const quesID=_("quesID")
 const ques=_("ques")
 const ans1=_("ans1")
@@ -228,6 +227,7 @@ submitBtn.addEventListener("click", ()=>{
     if(xhr.readyState==4 && xhr.status==200){
       res=JSON.parse(xhr.responseText)
       alertBS(res.message)
+      if(res.status){request_page(1)}
     }
   }
   xhr.onerror = function(){
