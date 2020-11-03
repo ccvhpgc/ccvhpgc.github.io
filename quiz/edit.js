@@ -12,11 +12,7 @@ const auth=firebase.auth()
 const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
 const ADD_QUES=ROOT_URL+"add-ques"
 const DELETE_QUES=ROOT_URL+"del-ques"
-const  QUESTIONS=ROOT_URL+"questions"
-
-
-/* customisable variable */
-let rpp = 6
+const  QUESTIONS=ROOT_URL+"questions/"
 
 
 /* shortcut for getting elements by id */
@@ -45,7 +41,7 @@ const results_box=_("results_box")
 
 /* define variables */
 let userID
-let resStatus, totalRows, pn
+let resStatus
 let availableQues=[]
 
 /* use custom alert by alertBS(x) */
@@ -67,7 +63,7 @@ auth.onAuthStateChanged(user=>{
     guestCard.classList.add("d-none")
     userCard.classList.remove("d-none")
     logoutBtn.classList.remove("d-none")
-    getAllQues()
+    request_page(1)
   } else {
     loader.classList.add("d-none")
     guestCard.classList.remove("d-none")
@@ -125,28 +121,20 @@ let confirmRes=confirm("Are you sure you want to delete this question!");
 }
 
 
-const editQues=id=>{
-  availableQues.forEach(data=>{
-    if(data.id == id){
-      quesID.value=data.id
-      ques.innerHTML=data.ques
-      ans1.innerHTML=data.ans1
-      ans2.innerHTML=data.ans2
-      ans3.innerHTML=data.ans3
-      ans4.innerHTML=data.ans4
-      correct.value=data.correct
-      desc.innerHTML=data.desc
-    }
-  })
+const editQues=i=>{
+  quesID.value=availableQues[i].id
+  ques.innerHTML=availableQues[i].ques
+  ans1.innerHTML=availableQues[i].ans1
+  ans2.innerHTML=availableQues[i].ans2
+  ans3.innerHTML=availableQues[i].ans3
+  ans4.innerHTML=availableQues[i].ans4
+  correct.value=availableQues[i].correct
+  desc.innerHTML=availableQues[i].desc
 }
 
-const showQuesDesc=id=>{
-  let tempDesc
-  availableQues.forEach(data=>{
-    if(data.id == id){
-      tempDesc=`<span style="white-space:pre-wrap">${data.desc}</span>`
-    }
-  })
+const showQuesDesc=i=>{
+  let tempDesc;
+  tempDesc=`<span style="white-space:pre-wrap">${availableQues[i].desc}</span>`
   alertBS(tempDesc)
 }
 
@@ -155,14 +143,14 @@ const showQuesDesc=id=>{
 const showQues=data=>{
   availableQues=[...data]
   let output=""
-  data.forEach((data)=>{
+  data.forEach((index, data)=>{
     output+=`<div class="col-sm-6 col-md-4">
     <div class="card h-100 shadow-sm border-secondary">
     <span class="card-header h6" style="white-space:pre-wrap">${data.ques}</span><div class="card-body">1. ${data.ans1}<br>2. ${data.ans2}<br>3. ${data.ans3}<br>4. ${data.ans4}<br>Correct Ans: ${data.correct}
     </div><div class="card-footer d-flex justify-content-between">
     <button onclick="deleteQues('${data.id}')" class="btn btn-danger btn-sm flex-fill mr-2">Delete</button>
-    <button onclick="editQues('${data.id}')" class="btn btn-success btn-sm flex-fill">Edit</button>
-    <button onclick="showQuesDesc('${data.id}')" class="btn btn-dark btn-sm flex-fill ml-2">Description</button>
+    <button onclick="editQues('${index}')" class="btn btn-success btn-sm flex-fill">Edit</button>
+    <button onclick="showQuesDesc('${index}')" class="btn btn-dark btn-sm flex-fill ml-2">Description</button>
     </div>
     </div>
     </div>`
@@ -171,88 +159,60 @@ const showQues=data=>{
 }
 
 
-const checkQuesRes=res=>{
-  if(res.status==true){
-    showQues(res.data)
-    fetch(QUESTIONS).then(res=>res.json())
-    .then(res=>{
-      if(res.status==true){
-        updateQuesAdded(res.data)
-      }
-    })
-  } else {
-    alertBS(res.message)
-  }
-}
-
-
 /* get questions and show pagination buttons */
 function request_page(pn){
-  let last=Math.ceil(totalRows/rpp)
-  if(last < 1){last = 1}
   results_box.innerHTML='<div class="text-center mb-5"><div class="spinner-border my-5" role="status"></div></div>';
 
-  let fd=new FormData()
-  fd.append("uid", userID)
-  fd.append("rpp", rpp)
-  fd.append("last", last)
-  fd.append("pn", pn)
+  let last, paginationCtrls="", output="";
 
-  var xhr=new XMLHttpRequest()
-  xhr.open("POST", QUESTIONS, true)
-  xhr.onreadystatechange=()=>{
-    if(xhr.readyState == 4 && xhr.status == 200){
-        var xhrRes=JSON.parse(xhr.responseText)
-        checkQuesRes(xhrRes)
-    }
-  }
-  xhr.onerror = function(){
-    alertBS("Request Error...")
-  }
-  xhr.send(fd)
+  fetch(QUESTIONS+pn+"/"+userID)
+  .then(res=>res.json())
+  .then(res=>{
+    if(res.status==false){
+      alertBS(res.message)
+    } else if(res.status==true){
+      last=Math.ceil(res.total/res.rpp)
+      if(last<1){last=1}
 
-  var paginationCtrls = "";
-  if(last != 1){
-    if(pn > 1){
-      paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn-1)+')" class="page-link shadow-none">&lt;</span></li>';
-      for(let i = pn-3; i < pn; i++){
-        if(i > 0){
-          paginationCtrls += '<li class="page-item"><span onclick="request_page('+i+')" class="page-link shadow-none">'+i+'</span></li>';
+      if(last != 1){
+        if(pn > 1){
+          paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn-1)+')" class="page-link shadow-none">&lt;</span></li>';
+          for(let i = pn-3; i < pn; i++){
+            if(i > 0){
+              paginationCtrls += '<li class="page-item"><span onclick="request_page('+i+')" class="page-link shadow-none">'+i+'</span></li>';
+            }
+          }
         }
-      }
-    }
-    paginationCtrls += '<li class="page-item active"><span class="page-link shadow-none">'+pn+'</span></li>';
+        paginationCtrls += '<li class="page-item active"><span class="page-link shadow-none">'+pn+'</span></li>';
 
-    for(let j = pn+1; j <= last; j++){
-      paginationCtrls += '<li class="page-item"><span onclick="request_page('+j+')" class="page-link shadow-none">'+j+'</span></li>';
-      if(j >= pn+3){
-        break;
-      }
-    }
-    if(pn != last){
+        for(let j = pn+1; j <= last; j++){
+         paginationCtrls += '<li class="page-item"><span onclick="request_page('+j+')" class="page-link shadow-none">'+j+'</span></li>';
+          if(j >= pn+3){
+            break;
+          }
+        }
+        if(pn != last){
       paginationCtrls += '<li class="page-item"><span onclick="request_page('+(pn+1)+')" class="page-link shadow-none">&gt;</span></li>';
+      }
     }
-  }
-  pagination_controls.innerHTML=paginationCtrls
-}
+ pagination_controls.innerHTML=paginationCtrls
 
-const getAllQues=()=>{
-fetch(QUESTIONS).then(res=>res.json())
-.then(res=>{
-  if(res.status==true){
-    totalRows=res.data
-    updateQuesAdded(res.data)
-    request_page(1)
-  } else {
-    alertBS(res.message)
-  }
-  request_page(1);
-})
-.catch(err=>alertBS(err))
+
+showQues(res.data)
+updateQuesAdded(res.total)
+
+    }
+  }).catch(err=>alertBS(err))
 }
 
 
-refreshBtn.addEventListener("click", getAllQues)
+    
+    
+
+
+
+
+refreshBtn.addEventListener("click", request_page(1))
 
 
 submitBtn.addEventListener("click", ()=>{
