@@ -116,6 +116,19 @@ let confirmRes=confirm("Are you sure you want to delete this question!");
   }
 }
 
+const htmlEscape=str=>{
+  return str .replace(/&/g, '&#38;')
+  .replace(/"/g, '&#34;') .replace(/'/g, '&#39;')
+  .replace(/</g, '&#60;') .replace(/>/g, '&#62;');
+}
+
+/*
+const htmlUn=str=>{
+  return str .replace(/&amp;/g, '&')
+  .replace(/&#34;/g, '"') .replace(/&#39;/g, "'")
+  .replace(/&lt;/g, '<') .replace(/&gt;/g, '>');
+}
+*/
 
 const editQues=i=>{
   quesID.value=availableQues[i].id
@@ -125,7 +138,7 @@ const editQues=i=>{
   ans3.value=availableQues[i].ans3
   ans4.value=availableQues[i].ans4
   correct.value=availableQues[i].correct
-  desc.value=availableQues[i].desc
+  desc.innerHTML=availableQues[i].desc
 }
 
 const showQuesDesc=i=>{
