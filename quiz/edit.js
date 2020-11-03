@@ -119,13 +119,13 @@ let confirmRes=confirm("Are you sure you want to delete this question!");
 
 const editQues=i=>{
   quesID.value=availableQues[i].id
-  ques.innerHTML=availableQues[i].ques
-  ans1.innerHTML=availableQues[i].ans1
-  ans2.innerHTML=availableQues[i].ans2
-  ans3.innerHTML=availableQues[i].ans3
-  ans4.innerHTML=availableQues[i].ans4
+  ques.value=availableQues[i].ques
+  ans1.value=availableQues[i].ans1
+  ans2.value=availableQues[i].ans2
+  ans3.value=availableQues[i].ans3
+  ans4.value=availableQues[i].ans4
   correct.value=availableQues[i].correct
-  desc.innerHTML=availableQues[i].desc
+  desc.value=availableQues[i].desc
 }
 
 const showQuesDesc=i=>{
