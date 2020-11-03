@@ -9,10 +9,10 @@ appId:"1:396547340937:web:fc1280a69df6f029c4e458",
 measurementId:"G-T37JYYJ6NE"}
 firebase.initializeApp(firebaseConfig)
 const auth=firebase.auth()
-const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
-const ADD_QUES=ROOT_URL+"add-ques"
-const DELETE_QUES=ROOT_URL+"del-ques"
-const  QUESTIONS=ROOT_URL+"questions/"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/quiz/"
+const ADD_QUES=ROOT_URL+"add-ques/cm"
+const DELETE_QUES=ROOT_URL+"del-ques/cm/"
+const  QUESTIONS=ROOT_URL+"questions/cm/"
 
 
 /* shortcut for getting elements by id */
@@ -107,7 +107,7 @@ clearForm.addEventListener("click", ()=>{
 
 
 const deleteQues=id=>{
-delPath=DELETE_QUES+".php?uid="+userID+"&id="+id
+delPath=DELETE_QUES+id+"/"+userID
 let confirmRes=confirm("Are you sure you want to delete this question!");
   if (confirmRes == true) {
     fetch(delPath).then(res=>res.json())

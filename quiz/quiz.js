@@ -1,7 +1,7 @@
-const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/cm/"
-const QUIZAPI=ROOT_URL+"ques/"
+const ROOT_URL="https://ccvhpgc.000webhostapp.com/api/quiz/"
+const QUIZAPI=ROOT_URL+"ques/cm/"
 const ADD_SCORE=ROOT_URL+"add-score"
-const CORRECT_BONUS=4
+const CORRECT_BONUS=2
 const MAX_TIME=30
 
 /* do not make this variable constant */
