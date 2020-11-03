@@ -40,9 +40,7 @@ const pagination_controls=_("paginationBtns")
 const results_box=_("results_box")
 
 /* define variables */
-let userID
-let resStatus
-let availableQues=[]
+let userID, resStatus, availableQues=[]
 
 /* use custom alert by alertBS(x) */
 const alertBSModal=_("alertBSModal")
@@ -61,7 +59,6 @@ auth.onAuthStateChanged(user=>{
     userID=user.uid
     loader.classList.add("d-none")
     guestCard.classList.add("d-none")
-    userCard.classList.remove("d-none")
     logoutBtn.classList.remove("d-none")
     request_page(1)
   } else {
@@ -141,9 +138,8 @@ const showQuesDesc=i=>{
 
 
 const showQues=data=>{
-  availableQues=[...data]
   let output=""
-  data.forEach((index, data)=>{
+  data.forEach((data, index)=>{
     output+=`<div class="col-sm-6 col-md-4">
     <div class="card h-100 shadow-sm border-secondary">
     <span class="card-header h6" style="white-space:pre-wrap">${data.ques}</span><div class="card-body">1. ${data.ans1}<br>2. ${data.ans2}<br>3. ${data.ans3}<br>4. ${data.ans4}<br>Correct Ans: ${data.correct}
@@ -155,7 +151,9 @@ const showQues=data=>{
     </div>
     </div>`
   })
+
   results_box.innerHTML=output
+availableQues=[...data]
 }
 
 
@@ -171,6 +169,8 @@ function request_page(pn){
     if(res.status==false){
       alertBS("Error: "+res.message)
     } else if(res.status==true){
+      userCard.classList.remove("d-none")
+
       last=Math.ceil(res.total/res.rpp)
       if(last<1){last=1}
 
@@ -196,23 +196,19 @@ function request_page(pn){
       }
     }
  pagination_controls.innerHTML=paginationCtrls
-
-
-showQues(res.data)
 updateQuesAdded(res.total)
+showQues(res.data)
 
     }
   }).catch(err=>alertBS(err))
 }
-
-
     
     
 
 
 
 
-refreshBtn.addEventListener("click", request_page(1))
+
 
 
 submitBtn.addEventListener("click", ()=>{
